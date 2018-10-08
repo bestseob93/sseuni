@@ -20,6 +20,8 @@ service: bestsup-backend # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
+  stage: dev
+  region: ap-northeast-2
 
 # you can overwrite defaults here
 #  stage: dev
@@ -55,8 +57,36 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  createBlog:
+    handler: src/blogs.createBlog
+    events:
+      - http:
+          path: blogs
+          method: post
+  readBlogs:
+    handler: src/blogs.readBlogs
+    events:
+      - http:
+          path: blogs
+          method: get
+  readBlog:
+    handler: src/blogs.readBlog
+    events:
+      - http:
+          path: blogs/{id}
+          method: get
+  updateBlog:
+    handler: src/blogs.updateBlog
+    events:
+      - http:
+          path: blogs/{id}
+          method: patch
+  deleteBlog:
+    handler: src/blogs.deleteBlog
+    events:
+      - http:
+          path: blogs/{id}
+          method: delete
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
