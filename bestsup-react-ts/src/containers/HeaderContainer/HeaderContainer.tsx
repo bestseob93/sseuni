@@ -11,18 +11,24 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
   }
 
   public componentDidMount() {
-    console.log(this.props.scroller);
+    // console.log(this.props.scroller);
   }
 
   private getStyles(scroller: number) {
+    console.log(scroller);
     if(scroller > 10) {
       return ({
-        backgroundColor: '#fff',
+        backgroundColor: '#87C8C8',
+        position: 'sticky' as 'sticky',
+        left: 0,
+        right: 0,
+        top: 0,
       });
     } else {
       return ({
-        backgroundColor: '#f3f3f3',
-      })
+        backgroundColor: '#fff',
+        position: 'relative' as 'relative',
+      });
     }
   }
 
