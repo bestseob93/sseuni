@@ -8,10 +8,10 @@ interface IHeaderProps {
   styles: React.CSSProperties,
 }
 
-const Header: React.StatelessComponent<IHeaderProps> = () => {
+const Header: React.StatelessComponent<IHeaderProps> = ({styles}) => {
   return (
     <header>
-      <nav className="navbar">
+      <nav className="navbar" style={styles}>
         <Link to="/">Home</Link>
         <Link to="/About">About</Link>
       </nav>
