@@ -15,18 +15,21 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
   }
 
   private getStyles(scroller: number) {
-    console.log(scroller);
     if(scroller > 10) {
+      const windowWidth = window.innerWidth;
+
       return ({
-        backgroundColor: '#87C8C8',
-        position: 'sticky' as 'sticky',
-        left: 0,
+        position: 'fixed' as 'fixed',
+        transform: 'translateZ(0)',
+        width: `${windowWidth} - ${scroller}px`,
         right: 0,
-        top: 0,
+        bottom: '10px',
+        borderRadius: `50%`,
+        transition: 'all 0.3s ease',
       });
     } else {
       return ({
-        backgroundColor: '#fff',
+        // backgroundColor: '#fff',
         position: 'relative' as 'relative',
       });
     }

@@ -1,10 +1,15 @@
 import * as React from 'react';
+import { Route, Switch } from 'react-router-dom';
+
 import HeaderContainer from './containers/HeaderContainer';
+import About from 'pages/AboutPage';
+import Home from 'pages/HomePage';
 
 import './App.css';
 
 interface IAppState {
   scroller: number;
+  ticking: boolean;
 }
 
 class App extends React.Component<{}, IAppState> {
@@ -13,9 +18,8 @@ class App extends React.Component<{}, IAppState> {
 
     this.state = {
       scroller: 0,
+      ticking: false,
     };
-
-    this.onScroll = this.onScroll.bind(this);
   }
 
   public componentDidMount() {
@@ -26,12 +30,24 @@ class App extends React.Component<{}, IAppState> {
     window.removeEventListener('scroll', this.onScroll);
   }  
 
-  private onScroll(): void {
-    requestAnimationFrame(() => {
-      const scrollTop = window.pageYOffset;
-      this.setState(() => {
-        return {scroller: scrollTop};
+  private onScroll = (): void => {
+    this.requestTick();
+  }
+
+  private requestTick = (): void => {
+    if(!this.state.ticking) {
+      this.setState({
+        ticking: true,
       });
+
+      requestAnimationFrame(this.update);
+    }
+  }
+
+  private update = (): void => {
+    const scrollTop = window.pageYOffset;
+    this.setState(() => {
+      return {scroller: scrollTop, ticking: false};
     });
   }
 
@@ -41,19 +57,10 @@ class App extends React.Component<{}, IAppState> {
       <React.Fragment>
         <HeaderContainer scroller={scroller} />
         <main className="container">
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
-          <h1>Personal Developer Blog</h1>
+          <Switch>
+            <Route exact={true} path="/" component={Home} />
+            <Route path="/About" component={About} />
+          </Switch>
         </main>
       </React.Fragment>
     );
