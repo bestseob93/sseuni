@@ -1,0 +1,48 @@
+.about-container {
+  top: 5rem;
+  .sticky-imgs {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 15%;
+    .figure-container {
+      width: 289px;
+      height: 355px;
+      transform: translate(0px, 0px) rotateX(0deg);
+      transform-style: preserve-3d;
+      figure {
+        width: 289px;
+        height: 355px;
+        background-size: 289px 355px;
+        background-repeat: no-repeat;
+        transform: translate(0px, 0px) rotateY(1deg);
+        will-change: transform;
+        transform-style: preserve-3d;
+        position: absolute;
+      }
+      figure.image-1 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_1_medium_2x.jpg');
+      }
+      figure.image-2 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_2_medium_2x.jpg');
+      }
+      figure.image-3 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_3_medium_2x.jpg');
+      }
+      figure.image-4 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_4_medium_2x.jpg');
+      }
+      figure.image-5 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_5_medium_2x.jpg');
+      }
+      figure.image-6 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_6_medium_2x.jpg');
+      }
+      figure.image-7 {
+        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_7_medium_2x.jpg');
+      }
+    }
+  }
+}
