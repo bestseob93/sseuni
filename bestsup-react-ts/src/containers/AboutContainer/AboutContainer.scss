@@ -1,48 +1,85 @@
-.about-container {
-  top: 5rem;
-  .sticky-imgs {
-    padding: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: sticky;
-    top: 15%;
-    .figure-container {
-      width: 289px;
-      height: 355px;
-      transform: translate(0px, 0px) rotateX(0deg);
-      transform-style: preserve-3d;
-      figure {
+section.section {
+  padding-top: 125px;
+  padding-bottom: 88px;
+  .intro-block {
+    margin-bottom: 120px;
+  }
+  .about-container {
+    position: relative;
+    z-index: 1;
+    .sticky-imgs {
+      padding: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      -webkit-box-align: center;
+      -webkit-box-pack: center;
+      position: sticky;
+      top: 15%;
+      overflow: hidden;
+      height: 688px;
+      max-height: 100vh;
+      z-index: 2;
+      .figure-container {
         width: 289px;
         height: 355px;
-        background-size: 289px 355px;
-        background-repeat: no-repeat;
-        transform: translate(0px, 0px) rotateY(1deg);
-        will-change: transform;
+        transform: translate(0px, 0px) rotateX(0deg);
         transform-style: preserve-3d;
-        position: absolute;
+        figure {
+          width: 289px;
+          height: 355px;
+          background-size: 289px 355px;
+          background-repeat: no-repeat;
+          transform: translate(0px, 0px) rotateY(1deg);
+          will-change: transform;
+          transform-style: preserve-3d;
+          position: absolute;
+        }
+        figure.image-1 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_1_medium_2x.jpg');
+        }
+        figure.image-2 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_2_medium_2x.jpg');
+        }
+        figure.image-3 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_3_medium_2x.jpg');
+        }
+        figure.image-4 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_4_medium_2x.jpg');
+        }
+        figure.image-5 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_5_medium_2x.jpg');
+        }
+        figure.image-6 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_6_medium_2x.jpg');
+        }
+        figure.image-7 {
+          background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_7_medium_2x.jpg');
+        }
       }
-      figure.image-1 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_1_medium_2x.jpg');
-      }
-      figure.image-2 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_2_medium_2x.jpg');
-      }
-      figure.image-3 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_3_medium_2x.jpg');
-      }
-      figure.image-4 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_4_medium_2x.jpg');
-      }
-      figure.image-5 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_5_medium_2x.jpg');
-      }
-      figure.image-6 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_6_medium_2x.jpg');
-      }
-      figure.image-7 {
-        background-image: url('https://www.apple.com/v/iphone-xr/d/images/cameras/computation_7_medium_2x.jpg');
+    }
+    .content-container {
+      padding-bottom: 200px;
+      padding-top: 75vh;
+      position: relative;
+      z-index: 1;
+      .gallery {
+        position: relative;
+        z-index: 1;
+        .gallery-item-1 {
+          padding-top: 60px;
+          padding-bottom: 40vh;
+          h3 {
+            width: 33%;
+          }
+        }
       }
     }
   }
+}
+
+.section-content {
+  margin-left: auto;
+  margin-right: auto;
+  width: 692px;
 }

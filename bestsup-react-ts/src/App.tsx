@@ -59,7 +59,10 @@ class App extends React.Component<{}, IAppState> {
         <main className="container">
           <Switch>
             <Route exact={true} path="/" component={Home} />
-            <Route path="/About" component={About} />
+            <Route
+              path="/About"
+              component={() => <About scroller={scroller} />}
+            />
           </Switch>
         </main>
       </React.Fragment>
