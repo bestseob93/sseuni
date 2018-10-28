@@ -1,4 +1,5 @@
 section.section {
+  width: 100%;
   padding-top: 125px;
   padding-bottom: 88px;
   .intro-block {
@@ -30,7 +31,7 @@ section.section {
           height: 355px;
           background-size: 289px 355px;
           background-repeat: no-repeat;
-          transform: translate(0px, 0px) rotateY(1deg);
+          transform: translate(0px, 0px);
           will-change: transform;
           transform-style: preserve-3d;
           position: absolute;
