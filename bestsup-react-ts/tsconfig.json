@@ -20,7 +20,11 @@
     "noUnusedLocals": true,
     "paths": {
       "*": ["src/*"]
-    }
+    },
+    "types": [
+      "node",
+      "webpack-env"
+    ]
   },
   "exclude": [
     "node_modules",
