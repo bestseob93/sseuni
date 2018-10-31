@@ -1,9 +1,13 @@
 import * as React  from 'react';
 
-const PageTemplate: React.StatelessComponent<{}> = () => {
+interface IProps {
+  children: React.ReactNode,
+};
+
+const PageTemplate: React.StatelessComponent<IProps> = ({ children }) => {
   return (
     <div className="page-tempalte">
-      PageTemplate
+      {children}
     </div>
   );
 };
