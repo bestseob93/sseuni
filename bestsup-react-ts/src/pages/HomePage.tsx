@@ -1,11 +1,12 @@
 import * as React from 'react';
+
 import PageTemplate from 'components/Templates/PageTemplate';
+import CardList from 'components/Card/CardList';
 
 const HomePage: React.StatelessComponent<{}> = () => {
   return (
     <PageTemplate>
-      <h1>  ui guide Blog</h1>
-      <h1>  ui guide Blog</h1>
+      <CardList />
     </PageTemplate>
   );
 }

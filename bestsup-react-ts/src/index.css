@@ -16,3 +16,7 @@ a, a:hover, a:visited, a:active {
   text-decoration: none;
   color: initial;
 }
+
+ul, li, ol {
+  list-style: none;
+}
