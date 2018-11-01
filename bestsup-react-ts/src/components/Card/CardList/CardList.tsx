@@ -8,6 +8,9 @@ const CardList: React.StatelessComponent<{}> = () => {
     <ul className="card-list">
       <CardItem />
       <CardItem />
+      <CardItem />
+      <CardItem />
+      <CardItem />
     </ul>
   );
 };

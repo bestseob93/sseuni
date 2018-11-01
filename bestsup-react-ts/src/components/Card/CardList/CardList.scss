@@ -9,6 +9,12 @@
 
 @media (min-width: 1200px) {
   ul.card-list {
-    grid-template-columns: repeat(2, calc(33% - .5rem));
+    grid-template-columns: repeat(3, calc(33% - .5rem));
+  }
+}
+
+@media (min-width: 1600px) {
+  ul.card-list {
+    grid-template-columns: repeat(4, calc(25% - .5rem));
   }
 }
