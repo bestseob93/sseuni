@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import PageTemplate from 'components/Templates/PageTemplate';
+import PageTemplate from 'components/Templates';
 import CardList from 'components/Card/CardList';
 
 const HomePage: React.StatelessComponent<{}> = () => {

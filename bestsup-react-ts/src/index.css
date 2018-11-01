@@ -1,3 +1,9 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
 html {
   font-size: 16px;
 }
@@ -9,7 +15,8 @@ body {
 }
 
 article, aside, footer, header, hgroup, nav {
-  display: flex;
+  padding: 0;
+  margin: 0;
 }
 
 a, a:hover, a:visited, a:active {
@@ -19,4 +26,6 @@ a, a:hover, a:visited, a:active {
 
 ul, li, ol {
   list-style: none;
+  padding: 0;
+  margin: 0;
 }

@@ -1,9 +1,6 @@
 .container {
-  display: flex;
-  display: -webkit-flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center; }
+  max-width: 1142px;
+  margin: 0 auto; }
 
 .animated {
   animation-duration: 1s;
