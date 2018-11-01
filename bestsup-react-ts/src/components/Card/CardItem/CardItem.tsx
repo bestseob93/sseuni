@@ -15,7 +15,10 @@ const CardItem: React.StatelessComponent<{}> = () => {
             />
           </div>
           <div className="author-name">
-            <span>이환섭</span>
+            <span>bestsup93</span>
+          </div>
+          <div className="post-share">
+            Share
           </div>
         </div>
         <div className="post-thumb-wrap">
@@ -26,9 +29,33 @@ const CardItem: React.StatelessComponent<{}> = () => {
           />
         </div>
         <h1 className="post-title">React Redux-Saga</h1>
-        <div className="post-date">
-          <p>2018-11-01</p>
-        </div>
+        <p className="post-date">2018-11-01</p>
+        <p className="post-body">
+          GoogleWalkout follows fallout over
+          Andy Rubin allegations Employees
+          are walking out of Google offices
+          worldwide in protest today as a storm
+          around the company’s handling of sexual
+          harassment cases continues
+          GoogleWalkout follows fallout over
+          Andy Rubin allegations Employees
+          are walking out of Google offices
+          worldwide in protest today as a storm
+          around the company’s handling of sexual
+          harassment cases continues
+          GoogleWalkout follows fallout over
+          Andy Rubin allegations Employees
+          are walking out of Google offices
+          worldwide in protest today as a storm
+          around the company’s handling of sexual
+          harassment cases continues
+          GoogleWalkout follows fallout over
+          Andy Rubin allegations Employees
+          are walking out of Google offices
+          worldwide in protest today as a storm
+          around the company’s handling of sexual
+          harassment cases continues
+        </p>
       </article>
     </li>
   );

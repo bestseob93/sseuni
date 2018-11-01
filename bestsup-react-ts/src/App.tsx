@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HeaderContainer from './containers/HeaderContainer';
+import TikiTakaContainer from 'containers/TikiTakaContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
 
@@ -60,9 +61,10 @@ class App extends React.Component<{}, IAppState> {
           <Switch>
             <Route exact={true} path="/" component={Home} />
             <Route
-              path="/About"
+              path="/about"
               component={() => <About scroller={scroller} />}
             />
+            <Route path="/write" component={TikiTakaContainer} />
           </Switch>
         </main>
       </React.Fragment>

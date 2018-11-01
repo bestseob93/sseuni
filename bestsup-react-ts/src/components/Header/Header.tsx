@@ -13,7 +13,8 @@ const Header: React.StatelessComponent<IHeaderProps> = ({styles}) => {
     <header style={styles}>
       <nav className="navbar">
         <Link to="/">Home</Link>
-        <Link to="/About">About</Link>
+        <Link to="/about">About</Link>
+        <Link to="/write">Write</Link>
       </nav>
     </header>
   );

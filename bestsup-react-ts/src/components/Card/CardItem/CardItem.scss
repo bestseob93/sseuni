@@ -1,6 +1,7 @@
 li.card-item {
   display: list-item;
   article.post {
+    cursor: pointer;
     div.post-attribution {
       display: flex;
       align-items: center;
@@ -9,6 +10,7 @@ li.card-item {
       div.author-avatar {
         width: 2rem;
         height: 2rem;
+        margin-right: .5rem;
         img.img-avatar {
           display: block;
           width: 2rem;
@@ -18,7 +20,9 @@ li.card-item {
         }
       }
       div.author-name {
-
+      }
+      div.post-share {
+        display: none;
       }
     }
 
@@ -36,8 +40,25 @@ li.card-item {
       }
     }
     h1.post-title {
-      div.post-date {
+      margin: 1rem 0 .5rem;
+    }
+    p.post-date {
+      font-size: .75rem;
+    }
+    p.post-body {
+      font-weight: 400;
+      color: #595959;
+    }
+  }
 
+  article.post:hover {
+    div.post-attribution {
+      position: relative;
+      div.post-share {
+        // TODO:  Icon 애니메이션화
+        display: block;
+        position: absolute;
+        right: 0;
       }
     }
   }
