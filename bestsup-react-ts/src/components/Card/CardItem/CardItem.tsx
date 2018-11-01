@@ -8,7 +8,11 @@ const CardItem: React.StatelessComponent<{}> = () => {
       <article className="post">
         <div className="post-attribution">
           <div className="author-avatar">
-            <img className="img-avatar" />
+            <img
+              alt="avatar"
+              className="img-avatar"
+              src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-1/p200x200/17862834_1258688320851648_3905539345754178613_n.jpg?_nc_cat=109&_nc_ht=scontent-icn1-1.xx&oh=7b9544e9859fc7b76bde84baad076137&oe=5C878732"
+            />
           </div>
           <div className="author-name">
             <span>이환섭</span>

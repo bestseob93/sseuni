@@ -2,8 +2,20 @@ li.card-item {
   display: list-item;
   article.post {
     div.post-attribution {
+      display: flex;
+      align-items: center;
+      margin-bottom: .75rem;
+      min-height: 2rem;
       div.author-avatar {
-
+        width: 2rem;
+        height: 2rem;
+        img.img-avatar {
+          display: block;
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          object-fit: cover;
+        }
       }
       div.author-name {
 
