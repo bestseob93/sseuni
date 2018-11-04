@@ -1,13 +1,5 @@
 import * as React from 'react';
 
-export interface IBodyContentProps {
-  tagName?: string,
-  html?: string,
-  onBlur?: () => void,
-  onChange?: () => void,
-  className?: string,
-  style?: object,
-}
 // Disable contentEditAble Warning
 console.error = (function() {
   const error = console.error
@@ -23,10 +15,12 @@ function normalizeHtml(str: string): string {
 }
 
 function findLastTextNode(node: Node) : Node | null {
+  console.log(node);
   if (node.nodeType === Node.TEXT_NODE) {
     return node;
   }
   const children = node.childNodes;
+  console.log(children);
   for (let i = children.length - 1; i >= 0; i--) {
     const textNode = findLastTextNode(children[i]);
     if (textNode !== null) {
@@ -38,6 +32,7 @@ function findLastTextNode(node: Node) : Node | null {
 
 function replaceCaret(el: any) {
   // Place the caret at the end of the element
+  console.log(el);
   const target = findLastTextNode(el);
   // do not move caret if element was not focused
   const isTargetFocused = document.activeElement === target;
@@ -54,6 +49,15 @@ function replaceCaret(el: any) {
   }
 }
 
+export interface IBodyContentProps {
+  tagName?: string,
+  html?: string,
+  onBlur?: () => void,
+  onChange?: (evt: React.ChangeEvent) => void,
+  className?: string,
+  style?: object,
+}
+
 class BodyContent extends React.Component<IBodyContentProps, {}> {
   private el = React.createRef<HTMLElement>();
   private lastHtml: string;
@@ -64,6 +68,27 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = props.html || '';
   }
   
+  public shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
+    // We need not rerender if the change of props simply reflects the user's edits.
+    // Rerendering in this case would make the cursor/caret jump
+
+    // Rerender if there is no element yet... (somehow?)
+    if (!this.el) {
+      return true;
+    }
+
+    // ...or if html really changed... (programmatically, not by user edit)
+    if(this.el.current !== null && typeof nextProps.html !== 'undefined') {
+      if (normalizeHtml(nextProps.html) !== normalizeHtml(this.el.current.innerHTML)) {
+        return true;
+      }
+    }
+
+    // Handle additional properties
+    return this.props.tagName !== nextProps.tagName ||
+      this.props.className !== nextProps.className ||
+      JSON.stringify(this.props.style) !== JSON.stringify(nextProps.style);
+  }
 
   public componentDidUpdate() {
     if (this.el.current !== null) {
@@ -78,19 +103,22 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     }
   }
 
-  private getText(el: HTMLElement): string {
-    return normalizeHtml(el.innerHTML);
-  }
-
   private onTextChange = (ev: React.ChangeEvent<HTMLInputElement>): void => {
     if (!this.el) {
       return;
     }
-
-    const text = this.getText(ev.target);
+    let text = '';
+    if(this.el.current !== null) {
+      text = this.el.current.innerHTML;
+    }
 
     if (this.props.onChange && text !== this.lastHtml) {
-      this.props.onChange();
+      const evt = Object.assign({}, ev, {
+        target: {
+          value: text
+        }
+      });
+      this.props.onChange(evt);
     }
 
     this.lastHtml = text;
@@ -98,7 +126,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   public render() {
     return React.createElement(
-      this.props.tagName || 'p',
+      this.props.tagName || 'div',
       {
         ...this.props,
         ref: this.el,
