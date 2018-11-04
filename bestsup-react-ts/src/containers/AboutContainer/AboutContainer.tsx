@@ -6,7 +6,7 @@ interface IAboutContainerProps {
 }
 
 class AboutContainer extends React.Component<IAboutContainerProps, {}> {
-  private figureRef = (element: HTMLDivElement) => {
+  private figureRef = (element: HTMLDivElement): void => {
     if(element) {
       console.log(this.props.scroller);
       console.log(element.getBoundingClientRect());
