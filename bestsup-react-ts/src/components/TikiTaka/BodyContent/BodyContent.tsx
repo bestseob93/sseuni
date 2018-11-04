@@ -18,14 +18,11 @@ function findLastTextNode(node: Node) : Node | null {
   if (node.nodeType === Node.TEXT_NODE) {
     return node;
   }
-
   const children = node.childNodes;
 
   for (let i = children.length - 1; i >= 0; i--) {
     const textNode = findLastTextNode(children[i]);
-    if (textNode !== null) {
-      return textNode;
-    }
+    return textNode;
   }
   return null;
 }
@@ -38,7 +35,7 @@ function replaceCaret(el: HTMLElement) {
   if (target !== null && target.nodeValue !== null && isTargetFocused) {
     const range = document.createRange();
     const sel = window.getSelection();
-    range.setStart(target, target.nodeValue.length);
+    range.setStart(target, target.nodeValue.length); // setStartAfter 도 있음.
     range.collapse(true);
     sel.removeAllRanges();
     sel.addRange(range);
@@ -57,11 +54,14 @@ export interface IBodyContentProps {
   style?: object,
 }
 
+// TODO: 엔터 쳐서 공백 만들었을 때 다시 포커싱 하면 빈 <p></p>로 포커싱 되게 하기
 class BodyContent extends React.Component<IBodyContentProps, {}> {
   constructor(props: IBodyContentProps) {
     super(props);
     
     this.lastHtml = props.html || '';
+
+    document.execCommand('defaultParagraphSeparator', false, 'p');
   }
 
   private el = React.createRef<HTMLElement>();
@@ -96,8 +96,9 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     if (this.props.html !== el.innerHTML) {
       this.lastHtml = this.props.html || '';
       el.innerHTML = this.lastHtml;
+      console.log(el);
     }
-    
+
     replaceCaret(el);
   }
 

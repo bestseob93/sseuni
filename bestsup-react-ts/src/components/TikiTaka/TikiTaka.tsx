@@ -22,10 +22,9 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
     };
   }
 
-  private handleChange = (evt: React.ChangeEvent): void => {
-    const input = evt.target as HTMLInputElement;
+  private handleChange = (evt: any): void => {
     this.setState({
-      html: input.value,
+      html: evt.target.value,
     });
   };
 
@@ -49,7 +48,6 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
           <DefaultPlaceholder />
         </h1>
         <BodyContent
-          tagName="p"
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
