@@ -15,12 +15,12 @@ function normalizeHtml(str: string): string {
 }
 
 function findLastTextNode(node: Node) : Node | null {
-  console.log(node);
   if (node.nodeType === Node.TEXT_NODE) {
     return node;
   }
+
   const children = node.childNodes;
-  console.log(children);
+
   for (let i = children.length - 1; i >= 0; i--) {
     const textNode = findLastTextNode(children[i]);
     if (textNode !== null) {
@@ -30,11 +30,10 @@ function findLastTextNode(node: Node) : Node | null {
   return null;
 }
 
-function replaceCaret(el: any) {
-  // Place the caret at the end of the element
-  console.log(el);
+function replaceCaret(el: HTMLElement) {
+  // 엘리먼트 제일 뒤에 위치
   const target = findLastTextNode(el);
-  // do not move caret if element was not focused
+  // 엘리먼트가 포커스 되지 않았을 때는 이동시키지 않음
   const isTargetFocused = document.activeElement === target;
   if (target !== null && target.nodeValue !== null && isTargetFocused) {
     const range = document.createRange();
@@ -53,87 +52,86 @@ export interface IBodyContentProps {
   tagName?: string,
   html?: string,
   onBlur?: () => void,
-  onChange?: (evt: React.ChangeEvent) => void,
+  onChange?: (evt: React.SyntheticEvent) => void,
   className?: string,
   style?: object,
 }
 
 class BodyContent extends React.Component<IBodyContentProps, {}> {
-  private el = React.createRef<HTMLElement>();
-  private lastHtml: string;
-
   constructor(props: IBodyContentProps) {
     super(props);
     
     this.lastHtml = props.html || '';
   }
+
+  private el = React.createRef<HTMLElement>();
+  private lastHtml: string;
+
+  private getEl = () => this.el.current;
+
   
   public shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
-    // We need not rerender if the change of props simply reflects the user's edits.
-    // Rerendering in this case would make the cursor/caret jump
-
-    // Rerender if there is no element yet... (somehow?)
-    if (!this.el) {
+    const el = this.getEl();
+    if (!el) {
       return true;
     }
 
-    // ...or if html really changed... (programmatically, not by user edit)
-    if(this.el.current !== null && typeof nextProps.html !== 'undefined') {
-      if (normalizeHtml(nextProps.html) !== normalizeHtml(this.el.current.innerHTML)) {
-        return true;
-      }
+    if (normalizeHtml(nextProps.html || '') !== normalizeHtml(el.innerHTML)) {
+      return true;
     }
 
-    // Handle additional properties
     return this.props.tagName !== nextProps.tagName ||
       this.props.className !== nextProps.className ||
       JSON.stringify(this.props.style) !== JSON.stringify(nextProps.style);
   }
 
   public componentDidUpdate() {
-    if (this.el.current !== null) {
-      console.log(this.el);
-      // Perhaps React (whose VDOM gets outdated because we often prevent
-      // rerendering) did not update the DOM. So we update it manually now.
-      if (this.props.html !== this.el.current.innerHTML) {
-        this.lastHtml = this.props.html || '';
-        this.el.current.innerHTML = this.lastHtml;
-      }
-      replaceCaret(this.el);
-    }
-  }
+    const el = this.getEl();
 
-  private onTextChange = (ev: React.ChangeEvent<HTMLInputElement>): void => {
-    if (!this.el) {
+    if(!el) {
       return;
     }
-    let text = '';
-    if(this.el.current !== null) {
-      text = this.el.current.innerHTML;
+
+    // 수동으로 컴포넌트 업데이트
+    if (this.props.html !== el.innerHTML) {
+      this.lastHtml = this.props.html || '';
+      el.innerHTML = this.lastHtml;
+    }
+    
+    replaceCaret(el);
+  }
+
+  private onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
+    const el = this.getEl();
+    if (!el) {
+      return;
     }
 
+    const text = el.innerHTML;
+
     if (this.props.onChange && text !== this.lastHtml) {
-      const evt = Object.assign({}, ev, {
+      const newEvt = Object.assign({}, ev, {
         target: {
           value: text
         }
       });
-      this.props.onChange(evt);
+      this.props.onChange(newEvt);
     }
 
     this.lastHtml = text;
   }
 
   public render() {
+    const { tagName, html, ...props } = this.props;
     return React.createElement(
-      this.props.tagName || 'div',
+      tagName || 'div',
       {
-        ...this.props,
+        ...props,
         ref: this.el,
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
         contentEditable: true,
-        dangerouslySetInnerHTML: { __html: this.props.html }
+        dangerouslySetInnerHTML: { __html: html }
       },
       this.props.children);
   }

@@ -31,28 +31,28 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
 
   private sanitize = (): void => {
     const sanitizeConf = {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'h1'],
+      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1'],
       allowedAttributes: {
         a: ['href'],
       },
     }
-    this.setState((prevState) => ({
-      html: sanitizeHtml(prevState, sanitizeConf)
-    }));
+    this.setState({
+      html: sanitizeHtml(this.state.html, sanitizeConf)
+    });
   }
 
   public render() {
+    console.log(JSON.stringify(this.state.html));
     return (
       <div className="tikitaka-editor">
         <h1 className="title" contentEditable={true} onChange={(e) => console.log(e)}>
           <DefaultPlaceholder />
         </h1>
         <BodyContent
+          tagName="p"
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
-          className={'hi'}
-          style={{'color': 'black'}}
         />
       </div>
     );
