@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+axios.defaults.baseURL = 'https://hg6pfn2h1m.execute-api.ap-northeast-2.amazonaws.com/dev';
+
 export function fetchBlogs() {
   console.log('fetch blog api called');
   return axios
-    .get('https://picsum.photos/list')
+    .get('/blogs')
     .then(response => {
       return response.data;
     });
@@ -12,34 +14,34 @@ export function fetchBlogs() {
 export function createBlog() {
   console.log('create blog api called');
   return axios
-    .get('https://picsum.photos/list')
+    .post('/blogs')
     .then(response => {
       return response.data;
     });
 }
 
-export function fetchBlogById() {
+export function fetchBlogById(id: string) {
   console.log('fetch blog by id api called');
   return axios
-    .get('https://picsum.photos/list')
+    .get(`/blog/${id}`)
     .then(response => {
       return response.data;
     });
 }
 
-export function updateBlog() {
+export function updateBlog(id: string) {
   console.log('update blog api called');
   return axios
-    .get('https://picsum.photos/list')
+    .put(`/blog/${id}`)
     .then(response => {
       return response.data;
     });
 }
 
-export function deleteBlog() {
+export function deleteBlog(id: string) {
   console.log('delete blog api called');
   return axios
-    .get('https://picsum.photos/list')
+    .delete(`/blog/${id}`)
     .then(response => {
       return response.data;
     });

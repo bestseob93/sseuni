@@ -43,7 +43,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: blogs
+          path: blog
           method: post
           cors: true
           authorizer: aws_iam
