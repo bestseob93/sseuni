@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { IdefaultState } from './counter.duck';
+import { IdefaultState } from './blog.duck';
 
 // except index.js file.
 const req = require.context('.', true, /^(?!.\/index).*.ts$/);

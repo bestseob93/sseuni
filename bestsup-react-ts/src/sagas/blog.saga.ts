@@ -1,16 +1,22 @@
-import { take, call, put } from 'redux-saga/effects';
+import { take, takeLatest, call, put } from 'redux-saga/effects';
 // import IPFS from 'ipfs-mini';
-import { fetchBlogs } from 'services/blogAPI';
+import * as blogAPI from 'services/blogAPI';
 
-import { types, actionCreators as actions } from 'ducks/counter.duck';
+import { types, actionCreators as actions } from 'ducks/blog.duck';
+import { IBlogEntity } from 'models';
 
-export function* watchFetchImages() {
+export function* fetchBlogs() {
+  let datas: IBlogEntity[];
+  datas = yield call(blogAPI.fetchBlogs);
+  console.log(datas);
+  yield put(actions.receiveData(datas));
+}
+
+export function* watchFetchBlogs() {
   console.log('saga called');
   while (true) {
-    yield take(types.REQUEST_DATA);
-    const datas = yield call(fetchBlogs);
-    console.log(datas);
-    yield put(actions.receiveData(datas));
+
+    yield takeLatest(types.REQUEST_DATA, fetchBlogs);
   }
 }
 
