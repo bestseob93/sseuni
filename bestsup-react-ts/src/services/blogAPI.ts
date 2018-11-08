@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { IBlogEntity } from 'models';
 
 axios.defaults.baseURL = 'https://hg6pfn2h1m.execute-api.ap-northeast-2.amazonaws.com/dev';
 
-export function fetchBlogs() {
+export const fetchBlogs = (): Promise<IBlogEntity[]> => {
   console.log('fetch blog api called');
   return axios
     .get('/blogs')
@@ -11,7 +12,7 @@ export function fetchBlogs() {
     });
 }
 
-export function createBlog() {
+export const createBlog = () => {
   console.log('create blog api called');
   return axios
     .post('/blogs')
@@ -20,7 +21,7 @@ export function createBlog() {
     });
 }
 
-export function fetchBlogById(id: string) {
+export const fetchBlogById = (id: string) => {
   console.log('fetch blog by id api called');
   return axios
     .get(`/blog/${id}`)
@@ -29,7 +30,7 @@ export function fetchBlogById(id: string) {
     });
 }
 
-export function updateBlog(id: string) {
+export const updateBlog = (id: string) => {
   console.log('update blog api called');
   return axios
     .put(`/blog/${id}`)
@@ -38,7 +39,7 @@ export function updateBlog(id: string) {
     });
 }
 
-export function deleteBlog(id: string) {
+export const deleteBlog = (id: string) => {
   console.log('delete blog api called');
   return axios
     .delete(`/blog/${id}`)

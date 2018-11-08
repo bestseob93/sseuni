@@ -1,3 +1,3 @@
-import { watchFetchImages } from './main.saga';
+import { watchFetchImages } from './blog.saga';
 
 export default watchFetchImages;
