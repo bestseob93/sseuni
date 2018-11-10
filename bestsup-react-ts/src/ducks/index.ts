@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { IdefaultState } from './blog.duck';
+import { BlogState } from './blog.duck';
 
 // except index.js file.
 const req = require.context('.', true, /^(?!.\/index).*.ts$/);
 
 // 스토어의 상태 타입 정의
 export interface IStoreState {
-  counter: IdefaultState;
+  blog: BlogState;
 }
 
 const reducers = {};

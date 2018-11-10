@@ -1,8 +1,18 @@
 import * as React from 'react';
 import Header from 'components/Header';
+import { connect } from 'react-redux';
+import { IStoreState } from 'ducks';
+import {
+  BlogData,
+  actionCreators as blogActions
+} from 'ducks/blog.duck';
+import { bindActionCreators } from 'redux';
+import { List } from 'immutable';
 
 interface IHeaderContainerProps {
   scroller: number;
+  datas: List<BlogData>;
+  BlogActions: typeof blogActions;
 }
 
 class HeaderContainer extends React.Component<IHeaderContainerProps> {
@@ -10,8 +20,14 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
     super(props);
   }
 
-  public componentDidMount() {
+  public async componentDidMount() {
     // console.log(this.props.scroller);
+    const { BlogActions } = this.props;
+    try {
+      await BlogActions.requestData();
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   private getStyles(scroller: number) {
@@ -36,6 +52,7 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
   }
 
   public render() {
+    console.log(this.props);
     return (
       <Header
         scroller={this.props.scroller}
@@ -46,4 +63,11 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
   }
 }
 
-export default HeaderContainer;
+export default connect(
+  ({ blog }: IStoreState) => ({
+    datas: blog.datas,
+  }),
+  (dispatch) => ({
+    BlogActions: bindActionCreators(blogActions, dispatch),
+  })
+)(HeaderContainer);
