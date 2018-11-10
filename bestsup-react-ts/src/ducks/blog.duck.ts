@@ -24,6 +24,11 @@ const BlogRecord = Record({
 });
 
 export class BlogData extends BlogRecord {
+  public id: string;
+  public title: string;
+  public content: string;
+  public attachment: string;
+  public createdAt: number;
   constructor(params?: IBlogEntity) {
     params ? super(params) : super();
   }

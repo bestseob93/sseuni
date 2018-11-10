@@ -32,7 +32,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
   }
 
   public render() {
-    return <CardList />
+    return <CardList datas={this.props.datas} />
   }
 }
 
