@@ -43,7 +43,7 @@ functions:
     handler: create.main
     events:
       - http:
-          path: blogs
+          path: blog
           method: post
           cors: true
           authorizer: aws_iam
@@ -57,7 +57,6 @@ functions:
           path: blogs/{id}
           method: get
           cors: true
-          authorizer: aws_iam
   list:
     # Defines an HTTP API endpoint that calls the main function in list.js
     # - path: url path is /blogs
@@ -68,10 +67,9 @@ functions:
           path: blogs
           method: get
           cors: true
-          authorizer: aws_iam
   update:
     # Defines an HTTP API endpoint that calls the main function in update.js
-    # - path: url path is /notes/{id}
+    # - path: url path is /blogs/{id}
     # - method: PUT request
     handler: update.main
     events:
@@ -82,7 +80,7 @@ functions:
           authorizer: aws_iam
   delete:
     # Defines an HTTP API endpoint that calls the main function in delete.js
-    # - path: url path is /notes/{id}
+    # - path: url path is /blogs/{id}
     # - method: DELETE request
     handler: delete.main
     events:
