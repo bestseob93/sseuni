@@ -14,6 +14,10 @@ const CardList: React.StatelessComponent<ICardListProps> = ({ datas }) => {
     (data, index) => data ? (
       <CardItem
         key={index}
+        title={data.get('title')}
+        content={data.get('content')}
+        attachment={data.get('attachment')}
+        createdAt={data.get('createdAt')}
       />
     ) : null
   );
