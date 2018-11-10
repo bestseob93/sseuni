@@ -5,6 +5,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import TikiTakaContainer from 'containers/TikiTakaContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
+import NotFound from './NotFound';
 
 import './App.css';
 
@@ -65,6 +66,7 @@ class App extends React.Component<{}, IAppState> {
               component={() => <About scroller={scroller} />}
             />
             <Route path="/write" component={TikiTakaContainer} />
+            <Route component={NotFound} />
           </Switch>
         </main>
       </React.Fragment>

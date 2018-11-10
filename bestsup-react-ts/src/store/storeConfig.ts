@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, compose, StoreEnhancer } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import { fork } from 'redux-saga/effects';
+import { fork, all } from 'redux-saga/effects';
 import * as Immutable from 'immutable';
 import installDevTools from 'immutable-devtools';
 
@@ -8,17 +8,16 @@ import ducks from 'ducks';
 import sagas from 'sagas';
 
 function* rootSaga (allSagas: any) {
-  for (const saga of allSagas) {
-    yield fork(saga)
-  }
+  yield all([
+    fork(allSagas),
+  ]);
 }
+
 const isDev = process.env.NODE_ENV === 'development';
 // Make our store print nicely in the console
 if (isDev) {
   installDevTools(Immutable);
 }
-
-console.log(ducks);
 
 const enhancers: any[] = [];
 

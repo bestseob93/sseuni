@@ -2,7 +2,21 @@ import * as React from 'react';
 
 import './CardItem.css';
 
-const CardItem: React.StatelessComponent<{}> = () => {
+interface ICardItemProps {
+  title?: string,
+  content?: string,
+  attachment?: string,
+  createdAt?: number,
+}
+
+const CardItem: React.StatelessComponent<ICardItemProps> = ({
+  title,
+  content,
+  attachment,
+  createdAt,
+}) => {
+  console.log(title);
+  console.log(attachment);
   return (
     <li className="card-item">
       <article className="post">
@@ -25,36 +39,13 @@ const CardItem: React.StatelessComponent<{}> = () => {
           <img 
             alt="image"
             className="img-thumb"
-            src="https://cdn-images-1.medium.com/max/2000/1*ZARHKtn8NaeAAwUe2i9kWA.png"
+            src={attachment}
           />
         </div>
-        <h1 className="post-title">React Redux-Saga</h1>
-        <p className="post-date">2018-11-01</p>
+        <h1 className="post-title">{title}</h1>
+        <p className="post-date">{createdAt}</p>
         <p className="post-body">
-          GoogleWalkout follows fallout over
-          Andy Rubin allegations Employees
-          are walking out of Google offices
-          worldwide in protest today as a storm
-          around the company’s handling of sexual
-          harassment cases continues
-          GoogleWalkout follows fallout over
-          Andy Rubin allegations Employees
-          are walking out of Google offices
-          worldwide in protest today as a storm
-          around the company’s handling of sexual
-          harassment cases continues
-          GoogleWalkout follows fallout over
-          Andy Rubin allegations Employees
-          are walking out of Google offices
-          worldwide in protest today as a storm
-          around the company’s handling of sexual
-          harassment cases continues
-          GoogleWalkout follows fallout over
-          Andy Rubin allegations Employees
-          are walking out of Google offices
-          worldwide in protest today as a storm
-          around the company’s handling of sexual
-          harassment cases continues
+          {content}
         </p>
       </article>
     </li>

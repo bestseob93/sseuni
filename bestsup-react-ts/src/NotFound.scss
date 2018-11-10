@@ -1,0 +1,26 @@
+$blue: #0A7189;
+$lblue: #75C6D9;
+
+section.not-found {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $blue;
+  text-align: center;
+  .desc {
+    margin-top: 20vh;
+    h1 {
+      font-size: 10rem;
+      line-height: 10rem;
+      color: #fff;
+    }
+    p {
+      font-size: 6rem;
+      color: #fff;
+    }
+  }
+}
