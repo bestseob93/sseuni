@@ -45,8 +45,10 @@ class AboutContainer extends React.Component<IAboutContainerProps, {}> {
     if(scroller >= 240 && scroller <= 690) {
       const maxRotateValue = -45;
       const rotateValue = scroller / -10;
+      const correctValue = parseInt(rotateValue.toFixed(2), 10);
+      console.log(typeof correctValue);
       return ({
-        transform: `translate(0px, 0px) rotateY(${rotateValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
+        transform: `translate(0px, 0px) rotateY(${correctValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
       });
     } else if(scroller > 690 && scroller <= 3600) {
       return ({

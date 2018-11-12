@@ -47,7 +47,12 @@ class App extends React.Component<{}, IAppState> {
   }
 
   private update = (): void => {
-    const scrollTop = window.pageYOffset;
+    const documentElement: HTMLElement | null = document.documentElement;
+    if(!documentElement) {
+      return;
+    }
+
+    const scrollTop = documentElement.scrollTop;
     this.setState(() => {
       return {scroller: scrollTop, ticking: false};
     });
