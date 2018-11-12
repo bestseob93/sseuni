@@ -15,8 +15,6 @@ const CardItem: React.StatelessComponent<ICardItemProps> = ({
   attachment,
   createdAt,
 }) => {
-  console.log(title);
-  console.log(attachment);
   return (
     <li className="card-item">
       <article className="post">
