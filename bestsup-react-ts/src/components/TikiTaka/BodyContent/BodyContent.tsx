@@ -10,6 +10,7 @@ console.error = (function() {
       }
   }
 })();
+
 function normalizeHtml(str: string): string {
   return str && str.replace(/&nbsp;|\u202F|\u00A0/g, ' '); // space 했을 때 유니코드나 nbsp 값 ' '로 치환
 }
@@ -58,7 +59,7 @@ export interface IBodyContentProps {
 class BodyContent extends React.Component<IBodyContentProps, {}> {
   constructor(props: IBodyContentProps) {
     super(props);
-    
+
     this.lastHtml = props.html || '';
 
     document.execCommand('defaultParagraphSeparator', false, 'p');
@@ -69,7 +70,6 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   private getEl = () => this.el.current;
 
-  
   public shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
     const el = this.getEl();
     if (!el) {
