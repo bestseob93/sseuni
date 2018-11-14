@@ -1,20 +1,12 @@
 import * as React from 'react';
 import Header from 'components/Header';
 
-interface IHeaderContainerProps {
-  scroller: number;
-}
-
-class HeaderContainer extends React.Component<IHeaderContainerProps> {
-  constructor(props: IHeaderContainerProps) {
-    super(props);
-  }
-
-  public componentDidMount() {
+class HeaderContainer extends React.Component<{}> {
+  componentDidMount() {
     // console.log(this.props.scroller);
   }
 
-  private getStyles(scroller: number) {
+  getStyles(scroller: number) {
     if(scroller > 10) {
       const windowWidth = window.innerWidth;
 
@@ -35,11 +27,10 @@ class HeaderContainer extends React.Component<IHeaderContainerProps> {
     }
   }
 
-  public render() {
+  render() {
     return (
       <Header
-        scroller={this.props.scroller}
-        styles={this.getStyles(this.props.scroller)}
+        styles={this.getStyles(30)}
       />
     );
     

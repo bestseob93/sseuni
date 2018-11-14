@@ -22,7 +22,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
     super(props);
   }
 
-  public async componentDidMount() {
+  async componentDidMount() {
     const { BlogActions } = this.props;
     try {
       await BlogActions.requestData();
@@ -31,7 +31,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
     }
   }
 
-  public render() {
+  render() {
     return <CardList datas={this.props.datas} />
   }
 }

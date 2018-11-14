@@ -65,12 +65,12 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     document.execCommand('defaultParagraphSeparator', false, 'p');
   }
 
-  private el = React.createRef<HTMLElement>();
-  private lastHtml: string;
+  el = React.createRef<HTMLElement>();
+  lastHtml: string;
 
-  private getEl = () => this.el.current;
+  getEl = () => this.el.current;
 
-  public shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
+  shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
     const el = this.getEl();
     if (!el) {
       return true;
@@ -85,7 +85,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
       JSON.stringify(this.props.style) !== JSON.stringify(nextProps.style);
   }
 
-  public componentDidUpdate() {
+  componentDidUpdate() {
     const el = this.getEl();
 
     if(!el) {
@@ -102,7 +102,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     replaceCaret(el);
   }
 
-  private onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
+  onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
     const el = this.getEl();
     if (!el) {
       return;
@@ -122,7 +122,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
-  public render() {
+  render() {
     const { tagName, html, ...props } = this.props;
     return React.createElement(
       tagName || 'div',

@@ -84,3 +84,12 @@ section.section {
   margin-right: auto;
   width: 692px;
 }
+
+@keyframes mymove {
+  from {
+    transform: translate(0px, 0px) rotateX(0);
+  }
+  to {
+    transform: translate(0px, 0px) rotateX(-15deg);
+  }
+}

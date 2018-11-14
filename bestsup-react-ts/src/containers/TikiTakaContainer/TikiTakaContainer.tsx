@@ -3,11 +3,11 @@ import TikiTaka from 'components/TikiTaka';
 
 class TikiTakaContainer extends React.Component<{}> {
 
-  public componentDidMount() {
+  componentDidMount() {
     // console.log(this.props.scroller);
   }
 
-  public render() {
+  render() {
     return (
       <TikiTaka />
     );

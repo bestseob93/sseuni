@@ -9,66 +9,17 @@ import NotFound from './NotFound';
 
 import './App.css';
 
-interface IAppState {
-  scroller: number;
-  ticking: boolean;
-}
-
-class App extends React.Component<{}, IAppState> {
-  constructor(props: any) {
-    super(props);
-
-    this.state = {
-      scroller: 0,
-      ticking: false,
-    };
-  }
-
-  public componentDidMount() {
-    window.addEventListener('scroll', this.onScroll);
-  }
-
-  public componentWillMount() {
-    window.removeEventListener('scroll', this.onScroll);
-  }
-
-  private onScroll = (): void => {
-    this.requestTick();
-  }
-
-  private requestTick = (): void => {
-    if(!this.state.ticking) {
-      this.setState({
-        ticking: true,
-      });
-
-      requestAnimationFrame(this.update);
-    }
-  }
-
-  private update = (): void => {
-    const documentElement: HTMLElement | null = document.documentElement;
-    if(!documentElement) {
-      return;
-    }
-
-    const scrollTop = documentElement.scrollTop;
-    this.setState(() => {
-      return {scroller: scrollTop, ticking: false};
-    });
-  }
-
-  public render() {
-    const { scroller } = this.state;
+class App extends React.Component<{}> {
+  render() {
     return (
       <React.Fragment>
-        <HeaderContainer scroller={scroller} />
+        <HeaderContainer />
         <main className="container">
           <Switch>
             <Route exact={true} path="/" component={Home} />
             <Route
               path="/about"
-              component={() => <About scroller={scroller} />}
+              component={() => <About />}
             />
             <Route path="/write" component={TikiTakaContainer} />
             <Route component={NotFound} />

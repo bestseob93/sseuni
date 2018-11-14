@@ -1,52 +1,98 @@
 import * as React from 'react';
 import './AboutContainer.css';
 
-interface IAboutContainerProps {
+interface IAboutContainerState {
   scroller: number;
+  ticking: boolean;
 }
 
-class AboutContainer extends React.Component<IAboutContainerProps, {}> {
-  private figureRef = (element: HTMLDivElement): void => {
+class AboutContainer extends React.Component<{}, IAboutContainerState> {
+  constructor(props: any) {
+    super(props);
+
+    this.state = {
+      scroller: 0,
+      ticking: false,
+    };
+  }
+
+  scrollTop: number = 0;
+
+  figureRef = (element: HTMLDivElement): void => {
     if(element) {
-      console.log(this.props.scroller);
+      console.log(this.state.scroller);
       console.log(element.getBoundingClientRect());
     }
   }
 
-  public componentDidMount() {
-    // const figureEle = this.figureRef.current!;
-    // const documentFigure = document.querySelector('div.figure-container')!;
-    // if(figureEle) {
-    //   console.log(this.figureRef);
-    //   console.log(figureEle.clientHeight);
-    //   console.log(figureEle.clientTop);
-    //   console.log(figureEle.offsetHeight);
-    //   console.log(figureEle.offsetTop);
-    //   console.log(figureEle.scrollHeight);
-    //   console.log(figureEle.scrollTop);
-    //   console.log('=================');
-    //   console.log(documentFigure.getBoundingClientRect());
-    // }
+  componentDidMount() {
+    this.setInitValues();
+    window.addEventListener('scroll', this.onScroll);
   }
 
-  public parallaxStyle(scroller: number) {
+  componentWillMount() {
+    window.removeEventListener('scroll', this.onScroll);
+  }
+
+  setInitValues = (): void => {
+    const documentElement: HTMLElement | null = document.documentElement;
+    if(!documentElement) {
+      return;
+    }
+
+    const scrollTop = documentElement.scrollTop;
+    this.scrollTop = scrollTop;
+    // scrollTop = $window.scrollTop();
+    // windowHeight = $window.height();
+    // windowWidth = $window.width();
+    // convertAllPropsToPx();
+    // buildPage();
+  }
+  onScroll = (): void => {
+    this.requestTick();
+  }
+
+  requestTick = (): void => {
+    if(!this.state.ticking) {
+      this.setState({
+        ticking: true,
+      });
+
+      requestAnimationFrame(this.update);
+    }
+  }
+
+  update = (): void => {
+    const documentElement: HTMLElement | null = document.documentElement;
+    if(!documentElement) {
+      return;
+    }
+
+    const scrollTop = documentElement.scrollTop;
+    this.setState(() => {
+      return {scroller: scrollTop, ticking: false};
+    });
+  }
+
+  parallaxStyle(scroller: number) {
     if(scroller >= 240) {
       const maxRotateValue = -15;
-      const rotateValue = scroller / -30;
+      const rotateValue = scroller / -120;
+      console.log(rotateValue);
       return ({
+        
         transform: `translate(0px, 0px) rotateX(${rotateValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
-      })
+      });
     } else {
       return;
     }
   }
 
-  public figureParallax(scroller: number, index: number) {
+  figureParallax(scroller: number, index: number) {
     if(scroller >= 240 && scroller <= 690) {
       const maxRotateValue = -45;
       const rotateValue = scroller / -10;
       const correctValue = parseInt(rotateValue.toFixed(2), 10);
-      console.log(typeof correctValue);
       return ({
         transform: `translate(0px, 0px) rotateY(${correctValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
       });
@@ -59,7 +105,7 @@ class AboutContainer extends React.Component<IAboutContainerProps, {}> {
     }
   }
 
-  public render() {
+  render() {
     return (
       <section className="section">
         <div className="section-content">
@@ -77,14 +123,14 @@ class AboutContainer extends React.Component<IAboutContainerProps, {}> {
         </div>
         <div className="about-container">
           <div className="sticky-imgs">
-            <div className="figure-container" ref={this.figureRef} style={this.parallaxStyle(this.props.scroller)}>
-              <figure className="image-1" style={this.figureParallax(this.props.scroller, 1)} />
-              <figure className="image-2" style={this.figureParallax(this.props.scroller, 2)} />
-              <figure className="image-3" style={this.figureParallax(this.props.scroller, 3)} />
-              <figure className="image-4" style={this.figureParallax(this.props.scroller, 4)} />
-              <figure className="image-5" style={this.figureParallax(this.props.scroller, 5)} />
-              <figure className="image-6" style={this.figureParallax(this.props.scroller, 6)} />
-              <figure className="image-7" style={this.figureParallax(this.props.scroller, 7)} />
+            <div className="figure-container" ref={this.figureRef} style={this.parallaxStyle(this.state.scroller)}>
+              <figure className="image-1" style={this.figureParallax(this.state.scroller, 1)} />
+              <figure className="image-2" style={this.figureParallax(this.state.scroller, 2)} />
+              <figure className="image-3" style={this.figureParallax(this.state.scroller, 3)} />
+              <figure className="image-4" style={this.figureParallax(this.state.scroller, 4)} />
+              <figure className="image-5" style={this.figureParallax(this.state.scroller, 5)} />
+              <figure className="image-6" style={this.figureParallax(this.state.scroller, 6)} />
+              <figure className="image-7" style={this.figureParallax(this.state.scroller, 7)} />
             </div>
           </div>
           <div className="content-container">
