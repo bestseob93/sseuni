@@ -30,7 +30,7 @@ class App extends React.Component<{}, IAppState> {
 
   public componentWillMount() {
     window.removeEventListener('scroll', this.onScroll);
-  }  
+  }
 
   private onScroll = (): void => {
     this.requestTick();

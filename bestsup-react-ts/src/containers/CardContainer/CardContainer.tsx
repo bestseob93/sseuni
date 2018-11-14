@@ -37,7 +37,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
 }
 
 export default connect(
-  ({ blog}: IStoreState) => ({
+  ({ blog }: IStoreState) => ({
     datas: blog.datas,
   }),
   (dispatch) => ({
