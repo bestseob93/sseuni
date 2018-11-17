@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './AboutContainer.css';
+import Plx from 'components/Plx';
 
 interface IAboutContainerState {
   scroller: number;
@@ -40,14 +41,19 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
       return;
     }
 
-    const scrollTop = documentElement.scrollTop;
+    const scrollTop: number = documentElement.scrollTop || window.scrollY;
     this.scrollTop = scrollTop;
     // scrollTop = $window.scrollTop();
     // windowHeight = $window.height();
     // windowWidth = $window.width();
-    // convertAllPropsToPx();
+    this.converPropsToPx();
     // buildPage();
   }
+
+  converPropsToPx = () => {
+
+  }
+
   onScroll = (): void => {
     this.requestTick();
   }
@@ -75,12 +81,10 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
   }
 
   parallaxStyle(scroller: number) {
-    if(scroller >= 240) {
+    if(scroller >= 300) {
       const maxRotateValue = -15;
-      const rotateValue = scroller / -120;
-      console.log(rotateValue);
+      const rotateValue = scroller / -30;
       return ({
-        
         transform: `translate(0px, 0px) rotateX(${rotateValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
       });
     } else {
@@ -93,6 +97,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
       const maxRotateValue = -45;
       const rotateValue = scroller / -10;
       const correctValue = parseInt(rotateValue.toFixed(2), 10);
+      console.log(typeof correctValue);
       return ({
         transform: `translate(0px, 0px) rotateY(${correctValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
       });
@@ -109,6 +114,9 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     return (
       <section className="section">
         <div className="section-content">
+          <Plx>
+            hi
+          </Plx>
           <div className="intro-block">
             <h2>Lee Hwan Sup</h2>
             <p>
