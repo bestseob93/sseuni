@@ -107,9 +107,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
 
     const rotateValue: number = parseFloat(value.toFixed(3));
     if(typeof index !== 'undefined') {
-      // const width = 1119; // sticky image width 값
-      // const styleEndValue = (width * 0.15) + (index - 3) + (width * 0.25);
-      return rotateValue * index;
+      return rotateValue * index * 0.6;
     } else {
       return rotateValue;
     }
@@ -127,21 +125,25 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
   }
 
   figureParallax(scroller: number, index: number) {
-    const computedValue = this.computeParallaxValue(scroller, 240, 450, 0, -45, undefined);
-    const vh = window.innerHeight * 0.01; // vh 값
-    const duration = (40 * vh) + (3.5 * vh) + (7 - index);
-    console.log(duration);
+    const computedValue = this.computeParallaxValue(scroller, 240, 260, 0, -45, undefined);
+    // const vh = window.innerHeight * 0.01; // vh 값
+    const duration = 75 + ((11 - index) / 11) * 100;
+    // const duration = (40 * vh) + (3.5 * vh) + (7 - index);
+    // console.log(duration);
+    // const width = 486; // image width 값
+    // const styleEndValue = (width * 0.15) + (index - 3) + (width * 0.25);
 
-    const translateValue = this.computeParallaxValue(scroller, 690, 300, 0, duration, index);
-    console.log(translateValue);
+    const translateValue = this.computeParallaxValue(scroller, 500, duration, 0, duration, index);
+    // console.log(translateValue);
 
-    if(scroller >= 240 && scroller <= 690) {
+    if(scroller >= 240 && scroller <= 500) {
       return ({
         transform: `translate(0px, 0px) rotateY(${computedValue}deg)`,
       });
-    } else if(scroller > 690 && scroller <= 3600) {
+    } else if(scroller > 500 && scroller <= 3600) {
       return ({
         transform: `translate(${translateValue}px, 0px) rotateY(-45deg)`,
+        opacity: 1,
       });
     } else {
       return;
@@ -174,6 +176,10 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
               <figure className="image-5" style={this.figureParallax(this.state.scroller, 5)} />
               <figure className="image-6" style={this.figureParallax(this.state.scroller, 6)} />
               <figure className="image-7" style={this.figureParallax(this.state.scroller, 7)} />
+              <figure className="image-8" style={this.figureParallax(this.state.scroller, 8)} />
+              <figure className="image-9" style={this.figureParallax(this.state.scroller, 9)} />
+              <figure className="image-10" style={this.figureParallax(this.state.scroller, 10)} />
+              <figure className="image-11" style={this.figureParallax(this.state.scroller, 11)} />
             </div>
           </div>
           <div className="content-container">
