@@ -1,6 +1,5 @@
 import * as React from 'react';
 import './AboutContainer.css';
-import Plx from 'components/Plx';
 
 interface IAboutContainerState {
   scroller: number;
@@ -51,7 +50,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
   }
 
   converPropsToPx = () => {
-
+    console.log('2');
   }
 
   onScroll = (): void => {
@@ -80,12 +79,43 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     });
   }
 
+  computeParallaxValue(scrollPosition: number, startPosition: number, duration: number, startValue: number, endValue: number): number {
+
+    const invert = startValue > endValue;
+    let maxValue = endValue;
+    let minValue = startValue;
+
+    if (invert) {
+      maxValue = startValue;
+      minValue = endValue;
+    }
+
+    let percentage: number = ((scrollPosition - startPosition) / duration);
+
+    if (percentage > 1) {
+      percentage = 1;
+    } else if (percentage < 0) {
+      percentage = 0;
+    }
+
+    let value: number = percentage * (maxValue - minValue);
+
+    if (invert) {
+      value = maxValue - value;
+    } else {
+      value = value + minValue;
+    }
+
+    const rotateValue: number = parseFloat(value.toFixed(3));
+
+    return rotateValue;
+  }
+
   parallaxStyle(scroller: number) {
-    if(scroller >= 300) {
-      const maxRotateValue = -15;
-      const rotateValue = scroller / -30;
+    const computedValue = this.computeParallaxValue(scroller, 240, 90, 0, -15);
+    if(scroller >= 240) {
       return ({
-        transform: `translate(0px, 0px) rotateX(${rotateValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
+        transform: `translate(0px, 0px) rotateX(${computedValue}deg)`,
       });
     } else {
       return;
@@ -93,17 +123,19 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
   }
 
   figureParallax(scroller: number, index: number) {
+    const computedValue = this.computeParallaxValue(scroller, 240, 450, 0, -45);
+    const styleEndValue = 73 + (index - 3) + 136.08;
+    console.log('index: ', index, 'value: ', styleEndValue);
+
+    const translateValue = this.computeParallaxValue(scroller, 690, 3600, 0, styleEndValue);
+
     if(scroller >= 240 && scroller <= 690) {
-      const maxRotateValue = -45;
-      const rotateValue = scroller / -10;
-      const correctValue = parseInt(rotateValue.toFixed(2), 10);
-      console.log(typeof correctValue);
       return ({
-        transform: `translate(0px, 0px) rotateY(${correctValue < maxRotateValue ? maxRotateValue : rotateValue}deg)`,
+        transform: `translate(0px, 0px) rotateY(${computedValue}deg)`,
       });
     } else if(scroller > 690 && scroller <= 3600) {
       return ({
-        transform: `translate(${(scroller / 30) * index}px, 0px) rotateY(-45deg)`,
+        transform: `translate(${translateValue}px, 0px) rotateY(-45deg)`,
       });
     } else {
       return;
@@ -114,9 +146,6 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     return (
       <section className="section">
         <div className="section-content">
-          <Plx>
-            hi
-          </Plx>
           <div className="intro-block">
             <h2>Lee Hwan Sup</h2>
             <p>
