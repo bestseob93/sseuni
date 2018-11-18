@@ -22,13 +22,13 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
     };
   }
 
-  private handleChange = (evt: any): void => {
+  handleChange = (evt: any): void => {
     this.setState({
       html: evt.target.value,
     });
   };
 
-  private sanitize = (): void => {
+  sanitize = (): void => {
     const sanitizeConf = {
       allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1'],
       allowedAttributes: {
@@ -40,7 +40,7 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
     });
   }
 
-  public render() {
+  render() {
     console.log(JSON.stringify(this.state.html));
     return (
       <div className="tikitaka-editor">
