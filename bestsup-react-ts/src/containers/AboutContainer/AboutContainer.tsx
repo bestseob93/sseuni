@@ -79,8 +79,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     });
   }
 
-  computeParallaxValue(scrollPosition: number, startPosition: number, duration: number, startValue: number, endValue: number): number {
-
+  computeParallaxValue(scrollPosition: number, startPosition: number, duration: number, startValue: number, endValue: number, index: any): number {
     const invert = startValue > endValue;
     let maxValue = endValue;
     let minValue = startValue;
@@ -107,12 +106,17 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     }
 
     const rotateValue: number = parseFloat(value.toFixed(3));
-
-    return rotateValue;
+    if(typeof index !== 'undefined') {
+      // const width = 1119; // sticky image width 값
+      // const styleEndValue = (width * 0.15) + (index - 3) + (width * 0.25);
+      return rotateValue * index;
+    } else {
+      return rotateValue;
+    }
   }
 
   parallaxStyle(scroller: number) {
-    const computedValue = this.computeParallaxValue(scroller, 240, 90, 0, -15);
+    const computedValue = this.computeParallaxValue(scroller, 240, 90, 0, -15, undefined);
     if(scroller >= 240) {
       return ({
         transform: `translate(0px, 0px) rotateX(${computedValue}deg)`,
@@ -123,11 +127,13 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
   }
 
   figureParallax(scroller: number, index: number) {
-    const computedValue = this.computeParallaxValue(scroller, 240, 450, 0, -45);
-    const styleEndValue = 73 + (index - 3) + 136.08;
-    console.log('index: ', index, 'value: ', styleEndValue);
+    const computedValue = this.computeParallaxValue(scroller, 240, 450, 0, -45, undefined);
+    const vh = window.innerHeight * 0.01; // vh 값
+    const duration = (40 * vh) + (3.5 * vh) + (7 - index);
+    console.log(duration);
 
-    const translateValue = this.computeParallaxValue(scroller, 690, 3600, 0, styleEndValue);
+    const translateValue = this.computeParallaxValue(scroller, 690, 300, 0, duration, index);
+    console.log(translateValue);
 
     if(scroller >= 240 && scroller <= 690) {
       return ({
