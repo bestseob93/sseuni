@@ -2,6 +2,7 @@ section.section {
   width: 100%;
   padding-top: 125px;
   padding-bottom: 88px;
+  display: block;
   .intro-block {
     margin-bottom: 120px;
   }
@@ -9,7 +10,6 @@ section.section {
     position: relative;
     z-index: 1;
     .sticky-imgs {
-      padding: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -22,14 +22,14 @@ section.section {
       max-height: 100vh;
       z-index: 2;
       .figure-container {
-        width: 289px;
-        height: 355px;
+        width: 486px;
+        height: 598px;
         transform: translate(0px, 0px) rotateX(0deg);
         transform-style: preserve-3d;
         figure {
-          width: 289px;
-          height: 355px;
-          background-size: 289px 355px;
+          width: 486px;
+          height: 598px;
+          background-size: 486px 598px;
           background-repeat: no-repeat;
           transform: translate(0px, 0px);
           will-change: transform;
@@ -83,4 +83,13 @@ section.section {
   margin-left: auto;
   margin-right: auto;
   width: 692px;
+}
+
+@keyframes mymove {
+  from {
+    transform: translate(0px, 0px) rotateX(0);
+  }
+  to {
+    transform: translate(0px, 0px) rotateX(-15deg);
+  }
 }

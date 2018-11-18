@@ -14,6 +14,7 @@
     "object-literal-sort-keys": false,
     "jsx-no-lambda": false,
     "only-arrow-functions": false,
-    "max-classes-per-file": false
+    "max-classes-per-file": false,
+    "member-access": false
   }
 }
