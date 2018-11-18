@@ -14,17 +14,15 @@ class App extends React.Component<{}> {
     return (
       <React.Fragment>
         <HeaderContainer />
-        <main className="container">
-          <Switch>
-            <Route exact={true} path="/" component={Home} />
-            <Route
-              path="/about"
-              component={() => <About />}
-            />
-            <Route path="/write" component={TikiTakaContainer} />
-            <Route component={NotFound} />
-          </Switch>
-        </main>
+        <Switch>
+          <Route exact={true} path="/" component={Home} />
+          <Route
+            path="/about"
+            component={() => <About />}
+          />
+          <Route path="/write" component={TikiTakaContainer} />
+          <Route component={NotFound} />
+        </Switch>
       </React.Fragment>
     );
 

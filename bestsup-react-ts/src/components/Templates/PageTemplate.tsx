@@ -8,9 +8,9 @@ interface IProps {
 
 const PageTemplate: React.StatelessComponent<IProps> = ({ children }) => {
   return (
-    <div className="page-tempalte">
+    <main className="container">
       {children}
-    </div>
+    </main>
   );
 };
 

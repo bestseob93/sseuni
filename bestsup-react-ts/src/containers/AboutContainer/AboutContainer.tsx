@@ -107,7 +107,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
 
     const rotateValue: number = parseFloat(value.toFixed(3));
     if(typeof index !== 'undefined') {
-      return rotateValue * index * 0.6;
+      return rotateValue * index * 0.5;
     } else {
       return rotateValue;
     }
@@ -130,10 +130,9 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     const duration = 75 + ((11 - index) / 11) * 100;
     // const duration = (40 * vh) + (3.5 * vh) + (7 - index);
     // console.log(duration);
-    // const width = 486; // image width 값
-    // const styleEndValue = (width * 0.15) + (index - 3) + (width * 0.25);
+    const styleEndValue = 73 + (index - 3) + 121.5; // 각 이미지의 최종 translateX 값
 
-    const translateValue = this.computeParallaxValue(scroller, 500, duration, 0, duration, index);
+    const translateValue = this.computeParallaxValue(scroller, 500, duration, 0, styleEndValue, index);
     // console.log(translateValue);
 
     if(scroller >= 240 && scroller <= 500) {
@@ -143,7 +142,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     } else if(scroller > 500 && scroller <= 3600) {
       return ({
         transform: `translate(${translateValue}px, 0px) rotateY(-45deg)`,
-        opacity: 1,
+        opacity: 1 - index * 0.043,
       });
     } else {
       return;

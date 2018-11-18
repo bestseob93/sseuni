@@ -2,6 +2,7 @@ section.section {
   width: 100%;
   padding-top: 125px;
   padding-bottom: 88px;
+  display: block;
   .intro-block {
     margin-bottom: 120px;
   }
@@ -9,7 +10,6 @@ section.section {
     position: relative;
     z-index: 1;
     .sticky-imgs {
-      padding: 3rem;
       display: flex;
       justify-content: center;
       align-items: center;

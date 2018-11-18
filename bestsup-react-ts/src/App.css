@@ -1,8 +1,3 @@
-.container {
-  max-width: 1142px;
-  margin: 0 auto;
-  padding-top: 4rem; }
-
 .animated {
   animation-duration: 1s;
   animation-fill-mode: both; }
