@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 
 import './CardItem.css';
 
@@ -33,13 +34,15 @@ const CardItem: React.StatelessComponent<ICardItemProps> = ({
             Share
           </div>
         </div>
-        <div className="post-thumb-wrap">
-          <img 
-            alt="image"
-            className="img-thumb"
-            src={attachment}
-          />
-        </div>
+        <Link to={`/blog/${title}`}>
+          <div className="post-thumb-wrap">
+            <img 
+              alt="image"
+              className="img-thumb"
+              src={attachment}
+            />
+          </div>
+        </Link>
         <h1 className="post-title">{title}</h1>
         <p className="post-date">{createdAt}</p>
         <p className="post-body">
