@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import { fixedEncodeURI } from 'helpers/encodeURI';
 
 import './CardItem.css';
 
@@ -34,7 +35,7 @@ const CardItem: React.StatelessComponent<ICardItemProps> = ({
             Share
           </div>
         </div>
-        <Link to={`/blog/${title}`}>
+        <Link to={`/blog/${fixedEncodeURI(title)}`}>
           <div className="post-thumb-wrap">
             <img 
               alt="image"
@@ -43,11 +44,15 @@ const CardItem: React.StatelessComponent<ICardItemProps> = ({
             />
           </div>
         </Link>
-        <h1 className="post-title">{title}</h1>
+        <Link to={`/blog/${fixedEncodeURI(title)}`}>
+          <h1 className="post-title">{title}</h1>
+        </Link>
         <p className="post-date">{createdAt}</p>
-        <p className="post-body">
-          {content}
-        </p>
+        <Link to={`/blog/${fixedEncodeURI(title)}`}>
+          <p className="post-body">
+            {content}
+          </p>
+        </Link>
       </article>
     </li>
   );
