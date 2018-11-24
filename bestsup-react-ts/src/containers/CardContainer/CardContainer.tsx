@@ -21,9 +21,6 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
   constructor(props: ICardContainerProps) {
     super(props);
   }
-  el = React.createRef<HTMLDivElement>();
-
-  getEl = () => this.el.current;
 
   async componentDidMount() {
     const { BlogActions } = this.props;
@@ -34,21 +31,8 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
     }
   }
 
-  componentWillUnmount() {
-    const el = this.getEl();
-    if (!el) {
-      return;
-    }
-    console.log(el);
-    
-  }
-
   render() {
-    return (
-      <div className="animated-home" ref={this.el}>
-        <CardList datas={this.props.datas} />
-      </div>
-    );
+    return <CardList datas={this.props.datas} />
   }
 }
 
