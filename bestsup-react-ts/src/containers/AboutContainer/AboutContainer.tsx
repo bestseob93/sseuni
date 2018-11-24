@@ -18,13 +18,6 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
 
   scrollTop: number = 0;
 
-  figureRef = (element: HTMLDivElement): void => {
-    if(element) {
-      console.log(this.state.scroller);
-      console.log(element.getBoundingClientRect());
-    }
-  }
-
   componentDidMount() {
     this.setInitValues();
     window.addEventListener('scroll', this.onScroll);
@@ -42,15 +35,6 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
 
     const scrollTop: number = documentElement.scrollTop || window.scrollY;
     this.scrollTop = scrollTop;
-    // scrollTop = $window.scrollTop();
-    // windowHeight = $window.height();
-    // windowWidth = $window.width();
-    this.converPropsToPx();
-    // buildPage();
-  }
-
-  converPropsToPx = () => {
-    console.log('2');
   }
 
   onScroll = (): void => {
@@ -167,7 +151,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
         </div>
         <div className="about-container">
           <div className="sticky-imgs">
-            <div className="figure-container" ref={this.figureRef} style={this.parallaxStyle(this.state.scroller)}>
+            <div className="figure-container" style={this.parallaxStyle(this.state.scroller)}>
               <figure className="image-1" style={this.figureParallax(this.state.scroller, 1)} />
               <figure className="image-2" style={this.figureParallax(this.state.scroller, 2)} />
               <figure className="image-3" style={this.figureParallax(this.state.scroller, 3)} />
