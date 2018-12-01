@@ -122,6 +122,14 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
+  handleMouseUp = (ev: React.SyntheticEvent<HTMLElement>): void => {
+    const selectedStr = window.getSelection().toString();
+    const selectedStrLength = selectedStr.length;
+    if(selectedStrLength > 0) {
+      // TODO: redux ui 연동(command 동작시키는 컴포넌트 생성))
+    }
+  }
+
   render() {
     const { tagName, html, ...props } = this.props;
     return React.createElement(
@@ -131,6 +139,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         ref: this.el,
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
+        onMouseUp: this.handleMouseUp,
         contentEditable: true,
         dangerouslySetInnerHTML: { __html: html }
       },
