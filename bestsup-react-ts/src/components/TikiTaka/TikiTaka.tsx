@@ -41,7 +41,6 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
   }
 
   render() {
-    console.log(JSON.stringify(this.state.html));
     return (
       <div className="tikitaka-editor">
         <h1 className="title" contentEditable={true} onChange={(e) => console.log(e)}>
@@ -51,6 +50,7 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
+          style={{margin: '20px'}}
         />
       </div>
     );

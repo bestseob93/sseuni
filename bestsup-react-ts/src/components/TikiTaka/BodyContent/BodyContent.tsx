@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import './BodyContent.css';
 // Disable contentEditAble Warning
 console.error = (function() {
   const error = console.error
@@ -30,6 +30,7 @@ function findLastTextNode(node: Node) : Node | null {
 
 function replaceCaret(el: HTMLElement) {
   // 엘리먼트 제일 뒤에 위치
+  console.log(el);
   const target = findLastTextNode(el);
   // 엘리먼트가 포커스 되지 않았을 때는 이동시키지 않음
   const isTargetFocused = document.activeElement === target;
@@ -123,11 +124,16 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   handleMouseUp = (ev: React.SyntheticEvent<HTMLElement>): void => {
-    const selectedStr = window.getSelection().toString();
-    const selectedStrLength = selectedStr.length;
-    if(selectedStrLength > 0) {
+    const selectedString = window.getSelection().toString();
+    const lengthOfSelectedString = selectedString.length;
+    console.log(lengthOfSelectedString)
+    if(lengthOfSelectedString > 0) {
       // TODO: redux ui 연동(command 동작시키는 컴포넌트 생성))
     }
+  }
+
+  onFocus = () => {
+    console.log('focused');
   }
 
   render() {
@@ -140,7 +146,9 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
         onMouseUp: this.handleMouseUp,
+        onFocus: this.onFocus,
         contentEditable: true,
+        placeholder: 'Enter text here...',
         dangerouslySetInnerHTML: { __html: html }
       },
       this.props.children);
