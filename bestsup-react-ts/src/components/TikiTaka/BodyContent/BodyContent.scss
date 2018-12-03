@@ -1,6 +1,11 @@
-.bodycontent-has-placeholder::before {
+// .bodycontent-has-placeholder::before {
+//   content: attr(placeholder);
+//   opacity: 0.5;
+//   color: inherit;
+//   cursor: text;
+// }
+
+[contenteditable=true]:empty:before {
   content: attr(placeholder);
-  opacity: 0.5;
-  color: inherit;
-  cursor: text;
+  display: block; /* For Firefox */
 }

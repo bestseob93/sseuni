@@ -4,8 +4,9 @@ import { IBlogEntity } from 'models';
 
 // TODO: actionCreator Type 정의하기
 export const types = {
-  REQUEST_DATA: 'main/REQUEST_DATA',
-  RECEIVE_DATA: 'main/RECEIVE_DATA',
+  REQUEST_DATA: 'blog/REQUEST_DATA',
+  RECEIVE_DATA: 'blog/RECEIVE_DATA',
+  REQUEST_POST: 'blog/REQUEST_POST',
 };
 
 type ResponsePayload = any;
@@ -13,6 +14,7 @@ type ResponsePayload = any;
 export const actionCreators = {
   requestData: createAction(types.REQUEST_DATA),
   receiveData: createAction<ResponsePayload>(types.RECEIVE_DATA),
+  requestPost: createAction(types.REQUEST_POST),
 };
 
 const BlogRecord = Record({
