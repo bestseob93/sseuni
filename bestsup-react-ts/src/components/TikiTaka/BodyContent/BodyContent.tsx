@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import './BodyContent.css';
 // Disable contentEditAble Warning
 console.error = (function() {
   const error = console.error
@@ -30,6 +30,7 @@ function findLastTextNode(node: Node) : Node | null {
 
 function replaceCaret(el: HTMLElement) {
   // 엘리먼트 제일 뒤에 위치
+  console.log(el);
   const target = findLastTextNode(el);
   // 엘리먼트가 포커스 되지 않았을 때는 이동시키지 않음
   const isTargetFocused = document.activeElement === target;
@@ -70,6 +71,10 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   getEl = () => this.el.current;
 
+  componentDidMount(): void {
+    document.addEventListener('mouseup', this.handleMouseUp);
+  }
+
   shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
     const el = this.getEl();
     if (!el) {
@@ -102,6 +107,10 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     replaceCaret(el);
   }
 
+  componentWillUnmount(): void {
+    document.removeEventListener('mouseup', this.handleMouseUp);
+  }
+
   onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
     const el = this.getEl();
     if (!el) {
@@ -122,6 +131,29 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
+  handleMouseUp = (ev: MouseEvent) => {
+    const selectedString = window.getSelection().toString();
+    const lengthOfSelectedString = selectedString.length;
+    console.log(lengthOfSelectedString);
+
+    if(lengthOfSelectedString > 0) {
+      // TODO: redux ui 연동(command 동작시키는 컴포넌트 생성))
+      // this.getCaretXY();
+    }
+  }
+
+
+  onFocus = () => {
+    const el = this.getEl();
+    if (!el) {
+      return;
+    }
+
+    if (el.innerHTML === '') {
+      el.innerHTML = '<p><br/></p>';
+    }
+  }
+
   render() {
     const { tagName, html, ...props } = this.props;
     return React.createElement(
@@ -131,7 +163,9 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         ref: this.el,
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
+        onFocus: this.onFocus,
         contentEditable: true,
+        placeholder: 'Enter text here...',
         dangerouslySetInnerHTML: { __html: html }
       },
       this.props.children);

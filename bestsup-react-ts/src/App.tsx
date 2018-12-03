@@ -5,6 +5,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import TikiTakaContainer from 'containers/TikiTakaContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
+import Write from 'pages/WritePage';
 import NotFound from './NotFound';
 
 import './App.css';
@@ -20,7 +21,8 @@ class App extends React.Component<{}> {
             path="/about"
             component={() => <About />}
           />
-          <Route path="/write" component={TikiTakaContainer} />
+          <Route path="/writeTest" component={TikiTakaContainer} />
+          <Route path="/write" component={Write} />
           <Route component={NotFound} />
         </Switch>
       </React.Fragment>
