@@ -71,6 +71,10 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   getEl = () => this.el.current;
 
+  componentDidMount(): void {
+    document.addEventListener('mouseup', this.handleMouseUp);
+  }
+
   shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
     const el = this.getEl();
     if (!el) {
@@ -103,6 +107,10 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     replaceCaret(el);
   }
 
+  componentWillUnmount(): void {
+    document.removeEventListener('mouseup', this.handleMouseUp);
+  }
+
   onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
     const el = this.getEl();
     if (!el) {
@@ -123,7 +131,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
-  handleMouseUp = (ev: React.SyntheticEvent<HTMLElement>): void => {
+  handleMouseUp = (ev: MouseEvent) => {
     const selectedString = window.getSelection().toString();
     const lengthOfSelectedString = selectedString.length;
     console.log(lengthOfSelectedString)
@@ -133,7 +141,14 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   onFocus = () => {
-    console.log('focused');
+    const el = this.getEl();
+    if (!el) {
+      return;
+    }
+
+    if (el.innerHTML === '') {
+      el.innerHTML = '<p><br/></p>';
+    }
   }
 
   render() {
@@ -145,7 +160,6 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         ref: this.el,
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
-        onMouseUp: this.handleMouseUp,
         onFocus: this.onFocus,
         contentEditable: true,
         placeholder: 'Enter text here...',
