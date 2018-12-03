@@ -134,11 +134,14 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   handleMouseUp = (ev: MouseEvent) => {
     const selectedString = window.getSelection().toString();
     const lengthOfSelectedString = selectedString.length;
-    console.log(lengthOfSelectedString)
+    console.log(lengthOfSelectedString);
+
     if(lengthOfSelectedString > 0) {
       // TODO: redux ui 연동(command 동작시키는 컴포넌트 생성))
+      // this.getCaretXY();
     }
   }
+
 
   onFocus = () => {
     const el = this.getEl();
