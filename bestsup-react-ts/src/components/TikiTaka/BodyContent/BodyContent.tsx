@@ -52,6 +52,7 @@ export interface IBodyContentProps {
   html?: string,
   onBlur?: () => void,
   onChange?: (evt: React.SyntheticEvent) => void,
+  toggleToolBar?: (toggle?: boolean) => void,
   className?: string,
   style?: object,
 }
@@ -72,6 +73,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   getEl = () => this.el.current;
 
   componentDidMount(): void {
+    // document.addEventListener('mousedown', this.handleMouseDown);
     document.addEventListener('mouseup', this.handleMouseUp);
   }
 
@@ -108,6 +110,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   componentWillUnmount(): void {
+    // document.removeEventListener('mousedown', this.handleMouseDown);
     document.removeEventListener('mouseup', this.handleMouseUp);
   }
 
@@ -132,13 +135,22 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   handleMouseUp = (ev: MouseEvent) => {
+    ev.preventDefault();
     const selectedString = window.getSelection().toString();
     const lengthOfSelectedString = selectedString.length;
     console.log(lengthOfSelectedString);
 
     if(lengthOfSelectedString > 0) {
-      // TODO: redux ui 연동(command 동작시키는 컴포넌트 생성))
-      // this.getCaretXY();
+      if (this.props.toggleToolBar) {
+        this.props.toggleToolBar(true);
+      }
+    }
+  }
+
+  handleMouseDown = (ev: MouseEvent) => {
+    ev.preventDefault();
+    if (this.props.toggleToolBar) {
+      this.props.toggleToolBar(false);
     }
   }
 
@@ -155,7 +167,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   render() {
-    const { tagName, html, ...props } = this.props;
+    const { tagName, html, toggleToolBar, ...props } = this.props;
     return React.createElement(
       tagName || 'div',
       {

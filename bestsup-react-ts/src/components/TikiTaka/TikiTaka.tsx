@@ -11,6 +11,7 @@ import './TikiTaka.css';
 
 export interface ITikiTaka {
   html: string,
+  isToggled: boolean
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
@@ -20,6 +21,7 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
 
     this.state = {
       html: '',
+      isToggled: false,
     };
   }
 
@@ -41,10 +43,16 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
     });
   }
 
+  toggleToolBar = (toggle: boolean) => {
+    this.setState({
+      isToggled: toggle,
+    })
+  }
+
   render() {
     return (
       <div className="tikitaka-editor">
-        <ToolBar />
+        <ToolBar isToggled={this.state.isToggled} />
         <h1 className="title" contentEditable={true} onChange={(e) => console.log(e)}>
           <DefaultPlaceholder />
         </h1>
@@ -52,6 +60,7 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
+          toggleToolBar={this.toggleToolBar}
           style={{margin: '20px'}}
         />
       </div>
