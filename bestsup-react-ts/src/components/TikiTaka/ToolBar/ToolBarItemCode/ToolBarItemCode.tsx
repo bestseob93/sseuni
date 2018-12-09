@@ -6,9 +6,28 @@ export interface IToolBarItemCodeProps {
   name: string,
   handleGistCode: (txt: string) => void
 }
-class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, {}> {
+
+export interface IToolBarItemCodeState {
+  height: number
+}
+
+class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarItemCodeState> {
+  constructor(props: IToolBarItemCodeProps) {
+    super(props);
+
+    this.state = {
+      height: 0,
+    };
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('message', function(e) {
+      console.log(e);
+    });
+  }
+
   encodedGist = (gistId: string): string => {
-    const script = '%3Cscript%3E%0Awindow.onload%20%3D%20function%28%29%20%7B%0A%20%20window.parent.postMessage%28%7B%20hello%3A%20%20document.documentElement.clientHeight%20%7D%2C%20%27%2A%27%29%3B%0A%7D%3B%0A%3C%2Fscript%3E';
+    const script = '%3Cscript%3E%0Awindow.onload%20%3D%20function%28%29%20%7B%0A%20%20window.parent.postMessage%28%7B%20height%3A%20%20document.documentElement.clientHeight%20%7D%2C%20%27%2A%27%29%3B%0A%7D%3B%0A%3C%2Fscript%3E';
     const encodedURI = `data:text/html;charset=utf-8,%3Cbody%3E%3Cscript%20src%3D%22https://gist.github.com/${gistId}%22%3E%3C%2Fscript%3E${script}%3C%2Fbody%3E`;
     return encodedURI;
   }
@@ -26,19 +45,21 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, {}> {
       const iFrameEle = document.createElement('iframe');
 
       iFrameContainer.setAttribute('class', 'iframe-container');
-
+      console.log(iFrameContainer.style);
       iFrameEle.src = this.encodedGist('bestseob93/25dcdcf38f5c5d2def9aa6cff3556a06.js');
       iFrameEle.setAttribute('sandbox', 'allow-scripts');
       iFrameEle.onload = function () {
-        const document = iFrameEle.contentWindow || iFrameEle.contentDocument;
-        console.log(document);
         window.addEventListener('message', function(e) {
-          console.log(e.data); // { hello: 'parent' }
+          iFrameContainer.style.paddingBottom = e.data.height + 'px';
         });
-        handleGistCode(fakeFigure.innerHTML);
+
+        console.log(iFrameContainer.style);
+        setTimeout(() => {
+          handleGistCode(fakeFigure.innerHTML);
+        }, 100);
       }
 
-      console.log(iFrameEle);
+      // TODO: 깜빡이는거 제거
       fakeFigure.appendChild(iFrameContainer);
       iFrameContainer.appendChild(iFrameEle);
       lastNode.appendChild(fakeFigure);
