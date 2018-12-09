@@ -9,12 +9,12 @@ import ToolBar from './ToolBar';
 
 import './TikiTaka.css';
 
-export interface ITikiTaka {
+export interface ITikiTakaState {
   html: string,
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
-class TikiTaka extends React.Component<{}, ITikiTaka> {
+class TikiTaka extends React.Component<{}, ITikiTakaState> {
   constructor(props: any) {
     super(props);
 
@@ -31,13 +31,19 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
 
   sanitize = (): void => {
     const sanitizeConf = {
-      allowedTags: ['b', 'i', 'em', 'strong', 'a', 'p', 'div', 'h1'],
-      allowedAttributes: {
-        a: ['href'],
-      },
+      allowedTags: false,
+      allowedAttributes: false,
+      allowedSchemes: ['data'],
     }
+    console.log('sanitized');
     this.setState({
       html: sanitizeHtml(this.state.html, sanitizeConf)
+    });
+  }
+
+  addGistCodeToHtml = (txt: string): void => {
+    this.setState({
+      html: this.state.html + txt,
     });
   }
 
@@ -45,7 +51,7 @@ class TikiTaka extends React.Component<{}, ITikiTaka> {
     console.log(this.state.html);
     return (
       <div className="tikitaka-editor">
-        <ToolBar />
+        <ToolBar handleGistCode={this.addGistCodeToHtml} />
         <h1 className="title" contentEditable={true} onChange={(e) => console.log(e)}>
           <DefaultPlaceholder />
         </h1>
