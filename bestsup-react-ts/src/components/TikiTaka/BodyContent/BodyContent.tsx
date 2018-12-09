@@ -52,7 +52,6 @@ export interface IBodyContentProps {
   html?: string,
   onBlur?: () => void,
   onChange?: (evt: React.SyntheticEvent) => void,
-  toggleToolBar?: (toggle?: boolean) => void,
   className?: string,
   style?: object,
 }
@@ -139,21 +138,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     const selectedString = window.getSelection().toString();
     const lengthOfSelectedString = selectedString.length;
     console.log(lengthOfSelectedString);
-
-    if(lengthOfSelectedString > 0) {
-      if (this.props.toggleToolBar) {
-        this.props.toggleToolBar(true);
-      }
-    }
   }
-
-  handleMouseDown = (ev: MouseEvent) => {
-    ev.preventDefault();
-    if (this.props.toggleToolBar) {
-      this.props.toggleToolBar(false);
-    }
-  }
-
 
   onFocus = () => {
     const el = this.getEl();
@@ -167,7 +152,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   render() {
-    const { tagName, html, toggleToolBar, ...props } = this.props;
+    const { tagName, html, ...props } = this.props;
     return React.createElement(
       tagName || 'div',
       {

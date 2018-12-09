@@ -9,7 +9,9 @@ class TikiTakaContainer extends React.Component<{}> {
 
   render() {
     return (
-      <TikiTaka />
+      <React.Fragment>
+        <TikiTaka />
+      </React.Fragment>
     );
   }
 }
