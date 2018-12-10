@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import ToolBarItem from './ToolBarItem';
-import ToolBarItemCode from './ToolBarItemCode';
+import ToolBarItem from '../ToolBarItem';
+import ToolBarItemCode from '../ToolBarItemCode';
 
 import './ToolBar.css';
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import sanitizeHtml from 'sanitize-html';
 import BodyContent from './BodyContent';
 import DefaultPlaceholder from './DefaultPlaceholder';
-import ToolBar from './ToolBar';
+import ToolBarList from './ToolBar/ToolBarList';
 
 // @types/React 아직 업데이트되지 않음 (lazy, Suspence 등)
 // const OtherComponent = React.lazy(() => import('./DefaultPlaceholder'));
@@ -51,7 +51,7 @@ class TikiTaka extends React.Component<{}, ITikiTakaState> {
     console.log(this.state.html);
     return (
       <div className="tikitaka-editor">
-        <ToolBar handleGistCode={this.addGistCodeToHtml} />
+        <ToolBarList handleGistCode={this.addGistCodeToHtml} />
         <h1 className="title" contentEditable={true} onChange={(e) => console.log(e)}>
           <DefaultPlaceholder />
         </h1>

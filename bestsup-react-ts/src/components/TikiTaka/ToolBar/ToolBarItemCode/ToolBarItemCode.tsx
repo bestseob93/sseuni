@@ -49,14 +49,18 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
       iFrameEle.src = this.encodedGist('bestseob93/25dcdcf38f5c5d2def9aa6cff3556a06.js');
       iFrameEle.setAttribute('sandbox', 'allow-scripts');
       iFrameEle.onload = function () {
-        window.addEventListener('message', function(e) {
-          iFrameContainer.style.paddingBottom = e.data.height + 'px';
-        });
+        const promised = () => {
+          return new Promise((resolve, reject) => {
+            window.addEventListener('message', function(e) {
+              iFrameContainer.style.paddingBottom = e.data.height + 'px';
+              resolve();
+            });
+          });
+        }
 
-        console.log(iFrameContainer.style);
-        setTimeout(() => {
-          handleGistCode(fakeFigure.innerHTML);
-        }, 100);
+        promised().then(() => {
+          handleGistCode(`${fakeFigure.innerHTML}<p><br /></p>`); // enter 시 div로 이어지는 것 방지
+        });
       }
 
       // TODO: 깜빡이는거 제거
