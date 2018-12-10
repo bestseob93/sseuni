@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import ToolBarItem from '../ToolBarItem';
 import ToolBarItemCode from '../ToolBarItemCode';
+import ToolBarItemImage from '../ToolBarItemImage';
 
 import './ToolBar.css';
 
@@ -18,7 +19,8 @@ const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCo
         <ToolBarItem name="bold" />
         <ToolBarItem name="italic" />
         <ToolBarItem name="quote" />
-        <ToolBarItemCode name="code" handleGistCode={handleGistCode} />
+        <ToolBarItemCode handleGistCode={handleGistCode} />
+        <ToolBarItemImage />
       </ul>
     </div>
   );

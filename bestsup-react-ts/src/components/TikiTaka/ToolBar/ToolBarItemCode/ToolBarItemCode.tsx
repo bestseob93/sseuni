@@ -3,7 +3,6 @@ import * as React from 'react';
 import code from '../ToolBarIcons/code.svg';
 
 export interface IToolBarItemCodeProps {
-  name: string,
   handleGistCode: (txt: string) => void
 }
 
@@ -18,12 +17,6 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
     this.state = {
       height: 0,
     };
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('message', function(e) {
-      console.log(e);
-    });
   }
 
   encodedGist = (gistId: string): string => {
@@ -63,7 +56,7 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
         });
       }
 
-      // TODO: 깜빡이는거 제거
+      // TODO: 깜빡이는 부분 처리 필요
       fakeFigure.appendChild(iFrameContainer);
       iFrameContainer.appendChild(iFrameEle);
       lastNode.appendChild(fakeFigure);
