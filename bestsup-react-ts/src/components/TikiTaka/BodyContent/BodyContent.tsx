@@ -120,7 +120,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     }
 
     const text = el.innerHTML;
-    console.log('c');
+
     if (this.props.onChange && text !== this.lastHtml) {
       const newEvt = Object.assign({}, ev, {
         target: {

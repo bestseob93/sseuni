@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import code from '../ToolBarIcons/code.svg';
+import { findLastNode } from 'helpers/domHelpers';
 
 export interface IToolBarItemCodeProps {
   handleGistCode: (txt: string) => void
@@ -24,14 +25,13 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
     const encodedURI = `data:text/html;charset=utf-8,%3Cbody%3E%3Cscript%20src%3D%22https://gist.github.com/${gistId}%22%3E%3C%2Fscript%3E${script}%3C%2Fbody%3E`;
     return encodedURI;
   }
-  insertEmbedCode = () => {
+  insertEmbedCode = (): void => {
     const { handleGistCode } = this.props;
 
     const editorContainer = document.querySelector('.tikitaka-editor div[contenteditable="true"]');
 
     if (editorContainer) {
-      const arrayOfParagraphs = Array.from(editorContainer.children);
-      const lastNode = arrayOfParagraphs[arrayOfParagraphs.length - 1];
+      const lastNode = findLastNode(editorContainer);
 
       const fakeFigure = document.createElement('figure');
       const iFrameContainer = document.createElement('div');
