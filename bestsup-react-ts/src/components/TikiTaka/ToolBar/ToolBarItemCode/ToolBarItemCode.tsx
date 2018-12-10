@@ -38,7 +38,8 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
       const iFrameEle = document.createElement('iframe');
 
       iFrameContainer.setAttribute('class', 'iframe-container');
-      console.log(iFrameContainer.style);
+      iFrameContainer.setAttribute('contenteditable', 'false');
+
       iFrameEle.src = this.encodedGist('bestseob93/25dcdcf38f5c5d2def9aa6cff3556a06.js');
       iFrameEle.setAttribute('sandbox', 'allow-scripts');
       iFrameEle.onload = function () {

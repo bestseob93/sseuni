@@ -4,7 +4,7 @@ import ToolBarItem from '../ToolBarItem';
 import ToolBarItemCode from '../ToolBarItemCode';
 import ToolBarItemImage from '../ToolBarItemImage';
 
-import './ToolBar.css';
+import './ToolBarList.css';
 
 export interface IToolBarListProps {
   handleGistCode: (txt: string) => void
@@ -20,7 +20,7 @@ const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCo
         <ToolBarItem name="italic" />
         <ToolBarItem name="quote" />
         <ToolBarItemCode handleGistCode={handleGistCode} />
-        <ToolBarItemImage />
+        <ToolBarItemImage handleGistCode={handleGistCode} />
       </ul>
     </div>
   );
