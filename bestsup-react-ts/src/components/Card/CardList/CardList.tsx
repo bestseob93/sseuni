@@ -10,14 +10,15 @@ interface ICardListProps {
 }
 
 const CardList: React.StatelessComponent<ICardListProps> = ({ datas }) => {
+  console.log(datas);
   const cardItemList = datas.map(
     (data, index) => data ? (
       <CardItem
         key={index}
-        title={data.get('title')}
-        content={data.get('content')}
-        attachment={data.get('attachment')}
-        createdAt={data.get('createdAt')}
+        title={data.title}
+        content={data.content}
+        attachment={data.attachment}
+        createdAt={data.createdAt}
       />
     ) : null
   );

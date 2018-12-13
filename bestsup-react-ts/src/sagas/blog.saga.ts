@@ -10,14 +10,20 @@ function* fetchBlogs() {
   try {
     datas = yield call(blogAPI.fetchBlogs);
     console.log(datas);
-    yield put(actions.receiveData(datas));
+    yield put(actions.fetchData(datas));
   } catch (e) {
     console.error(e);
   }
-
 }
 
 export function* watchFetchBlogs() {
   console.log('saga called');
   yield takeLatest(types.REQUEST_DATA, fetchBlogs);
 }
+
+// function* postBlog() {
+//   let data: IBlogEntity;
+//   try {
+
+//   }
+// }

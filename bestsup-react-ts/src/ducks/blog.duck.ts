@@ -1,11 +1,11 @@
-import { Record, List, fromJS } from 'immutable';
+import { Record, List } from 'immutable';
 import { createAction, handleActions, Action } from 'redux-actions';
 import { IBlogEntity } from 'models';
 
 // TODO: actionCreator Type 정의하기
 export const types = {
   REQUEST_DATA: 'blog/REQUEST_DATA',
-  RECEIVE_DATA: 'blog/RECEIVE_DATA',
+  FETCH_DATA: 'blog/FETCH_DATA',
   REQUEST_POST: 'blog/REQUEST_POST',
 };
 
@@ -13,7 +13,7 @@ type ResponsePayload = any;
 
 export const actionCreators = {
   requestData: createAction(types.REQUEST_DATA),
-  receiveData: createAction<ResponsePayload>(types.RECEIVE_DATA),
+  fetchData: createAction<ResponsePayload>(types.FETCH_DATA),
   requestPost: createAction(types.REQUEST_POST),
 };
 
@@ -38,10 +38,12 @@ export class BlogData extends BlogRecord {
 
 const BlogStateRecord = Record({
   datas: List(),
+  post: Record,
 });
 
 export class BlogState extends BlogStateRecord {
-  public datas: List<BlogData>
+  datas: List<BlogData>;
+  post: BlogData;
 }
 
 const defaultState = new BlogState();
@@ -50,10 +52,10 @@ export default handleActions<BlogState, any>({
   [types.REQUEST_DATA]: (state): BlogState => {
     return state;
   },
-  [types.RECEIVE_DATA]: (state, action: Action<ResponsePayload>): BlogState => {
+  [types.FETCH_DATA]: (state, action: Action<ResponsePayload>): BlogState => {
     return state.withMutations(
       s => {
-        s.set('datas', fromJS(action.payload));
+        s.set('datas', List(action.payload));
       }
     ) as BlogState;
   },
