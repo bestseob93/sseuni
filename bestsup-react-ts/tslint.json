@@ -15,6 +15,7 @@
     "jsx-no-lambda": false,
     "only-arrow-functions": false,
     "max-classes-per-file": false,
-    "member-access": false
+    "member-access": false,
+    "no-string-literal": false
   }
 }

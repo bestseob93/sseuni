@@ -1,21 +1,25 @@
-import axios from 'axios';
-import { IBlogEntity } from 'models';
+import axios, { AxiosPromise } from 'axios';
 
 axios.defaults.baseURL = 'https://hg6pfn2h1m.execute-api.ap-northeast-2.amazonaws.com/dev';
+axios.defaults.headers.post['Authorization'] = '3';
 
-export const fetchBlogs = (): Promise<IBlogEntity[]> => {
+export const fetchBlogs = (): Promise<AxiosPromise> => {
   console.log('fetch blog api called');
   return axios
     .get('/blogs')
     .then(response => {
       return response.data;
+    }).catch((err) => {
+      if (err) {
+        throw new Error(err);
+      }
     });
 }
 
-export const createBlog = () => {
+export const createBlog = (): Promise<AxiosPromise> => {
   console.log('create blog api called');
   return axios
-    .post('/blogs')
+    .post('/blog')
     .then(response => {
       return response.data;
     });
