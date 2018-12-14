@@ -14,7 +14,7 @@ type ResponsePayload = any;
 export const actionCreators = {
   requestData: createAction(types.REQUEST_DATA),
   fetchData: createAction<ResponsePayload>(types.FETCH_DATA),
-  requestPost: createAction(types.REQUEST_POST),
+  requestPost: createAction(types.REQUEST_POST, (data: any) => data),
 };
 
 const BlogRecord = Record({
@@ -59,4 +59,7 @@ export default handleActions<BlogState, any>({
       }
     ) as BlogState;
   },
+  [types.REQUEST_POST]: (state): BlogState => {
+    return state;
+  }
 }, defaultState);

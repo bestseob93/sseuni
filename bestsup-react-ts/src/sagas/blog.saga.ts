@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects';
+import { take, takeLatest, call, put } from 'redux-saga/effects';
 import * as blogAPI from 'services/blogAPI';
 
 import { types, actionCreators as actions } from 'ducks/blog.duck';
@@ -21,9 +21,16 @@ export function* watchFetchBlogs() {
   yield takeLatest(types.REQUEST_DATA, fetchBlogs);
 }
 
-// function* postBlog() {
-//   let data: IBlogEntity;
-//   try {
+export function* postBlog() {
+  // let data: IBlogEntity;
+  while (true) {
+    const action = yield take(actions.requestPost);
+    console.log(action);
 
-//   }
-// }
+    // const response = yield call(blogAPI.createBlog);
+
+    // const suggestedArtists = response.artists.items.slice(0,8);
+    // yield put(receiveTypeaheadSuggestions(suggestedArtists))
+  }
+}
+ 

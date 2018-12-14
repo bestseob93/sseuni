@@ -11,17 +11,25 @@ export const fetchBlogs = (): Promise<AxiosPromise> => {
       return response.data;
     }).catch((err) => {
       if (err) {
-        throw new Error(err);
+        throw new Error(`FETCH DATAS GOT ${err}`);
       }
     });
 }
 
-export const createBlog = (): Promise<AxiosPromise> => {
+export const createBlog = (title: string, content: string, attachment: string): Promise<AxiosPromise> => {
   console.log('create blog api called');
   return axios
-    .post('/blog')
+    .post('/blog', {
+      title,
+      content,
+      attachment,
+    })
     .then(response => {
       return response.data;
+    }).catch((err) => {
+      if (err) {
+        throw new Error(`CREATE BLOG GOT ${err}`);
+      }
     });
 }
 
