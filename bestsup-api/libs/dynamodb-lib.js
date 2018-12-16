@@ -1,6 +1,6 @@
 import AWS from "aws-sdk";
 
-AWS.config.update({ region: "ap-northeast-2" });
+AWS.config.update({ region: 'ap-northeast-2' });
 
 export function call(action, params) {
   const dynamoDb = new AWS.DynamoDB.DocumentClient();

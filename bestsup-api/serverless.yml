@@ -12,6 +12,7 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
+  bucket: 'bestsup-resources'
 
 provider:
   name: aws
@@ -38,6 +39,10 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:ap-northeast-2:*:*"
+    - Effect: Allow
+      Action:
+        - s3:*
+      Resource: "arn:aws:s3:::*"
 functions:
   create:
     handler: create.main
@@ -89,3 +94,12 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
+  upload:
+    handler: uploadImage.main
+    events:
+      - http:
+          path: upload
+          method: post
+          cors: true
+    environment:
+      BUCKET: ${self:custom.bucket}
