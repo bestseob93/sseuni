@@ -33,7 +33,6 @@ class HeaderContainer extends React.Component<{}> {
         styles={this.getStyles(30)}
       />
     );
-    
   }
 }
 

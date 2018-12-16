@@ -60,6 +60,7 @@ export default handleActions<BlogState, any>({
     ) as BlogState;
   },
   [types.REQUEST_POST]: (state): BlogState => {
+    console.log(state);
     return state;
   }
 }, defaultState);

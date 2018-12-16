@@ -7,10 +7,11 @@ import ToolBarItemImage from '../ToolBarItemImage';
 import './ToolBarList.css';
 
 export interface IToolBarListProps {
-  handleGistCode: (txt: string) => void
+  handleGistCode: (txt: string) => void,
+  addFirstImageToThumbnail: (file: any) => void
 };
 
-const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCode }) => {
+const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCode, addFirstImageToThumbnail }) => {
 
   // TODO: selection 위치에 따라 Toolbar 포지션 조정하기
   return (
@@ -20,7 +21,7 @@ const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCo
         <ToolBarItem name="italic" />
         <ToolBarItem name="quote" />
         <ToolBarItemCode handleGistCode={handleGistCode} />
-        <ToolBarItemImage handleGistCode={handleGistCode} />
+        <ToolBarItemImage addFirstImageToThumbnail={addFirstImageToThumbnail} handleGistCode={handleGistCode} />
       </ul>
     </div>
   );

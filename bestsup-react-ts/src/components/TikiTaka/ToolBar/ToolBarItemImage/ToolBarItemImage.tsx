@@ -4,7 +4,8 @@ import image from '../ToolBarIcons/image.svg';
 import { findLastNode } from 'helpers/domHelpers';
 
 export interface IToolBarItemImageProps {
-  handleGistCode: (txt: string) => void
+  handleGistCode: (txt: string) => void,
+  addFirstImageToThumbnail: (file: any) => void
 }
 
 class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
@@ -32,7 +33,7 @@ class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
     if (selectedFiles) {
       if (selectedFiles.length > 0) {
         const fileToLoad = selectedFiles[0];
-
+        this.props.addFirstImageToThumbnail(selectedFiles[0]);
         if (fileToLoad.type.match("image.*")) {
           const fileReader = new FileReader();
           fileReader.onload = (fileLoadedEvent: ProgressEvent | any): void => {
