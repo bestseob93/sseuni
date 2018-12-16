@@ -5,7 +5,7 @@ import { findLastNode } from 'helpers/domHelpers';
 
 export interface IToolBarItemImageProps {
   handleGistCode: (txt: string) => void,
-  addFirstImageToThumbnail: (file: any) => void
+  addImageToS3: (file: any) => Promise<string>
 }
 
 class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
@@ -28,24 +28,17 @@ class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
     }
   }
 
-  handleChange(selectedFiles: FileList | null): void {
+  async handleChange(selectedFiles: FileList | null): Promise<void> {
     console.log(selectedFiles);
     if (selectedFiles) {
       if (selectedFiles.length > 0) {
         const fileToLoad = selectedFiles[0];
-        this.props.addFirstImageToThumbnail(selectedFiles[0]);
-        if (fileToLoad.type.match("image.*")) {
-          const fileReader = new FileReader();
-          fileReader.onload = (fileLoadedEvent: ProgressEvent | any): void => {
-            if (fileLoadedEvent !== null) {
-              const newImgEle = document.createElement("img");
-              newImgEle.src = fileLoadedEvent.target.result;
-              this.insertImage(newImgEle);
-            }
-          };
+        const s3UrlOfFile = await this.props.addImageToS3(fileToLoad);
+        console.log(s3UrlOfFile);
+        const newImgEle = document.createElement("img");
 
-          fileReader.readAsDataURL(fileToLoad);
-        }
+        newImgEle.src = s3UrlOfFile;
+        this.insertImage(newImgEle);
       }
     }
   }

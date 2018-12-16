@@ -1,5 +1,7 @@
 import * as React from 'react';
 import sanitizeHtml from 'sanitize-html';
+import S3FileUpload from 'react-s3';
+
 import BodyContent from './BodyContent';
 import PostTitle from './PostTitle';
 import ToolBarList from './ToolBar/ToolBarList';
@@ -44,17 +46,35 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     });
   };
 
-  addFirstImageToThumbnail = (file: any): void => {
-    this.setState({
-      willBePostThumbnail: file
-    });
+  async addImageToS3(file: any): Promise<string> {
+    const config = {
+      bucketName: 'bestsup-resources',
+      region: 'ap-northeast-2',
+      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    };
+
+    let imageUrl: string = '';
+    try {
+      await S3FileUpload
+      .uploadFile(file, config)
+      .then((result: any) => {
+        console.log(result.location);
+        imageUrl = result.location;
+      })
+      .catch((err: any) => console.error(err));
+    } catch (e) {
+      console.error(e);
+    }
+
+    return imageUrl;
   }
 
   sanitize = (): void => {
     const sanitizeConf = {
       allowedTags: false,
       allowedAttributes: false,
-      allowedSchemes: ['data'],
+      allowedSchemes: ['data', 'https'],
     }
     console.log('sanitized');
     this.setState({
@@ -88,10 +108,11 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   render() {
     console.log(this.state);
+    console.log(process.env.REACT_APP_AWS_ACCESS_KEY_ID);
     return (
       <div className="tikitaka-editor">
         <ToolBarList
-          addFirstImageToThumbnail={this.addFirstImageToThumbnail}
+          addImageToS3={this.addImageToS3}
           handleGistCode={this.addGistCodeToHtml}
         />
         <SubmitBtn onSubmit={this.handleSubmit} />
