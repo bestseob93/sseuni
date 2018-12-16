@@ -1,20 +1,15 @@
 import * as React from 'react';
-
+import { IBlogEntity } from 'models';
 import './CardItem.css';
 
-interface ICardItemProps {
-  title?: string,
-  content?: string,
-  attachment?: string,
-  createdAt?: number,
-}
-
-const CardItem: React.StatelessComponent<ICardItemProps> = ({
+const CardItem: React.StatelessComponent<IBlogEntity> = ({
   title,
+  previewContent,
   content,
   attachment,
   createdAt,
 }) => {
+  console.log(content);
   return (
     <li className="card-item">
       <article className="post">
@@ -43,7 +38,7 @@ const CardItem: React.StatelessComponent<ICardItemProps> = ({
         <h1 className="post-title">{title}</h1>
         <p className="post-date">{createdAt}</p>
         <p className="post-body">
-          {content}
+          {previewContent}
         </p>
       </article>
     </li>

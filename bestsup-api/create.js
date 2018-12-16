@@ -9,6 +9,7 @@ export async function main(event, context, callback) {
     Item: {
       id: uuid.v1(),
       title: data.title,
+      previewContent: data.previewContent,
       content: data.content,
       attachment: data.attachment,
       createdAt: Date.now()

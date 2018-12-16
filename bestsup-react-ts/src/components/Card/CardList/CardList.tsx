@@ -16,6 +16,7 @@ const CardList: React.StatelessComponent<ICardListProps> = ({ datas }) => {
       <CardItem
         key={index}
         title={data.title}
+        previewContent={data.previewContent}
         content={data.content}
         attachment={data.attachment}
         createdAt={data.createdAt}

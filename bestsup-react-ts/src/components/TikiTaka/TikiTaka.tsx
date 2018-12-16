@@ -52,8 +52,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
     };
 
-    console.log(config);
-
     let imageUrl: string = '';
     try {
       await S3FileUpload
@@ -90,19 +88,27 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   handleSubmit = (evt: React.FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
-    const imgElements = document.querySelector('.tikitaka-editor div[contenteditable="true"] img');
+    const firstImgElement = document.querySelector('.tikitaka-editor div[contenteditable="true"] img');
+    const previewContentElement = document.querySelector('.tikitaka-editor div[contenteditable="true"] p');
+    console.log(previewContentElement);
     let firstImageUrl: string | null = '';
-    if (imgElements) {
-      firstImageUrl = imgElements.getAttribute('src');
+    let firstPreviewContent: string | null = '';
+
+    if (firstImgElement) {
+      firstImageUrl = firstImgElement.getAttribute('src');
+    }
+
+    if (previewContentElement) {
+      firstPreviewContent = previewContentElement.textContent;
     }
     const { BlogActions }  = this.props;
     const param = {
       title: this.state.title,
+      previewContent: firstPreviewContent,
       content: this.state.html,
       attachment: firstImageUrl,
     }
     try {
-      console.log(BlogActions);
       BlogActions.requestPost(param);
     } catch (err) {
       if (err) {
@@ -112,8 +118,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 
   render() {
-    console.log(this.state);
-    console.log(process.env.REACT_APP_AWS_SECRET_ACCESS_KEY);
     return (
       <div className="tikitaka-editor">
         <ToolBarList

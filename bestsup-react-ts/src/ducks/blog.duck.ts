@@ -20,6 +20,7 @@ export const actionCreators = {
 const BlogRecord = Record({
   id: '0f4f0b90-d479-11e8-8fad-7fabbab8a3b2',
   title: 'no 1',
+  previewContent: 'preview content in carditem',
   content: 'strabcedefsdfasfsdfga',
   attachment: 'https://cdn-images-1.medium.com/max/2000/1*ZARHKtn8NaeAAwUe2i9kWA.png',
   createdAt: 1540047358418,
@@ -28,6 +29,7 @@ const BlogRecord = Record({
 export class BlogData extends BlogRecord {
   public id: string;
   public title: string;
+  public previewContent: string;
   public content: string;
   public attachment: string;
   public createdAt: number;

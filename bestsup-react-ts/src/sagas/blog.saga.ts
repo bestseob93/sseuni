@@ -27,7 +27,7 @@ export function* postBlog() {
   const action = yield take(types.REQUEST_POST);
   console.log(action);
   try {
-    yield call(blogAPI.createBlog(action.payload));
+    yield call(blogAPI.createBlog, action.payload);
   } catch (e) {
     console.error(e);
   }
