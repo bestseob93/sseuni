@@ -16,7 +16,8 @@ export const fetchBlogs = (): Promise<AxiosPromise> => {
     });
 }
 
-export const createBlog = (title: string, content: string, attachment: string): Promise<AxiosPromise> => {
+export const createBlog = (payload: any): any => {
+  const { title, content, attachment } = payload;
   console.log('create blog api called');
   return axios
     .post('/blog', {

@@ -18,8 +18,7 @@ export interface ITikiTakaProps {
 
 export interface ITikiTakaState {
   title: string,
-  html: string,
-  willBePostThumbnail: any
+  html: string
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
@@ -30,7 +29,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     this.state = {
       title: '',
       html: '',
-      willBePostThumbnail: null,
     };
   }
 
@@ -48,11 +46,13 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   async addImageToS3(file: any): Promise<string> {
     const config = {
-      bucketName: 'bestsup-resources',
+      bucketName: 'teamgrit',
       region: 'ap-northeast-2',
       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
     };
+
+    console.log(config);
 
     let imageUrl: string = '';
     try {
@@ -90,11 +90,16 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   handleSubmit = (evt: React.FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
-
+    const imgElements = document.querySelector('.tikitaka-editor div[contenteditable="true"] img');
+    let firstImageUrl: string | null = '';
+    if (imgElements) {
+      firstImageUrl = imgElements.getAttribute('src');
+    }
     const { BlogActions }  = this.props;
     const param = {
       title: this.state.title,
       content: this.state.html,
+      attachment: firstImageUrl,
     }
     try {
       console.log(BlogActions);
@@ -108,7 +113,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   render() {
     console.log(this.state);
-    console.log(process.env.REACT_APP_AWS_ACCESS_KEY_ID);
+    console.log(process.env.REACT_APP_AWS_SECRET_ACCESS_KEY);
     return (
       <div className="tikitaka-editor">
         <ToolBarList
