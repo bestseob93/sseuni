@@ -12,7 +12,7 @@ custom:
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
-  bucket: 'bestsup-resources'
+  bucket: 'tikitakas'
 
 provider:
   name: aws

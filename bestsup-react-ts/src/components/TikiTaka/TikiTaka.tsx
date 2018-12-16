@@ -46,7 +46,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
 
   async addImageToS3(file: any): Promise<string> {
     const config = {
-      bucketName: 'teamgrit',
+      bucketName: 'tikitakas',
       region: 'ap-northeast-2',
       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,

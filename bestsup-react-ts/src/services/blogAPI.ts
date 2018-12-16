@@ -29,7 +29,8 @@ export const createBlog = (payload: any): any => {
       return response.data;
     }).catch((err) => {
       if (err) {
-        throw new Error(`CREATE BLOG GOT ${err}`);
+        console.log(':::::::::');
+        console.error(err.response);
       }
     });
 }
