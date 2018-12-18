@@ -13,7 +13,8 @@ import SubmitBtn from './SubmitBtn';
 import './TikiTaka.css';
 
 export interface ITikiTakaProps {
-  BlogActions: any
+  BlogActions: any,
+  history: any
 }
 
 export interface ITikiTakaState {
@@ -86,7 +87,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     });
   }
 
-  handleSubmit = (evt: React.FormEvent<HTMLButtonElement>) => {
+  handleSubmit = async (evt: React.FormEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     const firstImgElement = document.querySelector('.tikitaka-editor div[contenteditable="true"] img');
     const previewContentElement = document.querySelector('.tikitaka-editor div[contenteditable="true"] p');
@@ -109,7 +110,8 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       attachment: firstImageUrl,
     }
     try {
-      BlogActions.requestPost(param);
+      await BlogActions.requestPost(param);
+      await this.props.history.push('/');
     } catch (err) {
       if (err) {
         throw err;
