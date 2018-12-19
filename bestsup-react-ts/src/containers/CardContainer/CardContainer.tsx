@@ -16,7 +16,7 @@ interface ICardContainerProps {
   BlogActions: typeof blogActions;
 }
 
-
+// TODO: 상세 페이지 연결 안하고 원 페이지에 그대로 (모바일에서) pushState 사용)
 class CardContainer extends React.Component<ICardContainerProps, {}> {
   constructor(props: ICardContainerProps) {
     super(props);
