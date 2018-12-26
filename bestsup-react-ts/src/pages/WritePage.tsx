@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import PageTemplate from 'components/Templates';
-import WritePostContainer from 'containers/WritePostContainer';
+import TikiTakaContainer from 'containers/TikiTakaContainer';
 
 const WritePage: React.StatelessComponent<{}> = () => {
   return (
     <PageTemplate>
-      <WritePostContainer />
+      <TikiTakaContainer />
     </PageTemplate>
   );
 }

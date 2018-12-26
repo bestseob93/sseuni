@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HeaderContainer from './containers/HeaderContainer';
-import TikiTakaContainer from 'containers/TikiTakaContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
 import Write from 'pages/WritePage';
@@ -21,7 +20,6 @@ class App extends React.Component<{}> {
             path="/about"
             component={() => <About />}
           />
-          <Route path="/writeTest" component={TikiTakaContainer} />
           <Route path="/write" component={Write} />
           <Route component={NotFound} />
         </Switch>
