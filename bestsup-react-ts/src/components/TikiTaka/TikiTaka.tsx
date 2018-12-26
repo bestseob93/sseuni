@@ -1,6 +1,7 @@
 import * as React from 'react';
 import sanitizeHtml from 'sanitize-html';
 import S3FileUpload from 'react-s3';
+import { withRouter } from 'react-router-dom';
 
 import BodyContent from './BodyContent';
 import PostTitle from './PostTitle';
@@ -53,6 +54,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
     };
 
+    console.log(config);
     let imageUrl: string = '';
     try {
       await S3FileUpload
@@ -120,6 +122,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="tikitaka-editor">
         <ToolBarList
@@ -139,4 +142,4 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 };
 
-export default TikiTaka;
+export default withRouter(TikiTaka);
