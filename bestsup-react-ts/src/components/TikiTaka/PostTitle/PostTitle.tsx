@@ -7,7 +7,7 @@ export interface IPostTitleProps {
 const PostTitle: React.StatelessComponent<IPostTitleProps> = ({ handleChange }) => {
   return (
     <input
-      className="tikitaka-title"
+      className="tikitaka__title"
       placeholder="제목을 입력해주세요.."
       onChange={handleChange}
     />

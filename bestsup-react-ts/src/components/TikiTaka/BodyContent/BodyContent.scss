@@ -9,3 +9,9 @@
   content: attr(placeholder);
   display: block; /* For Firefox */
 }
+
+div[contenteditable=true] {
+  p {
+    margin: 2rem 0;
+  }
+}

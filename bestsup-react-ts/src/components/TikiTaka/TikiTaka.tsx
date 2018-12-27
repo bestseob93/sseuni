@@ -110,7 +110,8 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       previewContent: firstPreviewContent,
       content: this.state.html,
       attachment: firstImageUrl,
-    }
+    };
+
     try {
       await BlogActions.requestPost(param);
       await this.props.history.push('/');

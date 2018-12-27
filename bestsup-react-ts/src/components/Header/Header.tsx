@@ -3,17 +3,13 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-interface IHeaderProps {
-  styles: React.CSSProperties,
-}
-
-const Header: React.StatelessComponent<IHeaderProps> = ({styles}) => {
+const Header: React.StatelessComponent<{}> = () => {
   return (
-    <header style={styles}>
+    <header className="header">
       <nav className="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
-        <Link to="/write">Write</Link>
+        <Link className="nav__item" to="/">Home</Link>
+        <Link className="nav__item" to="/about">About</Link>
+        <Link className="nav__item" to="/write">Write</Link>
       </nav>
     </header>
   );

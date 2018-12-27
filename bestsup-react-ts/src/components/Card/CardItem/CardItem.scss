@@ -1,17 +1,17 @@
-li.card-item {
+.card__item {
   display: list-item;
-  article.post {
+  .post {
     cursor: pointer;
-    div.post-attribution {
+    .post__attribution {
       display: flex;
       align-items: center;
       margin-bottom: .75rem;
       min-height: 2rem;
-      div.author-avatar {
+      .post__author {
         width: 2rem;
         height: 2rem;
         margin-right: .5rem;
-        img.img-avatar {
+        .post__avatar {
           display: block;
           width: 2rem;
           height: 2rem;
@@ -19,18 +19,18 @@ li.card-item {
           object-fit: cover;
         }
       }
-      div.author-name {
+      .author__name {
       }
-      div.post-share {
+      .post__share_button {
         display: none;
       }
     }
 
-    div.post-thumb-wrap {
+    .post__thumbnail_wrap {
       width: 100%;
       position: relative;
       padding-top: 52.6%;
-      img.img-thumb {
+      .post__thumbnail {
         object-fit: cover;
         position: absolute;
         top: 0;
@@ -39,22 +39,22 @@ li.card-item {
         height: 100%;
       }
     }
-    h1.post-title {
+    .post__title {
       margin: 1rem 0 .5rem;
     }
-    p.post-date {
+    .post__date {
       font-size: .75rem;
     }
-    p.post-body {
+    .post__preview {
       font-weight: 400;
       color: #595959;
     }
   }
 
-  article.post:hover {
-    div.post-attribution {
+  .post:hover {
+    .post__attribution {
       position: relative;
-      div.post-share {
+      .post__share_button {
         // TODO:  Icon 애니메이션화
         display: block;
         position: absolute;

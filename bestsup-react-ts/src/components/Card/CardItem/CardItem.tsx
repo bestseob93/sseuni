@@ -11,33 +11,33 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
 }) => {
   console.log(content);
   return (
-    <li className="card-item">
+    <li className="card__item">
       <article className="post">
-        <div className="post-attribution">
-          <div className="author-avatar">
+        <div className="post__attribution">
+          <div className="post__author">
             <img
               alt="avatar"
-              className="img-avatar"
+              className="post__avatar"
               src="https://scontent-icn1-1.xx.fbcdn.net/v/t1.0-1/p200x200/17862834_1258688320851648_3905539345754178613_n.jpg?_nc_cat=109&_nc_ht=scontent-icn1-1.xx&oh=7b9544e9859fc7b76bde84baad076137&oe=5C878732"
             />
           </div>
-          <div className="author-name">
+          <div className="author__name">
             <span>bestsup93</span>
           </div>
-          <div className="post-share">
+          <div className="post__share_button">
             Share
           </div>
         </div>
-        <div className="post-thumb-wrap">
+        <div className="post__thumbnail_wrap">
           <img 
             alt="image"
-            className="img-thumb"
+            className="post__thumbnail"
             src={attachment}
           />
         </div>
-        <h1 className="post-title">{title}</h1>
-        <p className="post-date">{createdAt}</p>
-        <p className="post-body">
+        <h1 className="post__title">{title}</h1>
+        <p className="post__date">{createdAt}</p>
+        <p className="post__preview">
           {previewContent}
         </p>
       </article>
