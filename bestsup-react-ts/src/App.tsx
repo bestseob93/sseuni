@@ -5,6 +5,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
 import Write from 'pages/WritePage';
+import Post from 'pages/PostPage';
 import NotFound from './NotFound';
 
 import './App.css';
@@ -21,6 +22,7 @@ class App extends React.Component<{}> {
             component={() => <About />}
           />
           <Route path="/write" component={Write} />
+          <Route path="/post/:title" component={Post} />
           <Route component={NotFound} />
         </Switch>
       </React.Fragment>
