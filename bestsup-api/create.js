@@ -13,8 +13,7 @@ export async function main(event, context, callback) {
   const params = {
     TableName: "ssuni",
     Item: {
-      id: uuid.v1(),
-      blogId: blogId,
+      id: blogId,
       title: data.title,
       previewContent: data.previewContent,
       content: data.content,
