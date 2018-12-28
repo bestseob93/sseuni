@@ -42,6 +42,7 @@ export function* createBlog() {
   console.log(action);
   try {
     yield call(blogAPI.createBlog, action.payload);
+    yield action.history.push('/');
   } catch (e) {
     console.error(e);
   }

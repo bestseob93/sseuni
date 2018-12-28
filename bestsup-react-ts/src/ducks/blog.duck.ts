@@ -18,7 +18,11 @@ export const actionCreators = {
   fetchBlogs: createAction<ResponsePayload>(types.FETCH_BLOGS),
   requestBlog: createAction(types.REQUEST_BLOG, (id: string) => id),
   fetchBlog: createAction<ResponsePayload>(types.FETCH_BLOG),
-  requestCreateBlog: createAction(types.REQUEST_CREATE_BLOG, (data: any) => data),
+  requestCreateBlog: (payload: any, history: any) => ({
+    type: types.REQUEST_CREATE_BLOG,
+    payload,
+    history
+  }),
 };
 
 const BlogRecord = Record({
@@ -77,5 +81,5 @@ export default handleActions<BlogState, any>({
   },
   [types.REQUEST_CREATE_BLOG]: (state): BlogState => {
     return state;
-  },
+  }
 }, defaultState);

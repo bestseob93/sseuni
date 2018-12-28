@@ -14,6 +14,7 @@ import SubmitBtn from './SubmitBtn';
 import './TikiTaka.css';
 
 export interface ITikiTakaProps {
+  fetched: boolean,
   BlogActions: any,
   history: any
 }
@@ -113,17 +114,16 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     };
 
     try {
-      await BlogActions.requestCreateBlog(param);
+      await BlogActions.requestCreateBlog(param, this.props.history);
     } catch (err) {
       if (err) {
         throw err;
       }
-    } finally {
-      await this.props.history.push('/');
     }
   }
 
   render() {
+    console.log(this.props);
     return (
       <div className="tikitaka-editor">
         <ToolBarList

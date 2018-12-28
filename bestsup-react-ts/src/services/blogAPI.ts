@@ -8,6 +8,7 @@ export const fetchBlogs = (): Promise<AxiosPromise> => {
   return axios
     .get('/blogs')
     .then(response => {
+      console.log(response.data);
       return response.data;
     }).catch((err) => {
       if (err) {
