@@ -11,7 +11,7 @@ export const fetchBlogs = (): Promise<AxiosPromise> => {
       return response.data;
     }).catch((err) => {
       if (err) {
-        throw new Error(`FETCH DATAS GOT ${err}`);
+        throw new Error(`fetcinh blogs got ${err}`);
       }
     });
 }
@@ -42,7 +42,11 @@ export const fetchBlogById = (id: string) => {
     .get(`/blog/${id}`)
     .then(response => {
       return response.data;
-    });
+    }).catch((err) => {
+      if (err) {
+        throw new Error(`Fetching BlogById got ${err}`);
+      }
+    })
 }
 
 export const updateBlog = (id: string) => {
