@@ -25,7 +25,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
   async componentDidMount() {
     const { BlogActions } = this.props;
     try {
-      await BlogActions.requestData();
+      await BlogActions.requestBlogs();
     } catch (e) {
       console.error(e);
     }
@@ -38,7 +38,7 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
 
 export default connect(
   ({ blog }: IStoreState) => ({
-    datas: blog.datas,
+    datas: blog.blogs,
   }),
   (dispatch) => ({
     BlogActions: bindActionCreators(blogActions, dispatch),

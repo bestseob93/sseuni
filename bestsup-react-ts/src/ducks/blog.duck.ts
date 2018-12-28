@@ -4,17 +4,21 @@ import { IBlogEntity } from 'models';
 
 // TODO: actionCreator Type 정의하기
 export const types = {
-  REQUEST_DATA: 'blog/REQUEST_DATA',
-  FETCH_DATA: 'blog/FETCH_DATA',
-  REQUEST_POST: 'blog/REQUEST_POST',
+  REQUEST_BLOGS: 'blog/REQUEST_BLOGS',
+  FETCH_BLOGS: 'blog/FETCH_BLOGS',
+  REQUEST_BLOG: 'blog/REQUEST_BLOG',
+  FETCH_BLOG: 'blog/FETCH_BLOG',
+  REQUEST_CREATE_BLOG: 'blog/REQUEST_CREATE_BLOG',
 };
 
 type ResponsePayload = any;
 
 export const actionCreators = {
-  requestData: createAction(types.REQUEST_DATA),
-  fetchData: createAction<ResponsePayload>(types.FETCH_DATA),
-  requestPost: createAction(types.REQUEST_POST, (data: any) => data),
+  requestBlogs: createAction(types.REQUEST_BLOGS),
+  fetchBlogs: createAction<ResponsePayload>(types.FETCH_BLOGS),
+  requestBlog: createAction(types.REQUEST_BLOG, (id: string) => id),
+  fetchBlog: createAction<ResponsePayload>(types.FETCH_BLOG),
+  requestCreateBlog: createAction(types.REQUEST_CREATE_BLOG, (data: any) => data),
 };
 
 const BlogRecord = Record({
@@ -39,30 +43,39 @@ export class BlogData extends BlogRecord {
 }
 
 const BlogStateRecord = Record({
-  datas: List(),
-  post: Record,
+  blogs: List(),
+  blog: BlogData,
 });
 
 export class BlogState extends BlogStateRecord {
-  datas: List<BlogData>;
-  post: BlogData;
+  blogs: List<BlogData>;
+  blog: BlogData;
 }
 
 const defaultState = new BlogState();
 
 export default handleActions<BlogState, any>({
-  [types.REQUEST_DATA]: (state): BlogState => {
+  [types.REQUEST_BLOGS]: (state): BlogState => {
     return state;
   },
-  [types.FETCH_DATA]: (state, action: Action<ResponsePayload>): BlogState => {
+  [types.FETCH_BLOGS]: (state, action: Action<ResponsePayload>): BlogState => {
     return state.withMutations(
       s => {
-        s.set('datas', List(action.payload));
+        s.set('blogs', List(action.payload));
       }
     ) as BlogState;
   },
-  [types.REQUEST_POST]: (state): BlogState => {
-    console.log(state);
+  [types.REQUEST_BLOG]: (state): BlogState => {
     return state;
-  }
+  },
+  [types.FETCH_BLOG]: (state, action: Action<ResponsePayload>): BlogState => {
+    return state.withMutations(
+      s => {
+        s.set('blog', action.payload);
+      }
+    ) as BlogState;
+  },
+  [types.REQUEST_CREATE_BLOG]: (state): BlogState => {
+    return state;
+  },
 }, defaultState);

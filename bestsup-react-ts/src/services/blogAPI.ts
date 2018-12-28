@@ -36,8 +36,9 @@ export const createBlog = (payload: any): any => {
     });
 }
 
-export const fetchBlogById = (id: string) => {
+export const fetchBlogById = (id: string): Promise<AxiosPromise> => {
   console.log('fetch blog by id api called');
+  console.log(id);
   return axios
     .get(`/blog/${id}`)
     .then(response => {

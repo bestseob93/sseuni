@@ -59,7 +59,7 @@ functions:
     handler: get.main
     events:
       - http:
-          path: blogs/{id}
+          path: blog/{id}
           method: get
           cors: true
   list:

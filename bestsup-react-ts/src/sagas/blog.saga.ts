@@ -4,13 +4,11 @@ import * as blogAPI from 'services/blogAPI';
 import { types, actionCreators as actions } from 'ducks/blog.duck';
 import { IBlogEntity } from 'models';
 
-function* fetchBlogs() {
-  let datas: IBlogEntity[];
-  console.log('fetchBlogs');
+function* fetchBlogsSaga() {
+  let blogs: IBlogEntity[];
   try {
-    datas = yield call(blogAPI.fetchBlogs);
-    console.log(datas);
-    yield put(actions.fetchData(datas));
+    blogs = yield call(blogAPI.fetchBlogs);
+    yield put(actions.fetchBlogs(blogs));
   } catch (e) {
     console.error(e);
   }
@@ -18,12 +16,29 @@ function* fetchBlogs() {
 
 export function* watchFetchBlogs() {
   console.log('saga called');
-  yield takeLatest(types.REQUEST_DATA, fetchBlogs);
+  yield takeLatest(types.REQUEST_BLOGS, fetchBlogsSaga);
 }
 
-export function* postBlog() {
-  console.log('postBlog saga called');
-  const action = yield take(types.REQUEST_POST);
+function* fetchBlogByIdSaga(id: string) {
+  let blog: IBlogEntity;
+
+  try {
+    blog = yield call(blogAPI.fetchBlogById, id);
+    yield put(actions.fetchBlog(blog));
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export function* watchFetchBlogById() {
+  const action = yield take(types.REQUEST_BLOG);
+  console.log(action);
+  yield fetchBlogByIdSaga(action.payload);
+}
+
+export function* createBlog() {
+  console.log('createBlog saga called');
+  const action = yield take(types.REQUEST_CREATE_BLOG);
   console.log(action);
   try {
     yield call(blogAPI.createBlog, action.payload);

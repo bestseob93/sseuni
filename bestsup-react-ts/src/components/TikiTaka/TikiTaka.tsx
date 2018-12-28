@@ -113,12 +113,13 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     };
 
     try {
-      await BlogActions.requestPost(param);
-      await this.props.history.push('/');
+      await BlogActions.requestCreateBlog(param);
     } catch (err) {
       if (err) {
         throw err;
       }
+    } finally {
+      await this.props.history.push('/');
     }
   }
 
