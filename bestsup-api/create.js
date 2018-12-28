@@ -11,7 +11,7 @@ export async function main(event, context, callback) {
   const blogId = firstIdentifier + secondIdentifier;
 
   const params = {
-    TableName: "bestsup",
+    TableName: "ssuni",
     Item: {
       id: uuid.v1(),
       blogId: blogId,
