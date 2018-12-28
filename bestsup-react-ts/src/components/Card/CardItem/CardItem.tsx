@@ -4,6 +4,7 @@ import { IBlogEntity } from 'models';
 import './CardItem.css';
 
 const CardItem: React.StatelessComponent<IBlogEntity> = ({
+  id,
   title,
   previewContent,
   content,
@@ -13,7 +14,7 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
   console.log(content);
   return (
     <li className="card__item">
-      <Link to={`/post/${title}`}>
+      <Link to={`/post/${title}-${id}`}>
         <article className="post">
           <div className="post__attribution">
             <div className="post__author">

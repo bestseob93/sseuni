@@ -4,10 +4,16 @@ import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
   const data = JSON.parse(event.body);
+  const separatedV4 = uuid.v4().split('-');
+  const firstIdentifier = separatedV4[0];
+  const secondIdentifier = separatedV4[1];
+
+  const blogId = firstIdentifier + secondIdentifier;
+
   const params = {
     TableName: "bestsup",
     Item: {
-      id: uuid.v1(),
+      id: blogId,
       title: data.title,
       previewContent: data.previewContent,
       content: data.content,

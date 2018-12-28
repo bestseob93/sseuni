@@ -123,7 +123,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="tikitaka-editor">
         <ToolBarList
@@ -136,7 +135,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
-          style={{margin: '20px'}}
         />
       </div>
     );

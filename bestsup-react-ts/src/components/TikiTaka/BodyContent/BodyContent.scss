@@ -10,8 +10,8 @@
   display: block; /* For Firefox */
 }
 
-div[contenteditable=true] {
+.post__content {
   p {
-    margin: 2rem 0;
+    margin-top: 2rem;
   }
 }

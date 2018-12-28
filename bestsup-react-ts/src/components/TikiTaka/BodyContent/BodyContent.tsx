@@ -157,6 +157,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
       tagName || 'div',
       {
         ...props,
+        className: 'post__content',
         ref: this.el,
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
