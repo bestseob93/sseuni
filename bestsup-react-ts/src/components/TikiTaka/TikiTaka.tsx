@@ -123,7 +123,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div className="tikitaka-editor">
         <ToolBarList

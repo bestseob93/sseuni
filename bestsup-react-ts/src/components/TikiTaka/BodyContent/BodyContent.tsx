@@ -72,8 +72,8 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   getEl = () => this.el.current;
 
   componentDidMount(): void {
-    // document.addEventListener('mousedown', this.handleMouseDown);
-    document.addEventListener('mouseup', this.handleMouseUp);
+    document.addEventListener('mouseup', this.getSelectedText);
+    document.addEventListener('keyup', this.getSelectedText);
   }
 
   shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
@@ -109,8 +109,8 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   componentWillUnmount(): void {
-    // document.removeEventListener('mousedown', this.handleMouseDown);
-    document.removeEventListener('mouseup', this.handleMouseUp);
+    document.removeEventListener('mouseup', this.getSelectedText);
+    document.removeEventListener('keyup', this.getSelectedText);
   }
 
   onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
@@ -133,11 +133,13 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
-  handleMouseUp = (ev: MouseEvent) => {
+  getSelectedText = (ev: MouseEvent | KeyboardEvent) => {
     ev.preventDefault();
-    const selectedString = window.getSelection().toString();
-    const lengthOfSelectedString = selectedString.length;
-    console.log(lengthOfSelectedString);
+    // if (typeof window.getSelection !== 'undefined') {
+    //   const selectedString = window.getSelection().toString();
+    //   const lengthOfSelectedString = selectedString.length;
+    //   console.log(lengthOfSelectedString);
+    // }
   }
 
   onFocus = () => {
@@ -148,6 +150,12 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
     if (el.innerHTML === '') {
       el.innerHTML = '<p><br/></p>';
+    }
+  }
+
+  onEnterKeyPress = (ev: React.KeyboardEvent): void => {
+    if (ev.charCode === 13) {
+      document.execCommand('', false);
     }
   }
 
@@ -162,6 +170,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
         onFocus: this.onFocus,
+        onKeyPress: this.onEnterKeyPress,
         contentEditable: true,
         placeholder: 'Enter text here...',
         dangerouslySetInnerHTML: { __html: html }
