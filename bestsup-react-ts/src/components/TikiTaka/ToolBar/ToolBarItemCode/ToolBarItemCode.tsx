@@ -65,8 +65,8 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
   }
   render() {
     return (
-      <li className="toolbar-btn" onClick={this.insertEmbedCode}>
-        <img src={code} />
+      <li className="toolbar__button" onClick={this.insertEmbedCode}>
+        <img className="toolbar__icon" src={code} />
       </li>
     );
   }

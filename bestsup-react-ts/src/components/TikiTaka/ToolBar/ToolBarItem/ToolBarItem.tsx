@@ -28,8 +28,8 @@ const ToolBarItem: React.StatelessComponent<IToolBarItemProps> = ({ name }) => {
   };
 
   return (
-    <li className="toolbar-btn" onClick={e => execCommand(e, name)}>
-      <img src={renderSvgByName(name)} />
+    <li className="toolbar__button" onClick={e => execCommand(e, name)}>
+      <img className="toolbar__icon" src={renderSvgByName(name)} />
     </li>
   );
 }

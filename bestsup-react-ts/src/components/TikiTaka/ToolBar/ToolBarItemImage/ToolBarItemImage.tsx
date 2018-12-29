@@ -45,12 +45,12 @@ class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
 
   render() {
     return (
-      <li className="toolbar-btn image">
-        <label htmlFor="inputImage"><img src={image} /></label>
+      <li className="toolbar__button image">
+        <label htmlFor="inputImage"><img className="toolbar__icon" src={image} /></label>
         <input
           id="inputImage"
           type="file"
-          style={{position: 'fixed', top: '-100em'}}
+          className="image__input-hidden"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => { this.handleChange(e.target.files)}} />
       </li>
     );

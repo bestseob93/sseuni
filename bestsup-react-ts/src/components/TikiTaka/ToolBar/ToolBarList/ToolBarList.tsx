@@ -15,8 +15,8 @@ const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCo
 
   // TODO: selection 위치에 따라 Toolbar 포지션 조정하기
   return (
-    <div className="tikitaka-toolbar-wrapper">
-      <ul>
+    <div className="toolbar__wrapper">
+      <ul className="toolbar__icons-list">
         <ToolBarItem name="bold" />
         <ToolBarItem name="italic" />
         <ToolBarItem name="quote" />
