@@ -3,10 +3,20 @@ import {
   BlogData
 } from 'ducks/blog.duck';
 
-const Blog: React.StatelessComponent<{data: BlogData}> = () => {
+const Blog: React.StatelessComponent<{data: BlogData}> = (props) => {
+  const {
+    data
+  } = props;
+  const createMarkUp = () => {
+    return {
+      __html: data.content,
+    };
+  };
+
   return (
-    <div>
-      Blog
+    <div className="tikitaka">
+      <h1 className="tikitaka__title">{data.title}</h1>
+      <div dangerouslySetInnerHTML={createMarkUp()} />
     </div>
   );
 };

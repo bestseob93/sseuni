@@ -42,7 +42,7 @@ export const fetchBlogById = (id: string): Promise<AxiosPromise> => {
   return axios
     .get(`/blog/${id}`)
     .then(response => {
-      return response.data;
+      return response.data[0];
     }).catch((err) => {
       if (err) {
         throw new Error(`Fetching BlogById got ${err}`);
