@@ -1,7 +1,6 @@
 import axios, { AxiosPromise } from 'axios';
 
 axios.defaults.baseURL = 'https://hg6pfn2h1m.execute-api.ap-northeast-2.amazonaws.com/dev';
-axios.defaults.headers.post['Authorization'] = '3';
 
 export const fetchBlogs = (): Promise<AxiosPromise> => {
   console.log('fetch blog api called');

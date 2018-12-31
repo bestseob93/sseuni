@@ -31,7 +31,7 @@ class BlogContainer extends React.PureComponent<IBlogContainerProps, {}> {
   }
 
   render() {
-    console.log(this.props.data);
+    console.log(this.props);
     return <Blog data={this.props.data} />;
   }
 }

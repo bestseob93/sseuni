@@ -11,7 +11,7 @@ export async function main(event, context, callback) {
   const blogId = firstIdentifier + secondIdentifier;
 
   const params = {
-    TableName: "ssuni",
+    TableName: "sseuni-2",
     Item: {
       id: blogId,
       title: data.title,
@@ -27,6 +27,6 @@ export async function main(event, context, callback) {
     callback(null, success(params.Item));
   } catch (e) {
     console.log(e);
-    callback(null, failure({ status: false, e }));
+    callback(null, failure({ status: false, e, blogId, data: params.Item }));
   }
 }
