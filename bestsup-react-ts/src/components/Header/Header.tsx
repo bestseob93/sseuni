@@ -7,9 +7,11 @@ const Header: React.StatelessComponent<{}> = () => {
   return (
     <header className="header">
       <nav className="navbar">
-        <Link className="nav__item" to="/">Home</Link>
-        <Link className="nav__item" to="/about">About</Link>
-        <Link className="nav__item" to="/write">Write</Link>
+        <ul className="nav-list">
+          <li className="nav__item"><Link to="/">Home</Link></li>
+          <li className="nav__item"><Link to="/about">About</Link></li>
+          <li className="nav__item"><Link to="/write">Write</Link></li>
+        </ul>
       </nav>
     </header>
   );

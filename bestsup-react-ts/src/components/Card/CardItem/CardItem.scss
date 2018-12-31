@@ -1,13 +1,14 @@
 .card__item {
   display: list-item;
   .post {
-    cursor: pointer;
     .post__attribution {
       display: flex;
       align-items: center;
       margin-bottom: .75rem;
       min-height: 2rem;
       .post__author {
+        display: inline-block;
+        vertical-align: middle;
         width: 2rem;
         height: 2rem;
         margin-right: .5rem;
@@ -20,6 +21,8 @@
         }
       }
       .author__name {
+        display: inline-block;
+        vertical-align: middle;
       }
       .post__share_button {
         display: none;
@@ -43,6 +46,7 @@
       margin: 1rem 0 .5rem;
     }
     .post__date {
+      margin-bottom: 1rem;
       font-size: .75rem;
     }
     .post__preview {
@@ -56,6 +60,7 @@
       position: relative;
       .post__share_button {
         // TODO:  Icon 애니메이션화
+        cursor: pointer;
         display: block;
         position: absolute;
         right: 0;

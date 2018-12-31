@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { IBlogEntity } from 'models';
+import { convertedDate } from 'helpers/converTo';
 import './CardItem.css';
 
 const CardItem: React.StatelessComponent<IBlogEntity> = ({
@@ -14,9 +15,9 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
   console.log(content);
   return (
     <li className="card__item">
-      <Link to={`/post/${title}-${id}`}>
-        <article className="post">
-          <div className="post__attribution">
+      <article className="post">
+        <div className="post__attribution">
+          <a href="https://www.facebook.com/peaceSnap" target="_blank">
             <div className="post__author">
               <img
                 alt="avatar"
@@ -27,24 +28,26 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
             <div className="author__name">
               <span>bestsup93</span>
             </div>
-            <div className="post__share_button">
-              Share
-            </div>
+          </a> 
+          <div className="post__share_button">
+            Share
           </div>
+        </div>
+        <Link to={`/post/${title}-${id}`}>
           <div className="post__thumbnail_wrap">
-            <img 
+            <img
               alt="image"
               className="post__thumbnail"
               src={attachment}
             />
           </div>
           <h1 className="post__title">{title}</h1>
-          <p className="post__date">{createdAt}</p>
+          <p className="post__date">{convertedDate(createdAt)}</p>
           <p className="post__preview">
             {previewContent}
           </p>
-        </article>
-      </Link>
+        </Link>
+      </article>
     </li>
   );
 };

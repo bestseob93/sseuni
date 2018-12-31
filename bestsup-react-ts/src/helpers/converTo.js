@@ -15,3 +15,14 @@ export const convertPercentToPx: number = (value: string, axis: string) => {
   }
   return value;
 }
+
+export const convertedDate = (timestamp: any): string => {
+  const date = new Date(timestamp);
+  const months = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
+  const year = date.getFullYear();
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+
+  const convertedDateKR = `${year}년 ${month}월 ${day}일`;
+  return convertedDateKR;
+};
