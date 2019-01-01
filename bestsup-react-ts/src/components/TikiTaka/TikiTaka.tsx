@@ -33,7 +33,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     this.state = {
       title: '',
       html: '',
-      isToolBarVisible: true,
+      isToolBarVisible: false,
     };
   }
 
@@ -136,7 +136,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
         <ToolBarList
           addImageToS3={this.addImageToS3}
           handleGistCode={this.addGistCodeToHtml}
-          isToggleVisible={this.state.isToolBarVisible}
+          isToolBarVisible={this.state.isToolBarVisible}
         />
         <SubmitBtn
           onSubmit={this.handleSubmit}
@@ -147,6 +147,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
           html={this.state.html}
           onBlur={this.sanitize}
           onChange={this.handleChange}
+          toggleToolBar={this.toggleToolBar}
         />
       </div>
     );

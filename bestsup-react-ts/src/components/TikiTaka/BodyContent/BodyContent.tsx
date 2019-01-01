@@ -54,6 +54,7 @@ export interface IBodyContentProps {
   onChange?: (evt: React.SyntheticEvent) => void,
   className?: string,
   style?: object,
+  toggleToolBar?: () => void,
 }
 
 // TODO: 엔터 쳐서 공백 만들었을 때 다시 포커싱 하면 빈 <p></p>로 포커싱 되게 하기
@@ -73,7 +74,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   componentDidMount(): void {
     document.addEventListener('mouseup', this.getSelectedText);
-    document.addEventListener('keyup', this.getSelectedText);
+    document.addEventListener('keyup', this.handleKeyUp);
   }
 
   shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
@@ -110,7 +111,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   componentWillUnmount(): void {
     document.removeEventListener('mouseup', this.getSelectedText);
-    document.removeEventListener('keyup', this.getSelectedText);
+    document.removeEventListener('keyup', this.handleKeyUp);
   }
 
   onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
@@ -133,13 +134,35 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
+  handleKeyUp = (ev: KeyboardEvent) => {
+    if (ev.keyCode === 16) {
+      this.getSelectedText(ev);
+    }
+  }
+
   getSelectedText = (ev: MouseEvent | KeyboardEvent) => {
     ev.preventDefault();
     if (typeof window.getSelection !== 'undefined') {
-      const selectedString = window.getSelection().toString();
+      const selected = window.getSelection();
+      const selectedString = selected.toString();
       const lengthOfSelectedString = selectedString.length;
-      console.log(lengthOfSelectedString);
+      const position = this.getSelectedPosition(selectedString, lengthOfSelectedString);
+      console.log(position);
+
     }
+  }
+
+  getSelectedPosition = (text: string, selectedPosition: number) => {
+    const fakeSpan = document.createElement('span');
+    fakeSpan.textContent = text.substr(0, selectedPosition);
+    document.body.appendChild(fakeSpan);
+    const spanX = fakeSpan.offsetLeft;
+    const spanY = fakeSpan.offsetTop;
+    document.body.removeChild(fakeSpan);
+    return {
+      x: spanX,
+      y: spanY,
+    };
   }
 
   onFocus = () => {
@@ -160,11 +183,11 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   render() {
-    const { tagName, html, ...props } = this.props;
+    const { tagName, html } = this.props;
     return React.createElement(
       tagName || 'div',
       {
-        ...props,
+        onMouseUp: this.getSelectedText,
         className: 'post__content',
         ref: this.el,
         onInput: this.onTextChange,

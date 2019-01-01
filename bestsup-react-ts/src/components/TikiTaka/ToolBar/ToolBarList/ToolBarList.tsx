@@ -9,14 +9,14 @@ import './ToolBarList.css';
 export interface IToolBarListProps {
   handleGistCode: (txt: string) => void,
   addImageToS3: (file: any) => Promise<string>,
-  isToggleVisible: boolean,
+  isToolBarVisible: boolean,
 };
 
-const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCode, addImageToS3, isToggleVisible }) => {
+const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCode, addImageToS3, isToolBarVisible }) => {
 
   // TODO: selection 위치에 따라 Toolbar 포지션 조정하기
   return (
-    <div className={`toolbar__wrapper ${isToggleVisible ? '' : 'toolbar__wrapper-hide'}`}>
+    <div className={`toolbar__wrapper ${isToolBarVisible ? '' : 'toolbar__wrapper-hide'}`}>
       <ul className="toolbar__icons-list">
         <ToolBarItem name="bold" />
         <ToolBarItem name="italic" />
