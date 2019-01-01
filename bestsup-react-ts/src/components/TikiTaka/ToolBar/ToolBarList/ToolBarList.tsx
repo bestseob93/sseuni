@@ -10,22 +10,27 @@ export interface IToolBarListProps {
   handleGistCode: (txt: string) => void,
   addImageToS3: (file: any) => Promise<string>,
   isToolBarVisible: boolean,
+  style: React.CSSProperties
 };
 
-const ToolBarList: React.StatelessComponent<IToolBarListProps> = ({ handleGistCode, addImageToS3, isToolBarVisible }) => {
-
-  // TODO: selection 위치에 따라 Toolbar 포지션 조정하기
-  return (
-    <div className={`toolbar__wrapper ${isToolBarVisible ? '' : 'toolbar__wrapper-hide'}`}>
-      <ul className="toolbar__icons-list">
-        <ToolBarItem name="bold" />
-        <ToolBarItem name="italic" />
-        <ToolBarItem name="quote" />
-        <ToolBarItemCode handleGistCode={handleGistCode} />
-        <ToolBarItemImage addImageToS3={addImageToS3} handleGistCode={handleGistCode} />
-      </ul>
-    </div>
-  );
+class ToolBarList extends React.PureComponent<IToolBarListProps, {}> {
+  render() {
+    const { handleGistCode, addImageToS3, isToolBarVisible, style } = this.props;
+    console.log(style);
+    return (
+      <div
+        className={`toolbar__wrapper ${isToolBarVisible ? '' : 'toolbar__wrapper-hide'}`}
+        style={style}
+      >
+        <ul className="toolbar__icons-list">
+          <ToolBarItem name="bold" />
+          <ToolBarItem name="italic" />
+          <ToolBarItem name="quote" />
+          <ToolBarItemCode handleGistCode={handleGistCode} />
+          <ToolBarItemImage addImageToS3={addImageToS3} handleGistCode={handleGistCode} />
+        </ul>
+      </div>
+    );
+  }
 }
-
 export default ToolBarList;

@@ -23,6 +23,7 @@ export interface ITikiTakaState {
   title: string,
   html: string,
   isToolBarVisible: boolean,
+  styleOfToolBar: React.CSSProperties,
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
@@ -34,6 +35,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       title: '',
       html: '',
       isToolBarVisible: false,
+      styleOfToolBar: {},
     };
   }
 
@@ -82,13 +84,13 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     }
     console.log('sanitized');
     const clearSelection = () => {
-      if (window.getSelection) {
+      if (window.getSelection().toString().length < 1) {
         window.getSelection().removeAllRanges();
       }
-      this.toggleToolBar();
     }
 
     clearSelection();
+    this.toggleToolBar();
     this.setState({
       html: sanitizeHtml(this.state.html, sanitizeConf)
     });
@@ -138,6 +140,16 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     }));
   }
 
+  setToolBarPosition = (newLeft: number, newTop: number): void => {
+    this.setState({
+      styleOfToolBar: {
+        position: 'absolute',
+        left: newLeft,
+        top: newTop,
+      }
+    });
+  }
+
   render() {
     return (
       <div className="tikitaka-editor">
@@ -145,6 +157,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
           addImageToS3={this.addImageToS3}
           handleGistCode={this.addGistCodeToHtml}
           isToolBarVisible={this.state.isToolBarVisible}
+          style={this.state.styleOfToolBar}
         />
         <SubmitBtn
           onSubmit={this.handleSubmit}
@@ -156,6 +169,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
           onBlur={this.sanitize}
           onChange={this.handleChange}
           toggleToolBar={this.toggleToolBar}
+          setToolBarPosition={this.setToolBarPosition}
         />
       </div>
     );

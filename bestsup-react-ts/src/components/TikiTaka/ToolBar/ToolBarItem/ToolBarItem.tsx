@@ -24,6 +24,9 @@ const ToolBarItem: React.StatelessComponent<IToolBarItemProps> = ({ name }) => {
 
   const execCommand = (e: React.SyntheticEvent, cmd: string) => {
     e.preventDefault();
+    if (document.activeElement) {
+      console.log(document.activeElement.querySelector('p'));
+    }
     document.execCommand(cmd, false);
   };
 

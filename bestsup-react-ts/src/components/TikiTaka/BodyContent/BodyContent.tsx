@@ -15,38 +15,6 @@ function normalizeHtml(str: string): string {
   return str && str.replace(/&nbsp;|\u202F|\u00A0/g, ' '); // space 했을 때 유니코드나 nbsp 값 ' '로 치환
 }
 
-function findLastTextNode(node: Node) : Node | null {
-  if (node.nodeType === Node.TEXT_NODE) {
-    return node;
-  }
-  const children = node.childNodes;
-
-  for (let i = children.length - 1; i >= 0; i--) {
-    const textNode = findLastTextNode(children[i]);
-    return textNode;
-  }
-  return null;
-}
-
-function replaceCaret(el: HTMLElement) {
-  // 엘리먼트 제일 뒤에 위치
-  console.log(el);
-  const target = findLastTextNode(el);
-  // 엘리먼트가 포커스 되지 않았을 때는 이동시키지 않음
-  const isTargetFocused = document.activeElement === target;
-  if (target !== null && target.nodeValue !== null && isTargetFocused) {
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.setStart(target, target.nodeValue.length); // setStartAfter 도 있음.
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
-    if (el instanceof HTMLElement) {
-      el.focus();
-    }
-  }
-}
-
 export interface IBodyContentProps {
   tagName?: string,
   html?: string,
@@ -55,6 +23,7 @@ export interface IBodyContentProps {
   className?: string,
   style?: object,
   toggleToolBar: () => void,
+  setToolBarPosition: (newLeft: number, newTop: number) => void
 }
 
 // TODO: 엔터 쳐서 공백 만들었을 때 다시 포커싱 하면 빈 <p></p>로 포커싱 되게 하기
@@ -105,8 +74,6 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
       el.innerHTML = this.lastHtml;
       console.log(el);
     }
-
-    replaceCaret(el);
   }
 
   componentWillUnmount(): void {
@@ -148,11 +115,10 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
       const parentEle = selected.getRangeAt(0).startContainer.parentElement; // 영역의 부모 엘리먼트
       const parentEleOffsetLeft = parentEle ? parentEle.offsetLeft : 0; // 부모 엘리먼트의 Left 값
       const lengthOfSelectedString = selectedString.length; // 영역 내 텍스트 수
-
       const position = this.getSelectedPosition(selectedString, lengthOfSelectedString, parentEleOffsetLeft);
       if (lengthOfSelectedString > 0) {
-        console.log(position);
         this.props.toggleToolBar();
+        this.props.setToolBarPosition(position.x, position.y);
       }
     }
   }
