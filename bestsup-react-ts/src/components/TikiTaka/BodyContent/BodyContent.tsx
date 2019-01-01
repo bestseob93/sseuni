@@ -113,7 +113,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         if (window.getSelection().toString().length > 0) {
           this.props.toggleToolBar();
           window.getSelection().removeAllRanges();
-  
+          // TODO: selected 된 후에 키보드 입력 시 작동안함
           const el = this.getEl();
           if (!el) {
             return;

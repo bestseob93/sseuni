@@ -12,6 +12,7 @@ import SubmitBtn from './SubmitBtn';
 // const OtherComponent = React.lazy(() => import('./DefaultPlaceholder'));
 
 import './TikiTaka.css';
+import InlineMenu from './InlineMenu';
 
 export interface ITikiTakaProps {
   fetched: boolean,
@@ -163,6 +164,10 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   render() {
     return (
       <div className="tikitaka-editor">
+        <InlineMenu
+          isInlineMenuVisible={this.state.isInlineMenuVisible}
+          style={this.state.styleOfInlineMenu}
+        />
         <ToolBarList
           addImageToS3={this.addImageToS3}
           handleGistCode={this.addGistCodeToHtml}
@@ -171,7 +176,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
         />
         <SubmitBtn
           onSubmit={this.handleSubmit}
-          toggleToolBar={this.toggleToolBar}
         />
         <PostTitle handleChange={this.handleTitleChange} />
         <BodyContent

@@ -1,10 +1,16 @@
 import * as React from 'react';
 import './InlineMenu.css';
 
-class InlineMenu extends React.PureComponent<{}> {
+interface IinlineMenuProps {
+  isInlineMenuVisible: boolean,
+  style: React.CSSProperties
+}
+class InlineMenu extends React.PureComponent<IinlineMenuProps, {}> {
   render() {
+    // TODO: left는 tikitaka 기준 -30px, top은 마지막 paragraph의 offsetTop 값
+    const { isInlineMenuVisible } = this.props;
     return (
-      <div>InlineMenu</div>
+      <div className={`FAB ${isInlineMenuVisible ? '' : 'FAB-hide'}`}>.</div>
     );
   }
 }
