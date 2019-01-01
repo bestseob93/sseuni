@@ -135,11 +135,11 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   getSelectedText = (ev: MouseEvent | KeyboardEvent) => {
     ev.preventDefault();
-    // if (typeof window.getSelection !== 'undefined') {
-    //   const selectedString = window.getSelection().toString();
-    //   const lengthOfSelectedString = selectedString.length;
-    //   console.log(lengthOfSelectedString);
-    // }
+    if (typeof window.getSelection !== 'undefined') {
+      const selectedString = window.getSelection().toString();
+      const lengthOfSelectedString = selectedString.length;
+      console.log(lengthOfSelectedString);
+    }
   }
 
   onFocus = () => {

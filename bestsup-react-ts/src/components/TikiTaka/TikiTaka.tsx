@@ -21,7 +21,8 @@ export interface ITikiTakaProps {
 
 export interface ITikiTakaState {
   title: string,
-  html: string
+  html: string,
+  isToolBarVisible: boolean,
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
@@ -32,6 +33,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     this.state = {
       title: '',
       html: '',
+      isToolBarVisible: true,
     };
   }
 
@@ -47,7 +49,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     });
   };
 
-  async addImageToS3(file: any): Promise<string> {
+  addImageToS3 = async (file: any): Promise<string> => {
     const config = {
       bucketName: 'tikitakas',
       region: 'ap-northeast-2',
@@ -122,14 +124,24 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     }
   }
 
+  toggleToolBar = (): void => {
+    this.setState((prevState) => ({
+      isToolBarVisible: !prevState.isToolBarVisible,
+    }));
+  }
+
   render() {
     return (
       <div className="tikitaka-editor">
         <ToolBarList
           addImageToS3={this.addImageToS3}
           handleGistCode={this.addGistCodeToHtml}
+          isToggleVisible={this.state.isToolBarVisible}
         />
-        <SubmitBtn onSubmit={this.handleSubmit} />
+        <SubmitBtn
+          onSubmit={this.handleSubmit}
+          toggleToolBar={this.toggleToolBar}
+        />
         <PostTitle handleChange={this.handleTitleChange} />
         <BodyContent
           html={this.state.html}
