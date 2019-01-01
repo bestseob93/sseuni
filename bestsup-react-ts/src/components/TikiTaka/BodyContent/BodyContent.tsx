@@ -23,7 +23,9 @@ export interface IBodyContentProps {
   className?: string,
   style?: object,
   toggleToolBar: () => void,
-  setToolBarPosition: (newLeft: number, newTop: number) => void
+  setToolBarPosition: (newLeft: number, newTop: number) => void,
+  toggleInlineMenu: (value: boolean) => void,
+  setInlineMenuPosition: (positionY: number) => void,
 }
 
 // TODO: 엔터 쳐서 공백 만들었을 때 다시 포커싱 하면 빈 <p></p>로 포커싱 되게 하기
@@ -43,7 +45,9 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   componentDidMount(): void {
     document.addEventListener('mouseup', this.getSelectedText);
+    document.addEventListener('mousedown', this.removeSelectedAndToolBar);
     document.addEventListener('keyup', this.handleKeyUp);
+    document.addEventListener('keydown', this.removeSelectedAndToolBar);
   }
 
   shouldComponentUpdate(nextProps: IBodyContentProps): boolean {
@@ -78,7 +82,9 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   componentWillUnmount(): void {
     document.removeEventListener('mouseup', this.getSelectedText);
+    document.removeEventListener('mousedown', this.removeSelectedAndToolBar);
     document.removeEventListener('keyup', this.handleKeyUp);
+    document.removeEventListener('keydown', this.removeSelectedAndToolBar);
   }
 
   onTextChange = (ev: React.SyntheticEvent<HTMLInputElement>): void => {
@@ -101,6 +107,23 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
+  removeSelectedAndToolBar = (ev: KeyboardEvent) => {
+    if (ev.keyCode !== 8) { // backspace 아닌 경우
+      if (window.getSelection) {
+        if (window.getSelection().toString().length > 0) {
+          this.props.toggleToolBar();
+          window.getSelection().removeAllRanges();
+  
+          const el = this.getEl();
+          if (!el) {
+            return;
+          }
+          el.focus();
+        }
+      }
+    }
+  }
+
   handleKeyUp = (ev: KeyboardEvent): void => {
     if (ev.keyCode === 16) {
       this.getSelectedText(ev);
@@ -112,13 +135,16 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     if (typeof window.getSelection !== 'undefined') {
       const selected = window.getSelection(); // 드래그 셀렉트 된 영역
       const selectedString = selected.toString(); // 해당 영역 텍스트 구하기
-      const parentEle = selected.getRangeAt(0).startContainer.parentElement; // 영역의 부모 엘리먼트
-      const parentEleOffsetLeft = parentEle ? parentEle.offsetLeft : 0; // 부모 엘리먼트의 Left 값
-      const lengthOfSelectedString = selectedString.length; // 영역 내 텍스트 수
-      const position = this.getSelectedPosition(selectedString, lengthOfSelectedString, parentEleOffsetLeft);
-      if (lengthOfSelectedString > 0) {
-        this.props.toggleToolBar();
-        this.props.setToolBarPosition(position.x, position.y);
+      if (selected.rangeCount > 0) {
+        const parentEle = selected.getRangeAt(0).startContainer.parentElement; // 영역의 부모 엘리먼트
+        const parentEleOffsetLeft = parentEle ? parentEle.offsetLeft : 0; // 부모 엘리먼트의 Left 값
+
+        const lengthOfSelectedString = selectedString.length; // 영역 내 텍스트 수
+        const position = this.getSelectedPosition(selectedString, lengthOfSelectedString, parentEleOffsetLeft);
+        if (lengthOfSelectedString > 0) {
+          this.props.toggleToolBar();
+          this.props.setToolBarPosition(position.x, position.y);
+        }
       }
     }
   }
@@ -150,7 +176,13 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
 
   onEnterKeyPress = (ev: React.KeyboardEvent): void => {
     if (ev.charCode === 13) {
-      document.execCommand('', false);
+      if (ev.currentTarget.lastElementChild) {
+        const lastParagraphEle = ev.currentTarget.lastElementChild; // contentEditable의 마지막 Paragraph
+        const positionY = lastParagraphEle.getBoundingClientRect().top; // 마지막 paragraph의 top 포지션
+        const SHOW_INLINE_MENU = true;
+        this.props.toggleInlineMenu(SHOW_INLINE_MENU); // 인라인 메뉴 보이기
+        this.props.setInlineMenuPosition(positionY); // 인라인 메뉴 포지션 Y 값 셋팅
+      }
     }
   }
 
@@ -159,7 +191,6 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     return React.createElement(
       tagName || 'div',
       {
-        onMouseUp: this.getSelectedText,
         className: 'post__content',
         ref: this.el,
         onInput: this.onTextChange,

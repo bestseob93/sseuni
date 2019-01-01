@@ -24,6 +24,8 @@ export interface ITikiTakaState {
   html: string,
   isToolBarVisible: boolean,
   styleOfToolBar: React.CSSProperties,
+  isInlineMenuVisible: boolean,
+  styleOfInlineMenu: React.CSSProperties
 }
 
 // TODO: ContentEditable 컴포넌트화 시키기
@@ -36,6 +38,8 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       html: '',
       isToolBarVisible: false,
       styleOfToolBar: {},
+      isInlineMenuVisible: false,
+      styleOfInlineMenu: {},
     };
   }
 
@@ -83,14 +87,6 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       allowedSchemes: ['data', 'https'],
     }
     console.log('sanitized');
-    const clearSelection = () => {
-      if (window.getSelection().toString().length < 1) {
-        window.getSelection().removeAllRanges();
-      }
-    }
-
-    clearSelection();
-    this.toggleToolBar();
     this.setState({
       html: sanitizeHtml(this.state.html, sanitizeConf)
     });
@@ -146,7 +142,21 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
         position: 'absolute',
         left: newLeft,
         top: newTop,
-      }
+      },
+    });
+  }
+
+  toggleInlineMenu = (value: boolean): void => {
+    this.setState({
+      isInlineMenuVisible: value,
+    });
+  }
+
+  setInlineMenuPosition = (positionY: number): void => {
+    this.setState({
+      styleOfInlineMenu: {
+        top: positionY,
+      },
     });
   }
 
@@ -170,6 +180,8 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
           onChange={this.handleChange}
           toggleToolBar={this.toggleToolBar}
           setToolBarPosition={this.setToolBarPosition}
+          toggleInlineMenu={this.toggleInlineMenu}
+          setInlineMenuPosition={this.setInlineMenuPosition}
         />
       </div>
     );
