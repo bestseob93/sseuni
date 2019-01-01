@@ -81,6 +81,14 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
       allowedSchemes: ['data', 'https'],
     }
     console.log('sanitized');
+    const clearSelection = () => {
+      if (window.getSelection) {
+        window.getSelection().removeAllRanges();
+      }
+      this.toggleToolBar();
+    }
+
+    clearSelection();
     this.setState({
       html: sanitizeHtml(this.state.html, sanitizeConf)
     });

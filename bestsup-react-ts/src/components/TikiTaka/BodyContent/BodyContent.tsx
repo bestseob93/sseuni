@@ -54,7 +54,7 @@ export interface IBodyContentProps {
   onChange?: (evt: React.SyntheticEvent) => void,
   className?: string,
   style?: object,
-  toggleToolBar?: () => void,
+  toggleToolBar: () => void,
 }
 
 // TODO: 엔터 쳐서 공백 만들었을 때 다시 포커싱 하면 빈 <p></p>로 포커싱 되게 하기
@@ -134,7 +134,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
-  handleKeyUp = (ev: KeyboardEvent) => {
+  handleKeyUp = (ev: KeyboardEvent): void => {
     if (ev.keyCode === 16) {
       this.getSelectedText(ev);
     }
@@ -143,16 +143,22 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   getSelectedText = (ev: MouseEvent | KeyboardEvent) => {
     ev.preventDefault();
     if (typeof window.getSelection !== 'undefined') {
-      const selected = window.getSelection();
-      const selectedString = selected.toString();
-      const lengthOfSelectedString = selectedString.length;
-      const position = this.getSelectedPosition(selectedString, lengthOfSelectedString);
-      console.log(position);
+      const selected = window.getSelection(); // 드래그 셀렉트 된 영역
+      const selectedString = selected.toString(); // 해당 영역 텍스트 구하기
+      const parentEle = selected.getRangeAt(0).startContainer.parentElement; // 영역의 부모 엘리먼트
+      const parentEleOffsetLeft = parentEle ? parentEle.offsetLeft : 0; // 부모 엘리먼트의 Left 값
+      const lengthOfSelectedString = selectedString.length; // 영역 내 텍스트 수
 
+      const position = this.getSelectedPosition(selectedString, lengthOfSelectedString, parentEleOffsetLeft);
+      if (lengthOfSelectedString > 0) {
+        console.log(position);
+        this.props.toggleToolBar();
+      }
     }
   }
 
-  getSelectedPosition = (text: string, selectedPosition: number) => {
+  getSelectedPosition = (text: string, selectedPosition: number, parentEleOffsetLeft: number) => {
+    // selected 된 부분에 가짜 span을 만들어 XY값 구하기
     const fakeSpan = document.createElement('span');
     fakeSpan.textContent = text.substr(0, selectedPosition);
     document.body.appendChild(fakeSpan);
@@ -160,7 +166,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     const spanY = fakeSpan.offsetTop;
     document.body.removeChild(fakeSpan);
     return {
-      x: spanX,
+      x: parentEleOffsetLeft + spanX,
       y: spanY,
     };
   }
