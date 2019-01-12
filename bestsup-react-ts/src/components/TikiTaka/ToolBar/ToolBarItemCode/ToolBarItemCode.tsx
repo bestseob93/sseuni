@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import code from '../ToolBarIcons/code.svg';
+import code from 'assets/Icons/code.svg';
 import { findLastNode } from 'helpers/domHelpers';
 
 export interface IToolBarItemCodeProps {

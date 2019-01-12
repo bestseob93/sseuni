@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import bold from '../ToolBarIcons/bold.svg';
-import italic from '../ToolBarIcons/italic.svg';
-import quote from '../ToolBarIcons/quote.svg';
+import bold from 'assets/Icons/bold.svg';
+import italic from 'assets/Icons/italic.svg';
+import quote from 'assets/Icons/quote.svg';
 
 export interface IToolBarItemProps {
   name: string,

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import image from '../ToolBarIcons/image.svg';
+import image from 'assets/Icons/image.svg';
 import { findLastNode } from 'helpers/domHelpers';
 
 export interface IToolBarItemImageProps {
