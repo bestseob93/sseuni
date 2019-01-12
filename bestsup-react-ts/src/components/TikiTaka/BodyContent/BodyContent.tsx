@@ -175,15 +175,33 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
   }
 
   onEnterKeyPress = (ev: React.KeyboardEvent): void => {
-    if (ev.charCode === 13) {
+    if (ev.keyCode === 13) {
       if (ev.currentTarget.lastElementChild) {
         const lastParagraphEle = ev.currentTarget.lastElementChild; // contentEditable의 마지막 Paragraph
         const positionY: number = lastParagraphEle.getBoundingClientRect().top; // 마지막 paragraph의 top 포지션
         const inlineMenuPositionY: number = positionY - 95;
         const SHOW_INLINE_MENU: boolean = true;
-
         this.props.toggleInlineMenu(SHOW_INLINE_MENU); // 인라인 메뉴 보이기
         this.props.setInlineMenuPosition(inlineMenuPositionY); // 인라인 메뉴 포지션 Y 값 셋팅
+      }
+    }
+
+    if (ev.keyCode === 8) {
+      if (window.getSelection) {
+        const childElements: HTMLCollection = ev.currentTarget.children;
+        const anchorNode: Node = window.getSelection().anchorNode;
+        const currentNode: Node | null = anchorNode.nodeType === 3 ? anchorNode.parentElement : anchorNode;
+        Array.from(childElements).forEach((childEle: HTMLElement, index) => {
+        // 자식 노드 중 현재 커서에 있는 노드가 같은 경우 현재 인덱스의 -2번째 노드의 top 값
+          if (childEle === currentNode) {
+            const currentIndex = index - 2 < 1 ? 0 : index - 2;
+            const positionY: number = childElements[currentIndex].getBoundingClientRect().top;
+            const inlineMenuPositionY: number = positionY - 95;
+            const SHOW_INLINE_MENU: boolean = true;
+            this.props.toggleInlineMenu(SHOW_INLINE_MENU);
+            this.props.setInlineMenuPosition(inlineMenuPositionY);
+          }
+        });
       }
     }
   }
@@ -198,7 +216,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
         onInput: this.onTextChange,
         onBlur: this.props.onBlur || this.onTextChange,
         onFocus: this.onFocus,
-        onKeyPress: this.onEnterKeyPress,
+        onKeyDown: this.onEnterKeyPress,
         contentEditable: true,
         placeholder: 'Enter text here...',
         dangerouslySetInnerHTML: { __html: html }
