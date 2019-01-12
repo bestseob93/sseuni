@@ -148,6 +148,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
   }
 
   toggleInlineMenu = (value: boolean): void => {
+    console.log(value);
     this.setState({
       isInlineMenuVisible: value,
     });
