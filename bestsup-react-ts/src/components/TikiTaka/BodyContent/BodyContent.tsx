@@ -178,10 +178,12 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     if (ev.charCode === 13) {
       if (ev.currentTarget.lastElementChild) {
         const lastParagraphEle = ev.currentTarget.lastElementChild; // contentEditable의 마지막 Paragraph
-        const positionY = lastParagraphEle.getBoundingClientRect().top; // 마지막 paragraph의 top 포지션
-        const SHOW_INLINE_MENU = true;
+        const positionY: number = lastParagraphEle.getBoundingClientRect().top; // 마지막 paragraph의 top 포지션
+        const inlineMenuPositionY: number = positionY - 95;
+        const SHOW_INLINE_MENU: boolean = true;
+
         this.props.toggleInlineMenu(SHOW_INLINE_MENU); // 인라인 메뉴 보이기
-        this.props.setInlineMenuPosition(positionY); // 인라인 메뉴 포지션 Y 값 셋팅
+        this.props.setInlineMenuPosition(inlineMenuPositionY); // 인라인 메뉴 포지션 Y 값 셋팅
       }
     }
   }
