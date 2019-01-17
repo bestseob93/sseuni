@@ -5,6 +5,7 @@ import HeaderContainer from './containers/HeaderContainer';
 import About from 'pages/AboutPage';
 import Home from 'pages/HomePage';
 import Write from 'pages/WritePage';
+import Quill from 'pages/QuillPage';
 import Blog from 'pages/BlogPage';
 import NotFound from './NotFound';
 
@@ -22,6 +23,7 @@ class App extends React.Component<{}> {
             component={() => <About />}
           />
           <Route path="/write" component={Write} />
+          <Route path="/quill" component={Quill} />
           <Route path="/post/:title-:id" component={Blog} />
           <Route component={NotFound} />
         </Switch>
