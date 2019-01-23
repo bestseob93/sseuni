@@ -9,8 +9,6 @@ import Quill from 'pages/QuillPage';
 import Blog from 'pages/BlogPage';
 import NotFound from './components/NotFound';
 
-import './App.css';
-
 class App extends React.Component<{}> {
   render(): React.ReactNode {
     return (
