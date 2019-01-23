@@ -43,7 +43,7 @@ class ToolBarItemImage extends React.Component<IToolBarItemImageProps, {}> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <li className="toolbar__button image">
         <label htmlFor="inputImage"><img className="toolbar__icon" src={image} /></label>

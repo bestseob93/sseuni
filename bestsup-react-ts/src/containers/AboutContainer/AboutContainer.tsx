@@ -25,12 +25,12 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     }
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.setInitValues();
     window.addEventListener('scroll', this.onScroll);
   }
 
-  componentWillMount() {
+  componentWillMount(): void {
     window.removeEventListener('scroll', this.onScroll);
   }
 
@@ -149,7 +149,7 @@ class AboutContainer extends React.Component<{}, IAboutContainerState> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <section className="section">
         <div className="section-content">

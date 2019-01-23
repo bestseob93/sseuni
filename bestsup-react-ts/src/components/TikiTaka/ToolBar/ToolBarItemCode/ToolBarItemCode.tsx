@@ -63,7 +63,7 @@ class ToolBarItemCode extends React.Component<IToolBarItemCodeProps, IToolBarIte
       lastNode.appendChild(fakeFigure);
     }
   }
-  render() {
+  render(): React.ReactNode {
     return (
       <li className="toolbar__button" onClick={this.insertEmbedCode}>
         <img className="toolbar__icon" src={code} />

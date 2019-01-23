@@ -65,7 +65,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
       JSON.stringify(this.props.style) !== JSON.stringify(nextProps.style);
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(): void {
     const el = this.getEl();
 
     if(!el) {
@@ -107,7 +107,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     this.lastHtml = text;
   }
 
-  removeSelectedAndToolBar = (ev: KeyboardEvent) => {
+  removeSelectedAndToolBar = (ev: KeyboardEvent): void => {
     if (ev.keyCode !== 8) { // backspace 아닌 경우
       if (window.getSelection) {
         if (window.getSelection().toString().length > 0) {
@@ -130,7 +130,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     }
   }
 
-  getSelectedText = (ev: MouseEvent | KeyboardEvent) => {
+  getSelectedText = (ev: MouseEvent | KeyboardEvent): void => {
     ev.preventDefault();
     if (typeof window.getSelection !== 'undefined') {
       const selected = window.getSelection(); // 드래그 셀렉트 된 영역
@@ -163,7 +163,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     };
   }
 
-  onFocus = () => {
+  onFocus = (): void => {
     const el = this.getEl();
     if (!el) {
       return;
@@ -219,7 +219,7 @@ class BodyContent extends React.Component<IBodyContentProps, {}> {
     }
   }
 
-  render() {
+  render(): React.ReactNode {
     const { tagName, html } = this.props;
     return React.createElement(
       tagName || 'div',

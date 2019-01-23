@@ -24,7 +24,7 @@ class InlineMenu extends React.PureComponent<IinlineMenuProps, IinlineMenuState>
       minusStyle: {},
     };
   }
-  render() {
+  render(): React.ReactNode {
     // TODO: left는 tikitaka 기준 -30px, top은 마지막 paragraph의 offsetTop 값
     const { isInlineMenuVisible, style } = this.props;
     const rotateIt = (e: any) => {

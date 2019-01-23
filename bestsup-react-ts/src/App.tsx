@@ -12,7 +12,7 @@ import NotFound from './NotFound';
 import './App.css';
 
 class App extends React.Component<{}> {
-  render() {
+  render(): React.ReactNode {
     return (
       <React.Fragment>
         <HeaderContainer />

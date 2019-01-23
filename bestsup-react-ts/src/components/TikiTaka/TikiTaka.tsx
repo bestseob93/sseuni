@@ -162,7 +162,7 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     });
   }
 
-  render() {
+  render(): React.ReactNode {
     return (
       <div className="tikitaka-editor">
         <InlineMenu

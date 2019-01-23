@@ -14,7 +14,7 @@ export interface IToolBarListProps {
 };
 
 class ToolBarList extends React.PureComponent<IToolBarListProps, {}> {
-  render() {
+  render(): React.ReactNode {
     const { handleGistCode, addImageToS3, isToolBarVisible, style } = this.props;
     console.log(style);
     return (
