@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import PageTemplate from 'components/Templates';
-import QuillContainer from 'containers/QuillContainer';
+import QuillEditor from 'containers/QuillEditorContainer';
 
 const QuillPage: React.StatelessComponent<{}> = () => {
   return (
     <PageTemplate>
-      <QuillContainer />
+      <QuillEditor />
     </PageTemplate>
   );
 }
