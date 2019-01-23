@@ -1,4 +1,5 @@
 import * as React from 'react';
+import './highlight';
 import ReactQuill from 'react-quill';
 import { withRouter } from 'react-router-dom';
 import S3FileUpload from 'react-s3';
@@ -79,6 +80,7 @@ class QuillEditor extends React.PureComponent<IqlProps, IqlState> {
   }
 
   modules = {
+    syntax: true,
     toolbar: {
       container: [
         [{'header': [1, 2, false]}],
@@ -90,7 +92,7 @@ class QuillEditor extends React.PureComponent<IqlProps, IqlState> {
       handlers: {
         image: this.selectLocalImage
       }
-    }
+    },
   }
 
   handleChange = (value: string): void => {
