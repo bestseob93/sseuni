@@ -1,1 +1,1 @@
-export { default } from './SummerNote';
+export { default } from './QuillWrite';

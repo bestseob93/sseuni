@@ -1,3 +1,3 @@
-import SummerNote from 'components/SummerNote';
+import QuillWrite from 'components/QuillWrite';
 
-export default SummerNote;
+export default QuillWrite;

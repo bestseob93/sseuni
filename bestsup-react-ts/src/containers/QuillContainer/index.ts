@@ -1,1 +1,1 @@
-export { default } from './SummerNoteContainer';
+export { default } from './QuillContainer';
