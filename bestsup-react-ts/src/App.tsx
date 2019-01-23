@@ -7,7 +7,7 @@ import Home from 'pages/HomePage';
 import Write from 'pages/WritePage';
 import Quill from 'pages/QuillPage';
 import Blog from 'pages/BlogPage';
-import NotFound from './NotFound';
+import NotFound from './components/NotFound';
 
 import './App.css';
 
