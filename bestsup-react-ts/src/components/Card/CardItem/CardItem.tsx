@@ -4,6 +4,7 @@ import { IBlogEntity } from 'models';
 import { convertedDate } from 'helpers/converTo';
 import './CardItem.css';
 
+
 const CardItem: React.StatelessComponent<IBlogEntity> = ({
   id,
   title,
@@ -12,7 +13,12 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
   attachment,
   createdAt,
 }) => {
-  console.log(content);
+  const replaceToUnderbar = (str?: string): string => {
+    if (!str) {
+      return '';
+    }
+    return encodeURIComponent(str).replace(/%20/gi, '_');
+  }
   return (
     <li className="card__item">
       <article className="post">
@@ -33,7 +39,7 @@ const CardItem: React.StatelessComponent<IBlogEntity> = ({
             Share
           </div>
         </div>
-        <Link to={`/post/${title}-${id}`}>
+        <Link to={`/post/${replaceToUnderbar(title)}-${id}`}>
           <div className="post__thumbnail_wrap">
             <img
               alt="image"

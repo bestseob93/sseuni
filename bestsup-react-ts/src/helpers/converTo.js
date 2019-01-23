@@ -26,3 +26,7 @@ export const convertedDate = (timestamp: any): string => {
   const convertedDateKR = `${year}년 ${month}월 ${day}일`;
   return convertedDateKR;
 };
+
+export const normalizeHtml = (str: string): string => {
+  return str && str.replace(/&nbsp;|\u202F|\u00A0/g, ' '); // space 했을 때 유니코드나 nbsp 값 ' '로 치환
+}

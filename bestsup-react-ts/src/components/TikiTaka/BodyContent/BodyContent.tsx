@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { normalizeHtml } from 'helpers/converTo';
 import './BodyContent.css';
 // Disable contentEditAble Warning
 console.error = (function() {
@@ -10,10 +11,6 @@ console.error = (function() {
       }
   }
 })();
-
-function normalizeHtml(str: string): string {
-  return str && str.replace(/&nbsp;|\u202F|\u00A0/g, ' '); // space 했을 때 유니코드나 nbsp 값 ' '로 치환
-}
 
 export interface IBodyContentProps {
   tagName?: string,
