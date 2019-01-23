@@ -2,15 +2,24 @@ import * as React from 'react';
 import ReactQuill from 'react-quill';
 import { withRouter } from 'react-router-dom';
 import S3FileUpload from 'react-s3';
+
 import PostTitle from 'components/TikiTaka/PostTitle';
+import FormSubmit from './FormSubmit';
 
 import 'react-quill/dist/quill.bubble.css';
 
-interface IState {
+export interface IqlProps {
+  BlogActions: any,
+  history: any
+}
+
+
+export interface IqlState {
   html?: string,
   title?: string
 }
-class QuillEditor extends React.PureComponent<{}, IState> {
+
+class QuillEditor extends React.PureComponent<IqlProps, IqlState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -94,6 +103,39 @@ class QuillEditor extends React.PureComponent<{}, IState> {
     });
   }
 
+  handleSubmit = async (evt: React.FormEvent<HTMLButtonElement>) => {
+    evt.preventDefault();
+    const firstImgElement = document.querySelector('.ql-container .ql-editor img');
+    const previewContentElement = document.querySelector('.ql-container .ql-editor p');
+    console.log(firstImgElement);
+    console.log(previewContentElement);
+    let firstImageUrl: string | null = '';
+    let firstPreviewContent: string | null = '';
+
+    if (firstImgElement) {
+      firstImageUrl = firstImgElement.getAttribute('src');
+    }
+
+    if (previewContentElement) {
+      firstPreviewContent = previewContentElement.textContent;
+    }
+    const { BlogActions }  = this.props;
+    const param = {
+      title: this.state.title,
+      previewContent: firstPreviewContent,
+      content: this.state.html,
+      attachment: firstImageUrl,
+    };
+
+    try {
+      await BlogActions.requestCreateBlog(param, this.props.history);
+    } catch (err) {
+      if (err) {
+        throw err;
+      }
+    }
+  }
+
   render(): React.ReactNode {
     console.log(this.state.html);
     return (
@@ -106,6 +148,7 @@ class QuillEditor extends React.PureComponent<{}, IState> {
           modules={this.modules}
           placeholder={"Write here..."}
           onChange={this.handleChange} />
+        <FormSubmit onSubmit={this.handleSubmit} />
       </React.Fragment>
     );
   }

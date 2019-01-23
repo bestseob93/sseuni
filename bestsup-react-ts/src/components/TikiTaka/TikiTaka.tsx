@@ -15,7 +15,6 @@ import './TikiTaka.css';
 import InlineMenu from './InlineMenu';
 
 export interface ITikiTakaProps {
-  fetched: boolean,
   BlogActions: any,
   history: any
 }
