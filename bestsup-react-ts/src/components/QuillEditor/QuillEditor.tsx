@@ -1,15 +1,22 @@
 import * as React from 'react';
 import ReactQuill from 'react-quill';
+import { withRouter } from 'react-router-dom';
 import S3FileUpload from 'react-s3';
+import PostTitle from 'components/TikiTaka/PostTitle';
+
 import 'react-quill/dist/quill.bubble.css';
 
 interface IState {
-  text?: string
+  html?: string,
+  title?: string
 }
 class QuillEditor extends React.PureComponent<{}, IState> {
   constructor(props: any) {
     super(props);
-    this.state = { text: '' }; // You can also pass a Quill Delta here
+    this.state = {
+      html: '',
+      title: '',
+    }; // You can also pass a Quill Delta here
   }
 
   editorRef: ReactQuill;
@@ -77,18 +84,25 @@ class QuillEditor extends React.PureComponent<{}, IState> {
     }
   }
 
-  handleChange = (value: any): void => {
-    this.setState({ text: value });
+  handleChange = (value: string): void => {
+    this.setState({ html: value });
+  }
+
+  handleTitleChange = (evt: any): void => {
+    this.setState({
+      title: evt.target.value,
+    });
   }
 
   render(): React.ReactNode {
-    console.log(this.state.text);
+    console.log(this.state.html);
     return (
       <React.Fragment>
+        <PostTitle handleChange={this.handleTitleChange} />
         <ReactQuill
           ref={(el) => {if (el) {this.editorRef = el;}}}
           theme="bubble"
-          value={this.state.text}
+          value={this.state.html}
           modules={this.modules}
           placeholder={"Write here..."}
           onChange={this.handleChange} />
@@ -97,6 +111,4 @@ class QuillEditor extends React.PureComponent<{}, IState> {
   }
 }
 
-
-
-export default QuillEditor;
+export default withRouter(QuillEditor);
