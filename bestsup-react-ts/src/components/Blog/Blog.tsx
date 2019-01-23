@@ -16,7 +16,7 @@ const Blog: React.StatelessComponent<{data: BlogData}> = (props) => {
   };
 
   return (
-    <div className="tikitaka">
+    <div className="ql-editor">
       <h1 className="tikitaka__title">{data.title}</h1>
       <div className="post__byline"><em>{convertedDate(data.createdAt)}</em></div>
       <div className="post__content" dangerouslySetInnerHTML={createMarkUp()} />
