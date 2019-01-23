@@ -10,7 +10,7 @@ const Header: React.StatelessComponent<{}> = () => {
         <ul className="nav-list">
           <li className="nav__item"><Link to="/">Home</Link></li>
           <li className="nav__item"><Link to="/about">About</Link></li>
-          <li className="nav__item"><Link to="/write">Write</Link></li>
+          <li className="nav__item"><Link to="/quill">Write</Link></li>
         </ul>
       </nav>
     </header>
