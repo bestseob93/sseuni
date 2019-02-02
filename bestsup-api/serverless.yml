@@ -103,17 +103,17 @@ functions:
           cors: true
     environment:
       BUCKET: ${self:custom.bucket}
-  join:
-    handler: join.main
+  signup:
+    handler: signup.main
     events:
       - http:
-          path: join
+          path: signup
           method: post
           cors: true
   login:
     handler: login.main
     events:
       - http:
-          path: join
+          path: login
           method: post
           cors: true
