@@ -103,3 +103,17 @@ functions:
           cors: true
     environment:
       BUCKET: ${self:custom.bucket}
+  join:
+    handler: join.main
+    events:
+      - http:
+          path: join
+          method: post
+          cors: true
+  login:
+    handler: login.main
+    events:
+      - http:
+          path: join
+          method: post
+          cors: true

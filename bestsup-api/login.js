@@ -18,6 +18,6 @@ export async function main(event, context, callback) {
     callback(null, success(result));
   } catch (e) {
     console.log(e);
-    callback(null, failure({ status: false ));
+    callback(null, failure({ status: false }));
   }
 }
