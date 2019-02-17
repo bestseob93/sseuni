@@ -1,7 +1,5 @@
 import axios, { AxiosPromise } from 'axios';
 
-axios.defaults.baseURL = 'https://hg6pfn2h1m.execute-api.ap-northeast-2.amazonaws.com/dev';
-
 export const fetchBlogs = (): Promise<AxiosPromise> => {
   console.log('fetch blog api called');
   return axios
@@ -30,7 +28,6 @@ export const createBlog = (payload: any): any => {
       return response.data;
     }).catch((err) => {
       if (err) {
-        console.log(':::::::::');
         console.error(err.response);
       }
     });

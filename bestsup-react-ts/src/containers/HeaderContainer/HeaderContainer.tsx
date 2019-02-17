@@ -1,14 +1,27 @@
 import * as React from 'react';
 import Header from 'components/Header';
 
-class HeaderContainer extends React.Component<{}> {
-  componentDidMount(): void {
-    // console.log(this.props.scroller);
+interface IHeaderContainerState {
+  isVisible: boolean
+}
+
+class HeaderContainer extends React.PureComponent<{}, IHeaderContainerState> {
+  constructor(props: any) {
+    super(props);
+    this.state = {
+      isVisible: false,
+    };
+  }
+
+  onLoginClick = (): void => {
+    this.setState({
+      isVisible: true,
+    });
   }
 
   render(): React.ReactNode {
     return (
-      <Header />
+      <Header isVisible={this.state.isVisible} onLoginClick={this.onLoginClick} />
     );
   }
 }
