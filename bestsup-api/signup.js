@@ -1,4 +1,3 @@
-import uuid from "uuid";
 import crypto from 'crypto';
 import * as s3Lib from './libs/s3-lib';
 import * as dynamoDbLib from "./libs/dynamodb-lib";
@@ -11,9 +10,8 @@ export async function main(event, context, callback) {
   const hashPassword = crypto.createHash('sha512').update(password + salt).digest('hex');
 
   const params = {
-    TableName: 'user',
+    TableName: 'user-2',
     Item: {
-      id: uuid.v1(),
       username: data.payload.username,
       password: hashPassword,
       salt: salt
