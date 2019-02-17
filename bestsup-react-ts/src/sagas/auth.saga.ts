@@ -1,7 +1,7 @@
-import { take, takeLatest, call, put } from 'redux-saga/effects';
+import { take, call } from 'redux-saga/effects';
 import * as loginAPI from 'services/loginAPI';
 
-import { types, actionCreators as actions } from 'ducks/auth.duck';
+import { types } from 'ducks/auth.duck';
 
 export function* requestLogin() {
   console.log('requstLogin saga called');
