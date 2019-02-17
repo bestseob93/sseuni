@@ -36,7 +36,7 @@ export function* watchFetchBlogById() {
   yield fetchBlogByIdSaga(action.payload);
 }
 
-export function* createBlog() {
+export function* createBlogSaga() {
   console.log('createBlog saga called');
   const action = yield take(types.REQUEST_CREATE_BLOG);
   console.log(action);
