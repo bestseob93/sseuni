@@ -6,7 +6,6 @@ import { success, failure } from "./libs/response-lib";
 export async function main(event, context, callback) {
   const data = s3Lib.safelyParseJSON(event.body);
 
-  console.log(JSON.stringify(data));
   const params = {
     TableName: 'user-2',
     Key: {
@@ -16,17 +15,15 @@ export async function main(event, context, callback) {
 
   try {
     const result = await dynamoDbLib.call('get', params);
-    console.log(JSON.stringify(result));
-    const password = result.password;
-    const inputPassword = data.password;
-    const salt = result.salt;
+    const password = result.Item.password;
+    const inputPassword = data.payload.password;
+    const salt = result.Item.salt;
     const hashPassword = crypto.createHash('sha512').update(inputPassword + salt).digest('hex');
 
     if (password === hashPassword) {
-      callback(null, success());
+      callback(null, success({ success: true }));
     }
   } catch (e) {
-    console.log(JSON.stringify(e));
     callback(null, failure({ status: false }));
   }
 }
