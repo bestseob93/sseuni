@@ -5,7 +5,6 @@ import * as dynamoDbLib from "./libs/dynamodb-lib";
 import { success, failure } from "./libs/response-lib";
 
 export async function main(event, context, callback) {
-  console.log(event.body);
   const data = s3Lib.safelyParseJSON(event.body);
   const password = data.payload.password;
   const salt = Math.round((new Date().valueOf() * Math.random())) + '';
