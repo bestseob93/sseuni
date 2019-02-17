@@ -11,8 +11,8 @@ export const actionCreators = {
 }
 
 const AuthRecord = Record({
-  username: 'abc',
-  password: 'def'
+  username: '',
+  password: ''
 });
 
 export class AuthData extends AuthRecord {

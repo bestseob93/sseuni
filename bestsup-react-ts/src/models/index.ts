@@ -1,2 +1,3 @@
 export * from './blogEntity';
-export * from './AuthEntity';
+export * from './authEntity';
+export * from './uiEntity';
