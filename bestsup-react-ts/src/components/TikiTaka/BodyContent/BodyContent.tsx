@@ -16,7 +16,7 @@ export interface IBodyContentProps {
   tagName?: string,
   html?: string,
   onBlur?: () => void,
-  onChange?: (evt: React.SyntheticEvent) => void,
+  onChange?: (ev: React.SyntheticEvent) => void,
   className?: string,
   style?: object,
   toggleToolBar: () => void,

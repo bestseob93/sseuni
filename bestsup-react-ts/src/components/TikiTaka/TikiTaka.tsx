@@ -43,19 +43,21 @@ class TikiTaka extends React.Component<ITikiTakaProps, ITikiTakaState> {
     };
   }
 
-  handleTitleChange = (evt: any): void => {
+  handleTitleChange = (ev: React.SyntheticEvent): void => {
+    const { value } = ev.target as HTMLInputElement;
     this.setState({
-      title: evt.target.value,
+      title: value,
     });
   }
 
-  handleChange = (evt: any): void => {
+  handleChange = (ev: React.SyntheticEvent): void => {
+    const { value } = ev.target as HTMLInputElement;
     this.setState({
-      html: evt.target.value,
+      html: value
     });
   };
 
-  addImageToS3 = async (file: any): Promise<string> => {
+  addImageToS3 = async (file: FileReader): Promise<string> => {
     const config = {
       bucketName: 'tikitakas',
       region: 'ap-northeast-2',
