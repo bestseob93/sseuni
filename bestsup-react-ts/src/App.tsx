@@ -16,7 +16,6 @@ class App extends React.Component<{}> {
     return (
       <React.Fragment>
         <HeaderContainer />
-        <ModalContainer />
         <Switch>
           <Route exact={true} path="/" component={Home} />
           <Route
@@ -28,6 +27,7 @@ class App extends React.Component<{}> {
           <Route path="/post/:title-:id" component={Blog} />
           <Route component={NotFound} />
         </Switch>
+        <ModalContainer />
       </React.Fragment>
     );
 
