@@ -1,11 +1,8 @@
 import * as React from 'react';
 import Header from 'components/Header';
 
-interface IHeaderContainerState {
-  isVisible: boolean
-}
 
-class HeaderContainer extends React.PureComponent<{}, IHeaderContainerState> {
+class HeaderContainer extends React.PureComponent<{}> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -16,12 +13,12 @@ class HeaderContainer extends React.PureComponent<{}, IHeaderContainerState> {
   onLoginClick = (): void => {
     this.setState({
       isVisible: true,
-    });
+    })
   }
 
   render(): React.ReactNode {
     return (
-      <Header isVisible={this.state.isVisible} onLoginClick={this.onLoginClick} />
+      <Header />
     );
   }
 }

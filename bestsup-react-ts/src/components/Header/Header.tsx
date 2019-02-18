@@ -3,12 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.css';
 
-interface IHeaderProps {
-  onLoginClick: () => void,
-  isVisible: boolean
-}
-
-const Header: React.StatelessComponent<IHeaderProps> = () => {
+const Header: React.StatelessComponent<{}> = () => {
   return (
     <header className="header">
       <nav className="navbar">
