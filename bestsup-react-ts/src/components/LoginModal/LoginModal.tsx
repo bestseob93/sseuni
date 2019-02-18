@@ -9,10 +9,10 @@ interface ILoginModalProps {
 // https://codepen.io/ivanodintsov/pen/yqvZzO - 나중에 참고
 const LoginModal: React.StatelessComponent<ILoginModalProps> = ({ isVisible, closeLoginModal }) => {
   return (
-    <div className={cx('modal__container', { 'modal__container--opend': isVisible })}>
+    <div className={cx('modal__container', { 'modal__container--open': isVisible })}>
       <div className="modal__container--background" />
       <div className="modal__box">
-        <button className="modal__close">✖</button>
+        <button className="modal__close" onClick={closeLoginModal}>✖</button>
         <div className="modal__login--form">
           <div className="form__box"><input className="form__field" name="username" placeholder="Username" type="text" /></div>
           <div className="form__box"><input className="form__field" name="password" placeholder="Password" type="password" /></div>
