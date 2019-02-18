@@ -1,4 +1,5 @@
 import * as React from 'react';
+import cx from 'classnames';
 import './LoginModal.css';
 
 interface ILoginModalProps {
@@ -8,7 +9,7 @@ interface ILoginModalProps {
 // https://codepen.io/ivanodintsov/pen/yqvZzO - 나중에 참고
 const LoginModal: React.StatelessComponent<ILoginModalProps> = ({ isVisible, closeLoginModal }) => {
   return (
-    <div className={`modal ${isVisible ? 'opend' : ''}`}>
+    <div className={cx('modal', { opend: isVisible })}>
       LoginModal
     </div>
   );
