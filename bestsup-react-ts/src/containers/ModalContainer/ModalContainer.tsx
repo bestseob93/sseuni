@@ -4,15 +4,28 @@ import { bindActionCreators } from 'redux';
 import {
   actionCreators as uiActions
 } from 'ducks/ui.duck';
-
 import { IStoreState } from 'ducks';
+import LoginModal from 'components/LoginModal';
 
-class ModalContainer extends React.PureComponent<{}> {
+interface IModalContainerProps {
+  isLoginModalVisible: boolean,
+  UiActions: typeof uiActions
+}
+
+class ModalContainer extends React.PureComponent<IModalContainerProps, {}> {
+  closeLoginModal = (): void => {
+    const { UiActions } = this.props;
+    UiActions.hideLoginModal();
+  }
+
   render(): React.ReactNode {
     console.log(this.props);
     return (
-      <div>ModalContainer</div>
-    )
+      <LoginModal
+        isVisible={this.props.isLoginModalVisible}
+        closeLoginModal={this.closeLoginModal}
+      />
+    );
   }
 }
 

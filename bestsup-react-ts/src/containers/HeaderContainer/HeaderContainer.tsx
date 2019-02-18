@@ -1,26 +1,35 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  actionCreators as uiActions
+} from 'ducks/ui.duck';
+import { IStoreState } from 'ducks';
 import Header from 'components/Header';
 
+interface IHeaderContainerProps {
+  isLoginModalVisible: boolean,
+  UiActions: typeof uiActions
+}
 
-class HeaderContainer extends React.PureComponent<{}> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      isVisible: false,
-    };
-  }
-
-  onLoginClick = (): void => {
-    this.setState({
-      isVisible: true,
-    })
+class HeaderContainer extends React.PureComponent<IHeaderContainerProps, {}> {
+  openLoginModal = (): void => {
+    const { UiActions } = this.props;
+    UiActions.showLoginModal();
   }
 
   render(): React.ReactNode {
     return (
-      <Header />
+      <Header openLoginModal={this.openLoginModal} />
     );
   }
 }
 
-export default HeaderContainer;
+export default connect(
+  ({ ui }: IStoreState) => ({
+    isLoginModalVisible: ui.get('isLoginModalVisible'),
+  }),
+  (dispatch) => ({
+    UiActions: bindActionCreators(uiActions, dispatch)
+  })
+)(HeaderContainer);

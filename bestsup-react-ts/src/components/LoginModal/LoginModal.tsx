@@ -2,12 +2,13 @@ import * as React from 'react';
 import './LoginModal.css';
 
 interface ILoginModalProps {
-  isVisible: boolean
+  isVisible: boolean,
+  closeLoginModal: () => void
 }
 // https://codepen.io/ivanodintsov/pen/yqvZzO - 나중에 참고
-const LoginModal: React.StatelessComponent<ILoginModalProps> = ({ isVisible }) => {
+const LoginModal: React.StatelessComponent<ILoginModalProps> = ({ isVisible, closeLoginModal }) => {
   return (
-    <div className="modal">
+    <div className={`modal ${isVisible ? 'opend' : ''}`}>
       LoginModal
     </div>
   );
