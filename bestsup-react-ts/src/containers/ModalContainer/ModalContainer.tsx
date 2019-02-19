@@ -30,7 +30,7 @@ class ModalContainer extends React.PureComponent<IModalContainerProps, {}> {
       value
     };
 
-    AuthActions.handleChange(payload)
+    AuthActions.handleChange(payload);
   }
 
   handleSubmit = async (): Promise<void> => {
