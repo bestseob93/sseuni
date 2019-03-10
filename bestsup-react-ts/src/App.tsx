@@ -9,6 +9,7 @@ import Home from 'pages/HomePage';
 import Write from 'pages/WritePage';
 import Quill from 'pages/QuillPage';
 import Blog from 'pages/BlogPage';
+import Hidden from 'pages/HiddenPage';
 import NotFound from './components/NotFound';
 
 class App extends React.Component<{}> {
@@ -25,6 +26,7 @@ class App extends React.Component<{}> {
           <Route path="/write" component={Write} />
           <Route path="/quill" component={Quill} />
           <Route path="/post/:title-:id" component={Blog} />
+          <Route path="/hidden" component={Hidden} />
           <Route component={NotFound} />
         </Switch>
         <ModalContainer />

@@ -4,10 +4,11 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 
 interface IHeaderProps {
-  openLoginModal: () => void
+  openLoginModal: () => void,
+  isLoginButtonVisible: boolean
 }
 
-const Header: React.StatelessComponent<IHeaderProps> = ({ openLoginModal }) => {
+const Header: React.StatelessComponent<IHeaderProps> = ({ openLoginModal, isLoginButtonVisible }) => {
   return (
     <header className="header">
       <nav className="navbar">
@@ -15,7 +16,7 @@ const Header: React.StatelessComponent<IHeaderProps> = ({ openLoginModal }) => {
           <li className="nav__item"><Link to="/">Home</Link></li>
           <li className="nav__item"><Link to="/about">About</Link></li>
           <li className="nav__item"><Link to="/quill">Write</Link></li>
-          <li className="nav__item"><a href="#" onClick={openLoginModal}>Login</a></li>
+          {isLoginButtonVisible ? <li className="nav__item"><a href="#" onClick={openLoginModal}>Login</a></li>: ''}
         </ul>
       </nav>
     </header>

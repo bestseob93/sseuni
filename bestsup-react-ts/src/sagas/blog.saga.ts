@@ -5,9 +5,8 @@ import { types, actionCreators as actions } from 'ducks/blog.duck';
 import { IBlogEntity } from 'models';
 
 function* fetchBlogsSaga() {
-  let blogs: IBlogEntity[];
   try {
-    blogs = yield call(blogAPI.fetchBlogs);
+    const blogs: IBlogEntity[] = yield call(blogAPI.fetchBlogs);
     yield put(actions.fetchBlogs(blogs));
   } catch (e) {
     console.error(e);
@@ -19,11 +18,10 @@ export function* watchFetchBlogs() {
   yield takeLatest(types.REQUEST_BLOGS, fetchBlogsSaga);
 }
 
-function* fetchBlogByIdSaga(id: string) {
-  let blog: IBlogEntity;
-
+// TODO: action type 설정
+function* fetchBlogByIdSaga(action: any) {
   try {
-    blog = yield call(blogAPI.fetchBlogById, id);
+    const blog: IBlogEntity = yield call(blogAPI.fetchBlogById, action.payload);
     yield put(actions.fetchBlog(blog));
   } catch (e) {
     console.error(e);
@@ -31,9 +29,7 @@ function* fetchBlogByIdSaga(id: string) {
 }
 
 export function* watchFetchBlogById() {
-  const action = yield take(types.REQUEST_BLOG);
-  console.log(action);
-  yield fetchBlogByIdSaga(action.payload);
+  yield takeLatest(types.REQUEST_BLOG, fetchBlogByIdSaga);
 }
 
 export function* createBlogSaga() {

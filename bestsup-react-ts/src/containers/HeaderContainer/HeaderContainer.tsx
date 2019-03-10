@@ -9,6 +9,7 @@ import Header from 'components/Header';
 
 interface IHeaderContainerProps {
   isLoginModalVisible: boolean,
+  isLoginButtonVisible: boolean,
   UiActions: typeof uiActions
 }
 
@@ -20,7 +21,7 @@ class HeaderContainer extends React.PureComponent<IHeaderContainerProps, {}> {
 
   render(): React.ReactNode {
     return (
-      <Header openLoginModal={this.openLoginModal} />
+      <Header openLoginModal={this.openLoginModal} isLoginButtonVisible={this.props.isLoginButtonVisible} />
     );
   }
 }
@@ -28,6 +29,7 @@ class HeaderContainer extends React.PureComponent<IHeaderContainerProps, {}> {
 export default connect(
   ({ ui }: IStoreState) => ({
     isLoginModalVisible: ui.get('isLoginModalVisible'),
+    isLoginButtonVisible: ui.get('isLoginButtonVisible')
   }),
   (dispatch) => ({
     UiActions: bindActionCreators(uiActions, dispatch)

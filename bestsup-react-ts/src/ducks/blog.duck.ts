@@ -59,20 +59,20 @@ export class BlogState extends BlogStateRecord {
 const defaultState = new BlogState();
 
 export default handleActions<BlogState, any>({
-  [types.REQUEST_BLOGS]: (state): BlogState => {
+  [types.REQUEST_BLOGS]: (state: BlogState) => {
     return state;
   },
-  [types.FETCH_BLOGS]: (state, action: Action<ResponsePayload>): BlogState => {
+  [types.FETCH_BLOGS]: (state: BlogState, action: Action<ResponsePayload>) => {
     return state.withMutations(
       s => {
         s.set('blogs', List(action.payload));
       }
     ) as BlogState;
   },
-  [types.REQUEST_BLOG]: (state): BlogState => {
+  [types.REQUEST_BLOG]: (state: BlogState) => {
     return state;
   },
-  [types.FETCH_BLOG]: (state, action: Action<ResponsePayload>): BlogState => {
+  [types.FETCH_BLOG]: (state: BlogState, action: Action<ResponsePayload>) => {
     return state.withMutations(
       s => {
         s.set('blog', action.payload);
