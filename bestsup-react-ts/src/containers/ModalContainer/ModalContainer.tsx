@@ -12,6 +12,10 @@ import LoginModal from 'components/LoginModal';
 
 interface IModalContainerProps {
   isLoginModalVisible: boolean,
+  loginInfo: {
+    username: string,
+    password: string
+  },
   AuthActions: typeof authActions,
   UiActions: typeof uiActions
 }
@@ -34,12 +38,11 @@ class ModalContainer extends React.PureComponent<IModalContainerProps, {}> {
   }
 
   handleSubmit = async (): Promise<void> => {
-    const { AuthActions } = this.props;
-    await AuthActions.requestLogin();
+    const { AuthActions, loginInfo } = this.props;
+    await AuthActions.requestLogin(loginInfo);
   }
 
   render(): React.ReactNode {
-    console.log(this.props);
     return (
       <LoginModal
         isVisible={this.props.isLoginModalVisible}
@@ -52,8 +55,12 @@ class ModalContainer extends React.PureComponent<IModalContainerProps, {}> {
 }
 
 export default connect(
-  ({ ui }: IStoreState) => ({
+  ({ ui, auth }: IStoreState) => ({
     isLoginModalVisible: ui.get('isLoginModalVisible'),
+    loginInfo: {
+      username: auth.get('username'),
+      password: auth.get('password')
+    }
   }),
   (dispatch) => ({
     AuthActions: bindActionCreators(authActions, dispatch),

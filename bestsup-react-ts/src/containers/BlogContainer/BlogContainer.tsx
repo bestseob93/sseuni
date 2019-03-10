@@ -20,14 +20,10 @@ class BlogContainer extends React.PureComponent<IBlogContainerProps, {}> {
     super(props);
   }
 
-  async componentDidMount() {
+  componentDidMount(): void {
     const { BlogActions, match } = this.props;
     const blogIdFromParameter: string = match.params.id;
-    try {
-      await BlogActions.requestBlog(blogIdFromParameter);
-    } catch (e) {
-      console.error(e);
-    }
+    BlogActions.requestBlog(blogIdFromParameter);
   }
 
   render(): React.ReactNode {

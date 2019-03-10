@@ -6,11 +6,12 @@ import S3FileUpload from 'react-s3';
 
 import PostTitle from 'components/TikiTaka/PostTitle';
 import FormSubmit from './FormSubmit';
+import { actionCreators as blogActions } from 'ducks/blog.duck'
 
 import 'react-quill/dist/quill.bubble.css';
 
 export interface IqlProps {
-  BlogActions: any,
+  BlogActions: typeof blogActions,
   history: any
 }
 

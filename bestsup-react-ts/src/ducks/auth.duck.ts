@@ -4,11 +4,14 @@ import { IAuthEntity } from 'models';
 
 export const types = {
   REQUEST_LOGIN: 'auth/REQUEST_LOGIN',
+  REQUEST_LOGIN_SUCCESS: 'auth/REQUEST_LOGIN_SUCCESS',
+  REQUEST_LOGIN_FAILED: 'auth/REQUEST_LOGIN_FAILED',
   HANDLE_CHANGE: 'auth/HANDLE_CHANGE',
 };
 
 export const actionCreators = {
-  requestLogin: createAction(types.REQUEST_LOGIN),
+  requestLogin: createAction(types.REQUEST_LOGIN, (payload: any) => payload),
+  requestLoginSuccess: createAction(types.REQUEST_LOGIN_SUCCESS, (payload: any) => payload),
   handleChange: (payload: any) => ({
     type: types.HANDLE_CHANGE,
     payload

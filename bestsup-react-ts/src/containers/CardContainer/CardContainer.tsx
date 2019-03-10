@@ -22,13 +22,9 @@ class CardContainer extends React.Component<ICardContainerProps, {}> {
     super(props);
   }
 
-  async componentDidMount() {
+  componentDidMount(): void {
     const { BlogActions } = this.props;
-    try {
-      await BlogActions.requestBlogs();
-    } catch (e) {
-      console.error(e);
-    }
+    BlogActions.requestBlogs();
   }
 
   render(): React.ReactNode {
