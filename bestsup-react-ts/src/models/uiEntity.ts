@@ -1,3 +1,4 @@
 export interface IUiEntity {
-  isLoginMdaolVisible: boolean
+  isLoginModalVisible: boolean,
+  isLoginButtonVisible: boolean
 }
