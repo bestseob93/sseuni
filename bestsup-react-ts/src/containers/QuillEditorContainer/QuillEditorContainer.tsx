@@ -13,20 +13,19 @@ interface IQuillEditorContainer {
 }
 
 class QuillEditorContainer extends React.Component<IQuillEditorContainer, {}> {
-  componentDidMount(): void {
-    this.checkLogin()
-  }
-
-  checkLogin(): void {
+  checkLogin(kickToHome: () => void): void {
     const result: any = getLocalStorage()
-
-    if (result.username === 'unrealstyle') {
-      console.log('login');
+    if (result) {
+      if (!(result.username === 'unrealstyle')) {
+        kickToHome()
+      }
+    } else {
+      kickToHome()
     }
   }
 
   render() : React.ReactNode {
-    return <QuillEditor { ...this.props } />
+    return <QuillEditor { ...this.props } checkLogin={this.checkLogin} />
   }
 }
 

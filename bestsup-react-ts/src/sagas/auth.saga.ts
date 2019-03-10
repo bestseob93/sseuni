@@ -12,7 +12,7 @@ export function* requestLogin() {
   try {
     yield call(loginAPI.requestLogin, action.payload);
     yield put(uiActions.hideLoginModal())
-    yield setLocalStorage(action.payload)
+    yield setLocalStorage(action.payload.username)
   } catch (e) {
     console.error(e);
   }

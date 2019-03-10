@@ -13,8 +13,14 @@ class HiddenContainer extends React.Component<IHiddenContainerProps, {}> {
   componentDidMount(): void {
     const { UiActions } = this.props;
 
-    UiActions.showLoginButton()
+    UiActions.showLoginButton();
   }
+
+  componentWillUnmount(): void {
+    const { UiActions } = this.props;
+    UiActions.hideLoginButton();
+  }
+
   render(): React.ReactNode {
     return (
       <div>

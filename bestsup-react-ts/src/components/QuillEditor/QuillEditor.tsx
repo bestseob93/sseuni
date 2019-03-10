@@ -12,7 +12,8 @@ import 'react-quill/dist/quill.bubble.css';
 
 export interface IqlProps {
   BlogActions: typeof blogActions,
-  history: any
+  history: any,
+  checkLogin: (kickToHome: () => void) => void
 }
 
 
@@ -30,9 +31,18 @@ class QuillEditor extends React.PureComponent<IqlProps, IqlState> {
     }; // You can also pass a Quill Delta here
   }
 
+  componentDidMount(): void {
+    this.props.checkLogin(this.kickToHome)
+  }
+
   editorRef: ReactQuill;
 
-  selectLocalImage = () => {
+  kickToHome = (): void => {
+    this.props.history.push('/');
+    alert('로그인 후 사용해주세요.');
+  }
+
+  selectLocalImage = (): void => {
     const input = document.createElement('input');
     input.setAttribute('type', 'file');
     input.click();
